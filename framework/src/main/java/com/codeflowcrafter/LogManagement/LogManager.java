@@ -23,12 +23,12 @@ interface ILogManager
 {
     void SetRetriever(ILogRetriever retriever);
     void SetEmitter(ILogEmitter emitter);
-    ILogEntry CreateLogEntry(Priority priority) throws NoSuchFieldException;
+    ILogEntry CreateLogEntry(Priority priority);
     void EmitLog(ILogEntry log);
 }
 
 public class LogManager implements ILogManager {
-    static ILogManager s_instance = new LogManager();
+    private static ILogManager s_instance = new LogManager();
 
     ILogRetriever _retriever;
     ILogEmitter _emitter;
@@ -56,16 +56,14 @@ public class LogManager implements ILogManager {
         _emitter = emitter;
     }
 
-    public ILogEntry CreateLogEntry(Priority priority) throws NoSuchFieldException
+    public ILogEntry CreateLogEntry(Priority priority)
     {
-        if(_retriever == null) throw new NoSuchFieldException("Retriever has not been provided");
-
         ILogEntry log = new LogEntry(
                 TimeZone.getDefault(),
                 Calendar.getInstance().getTime(),
-                _retriever.RetrieveUser(),
-                _retriever.RetrieveSessionId(),
-                _retriever.RetrieveBusinessTransactionId(),
+                (_retriever == null) ? "N/A" : _retriever.RetrieveUser(),
+                (_retriever == null) ? "N/A" : _retriever.RetrieveSessionId(),
+                (_retriever == null) ? "N/A" : _retriever.RetrieveBusinessTransactionId(),
                 priority
         );
 

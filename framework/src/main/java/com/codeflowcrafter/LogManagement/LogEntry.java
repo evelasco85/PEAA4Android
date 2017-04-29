@@ -47,7 +47,7 @@ interface ILogEntry {
 
     HashMap<String, String> GetParameters();
 
-    void GetParameters(HashMap<String, String> parameters);
+    void AddParameter(String paramKey, String paramValue);
 }
 
 public class LogEntry implements ILogEntry {
@@ -135,8 +135,8 @@ public class LogEntry implements ILogEntry {
     public HashMap < String, String > GetParameters() {
         return _parameters;
     }
-    public void GetParameters(HashMap < String, String > parameters) {
-        _parameters = parameters;
+    public void AddParameter(String paramKey, String paramValue) {
+        _parameters.put(paramKey, paramValue);
     }
 
     public LogEntry(TimeZone timeZoneInfo, Date occurence,
