@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PEAA4Android.iml" filepath="$PROJECT_DIR$/PEAA4Android.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/peaa/peaa.iml" filepath="$PROJECT_DIR$/peaa/peaa.iml" />
     </modules>
   </component>
