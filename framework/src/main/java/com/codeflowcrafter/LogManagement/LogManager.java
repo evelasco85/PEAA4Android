@@ -1,14 +1,17 @@
 package com.codeflowcrafter.LogManagement;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 /**
  * Created by aiko on 4/29/17.
  */
 
 interface ILogRetriever
 {
-    String RetrieveUserDelegate();
-    String RetrieveSessionIdDelegate();
-    String RetrieveBusinessTransactionIdDelegate();
+    String RetrieveUser();
+    String RetrieveSessionId();
+    String RetrieveBusinessTransactionId();
 }
 
 interface ILogEmitter
@@ -20,7 +23,7 @@ interface ILogManager
 {
     void SetRetriever(ILogRetriever retriever);
     void SetEmitter(ILogEmitter emitter);
-    ILogEntry CreateLogEntry(Priority priority);
+    ILogEntry CreateLogEntry(Priority priority) throws NoSuchFieldException;
     void EmitLog(ILogEntry log);
 }
 
@@ -53,9 +56,22 @@ public class LogManager implements ILogManager {
         _emitter = emitter;
     }
 
-    public ILogEntry CreateLogEntry(Priority priority)
+    public ILogEntry CreateLogEntry(Priority priority) throws NoSuchFieldException
     {
-        return null;
+        if(_retriever == null) throw new NoSuchFieldException("Retriever has not been provided");
+
+        ILogEntry log = new LogEntry(
+                TimeZone.getDefault(),
+                Calendar.getInstance().getTime(),
+                _retriever.RetrieveUser(),
+                _retriever.RetrieveSessionId(),
+                _retriever.RetrieveBusinessTransactionId(),
+                priority
+        );
+
+        log.SetStatus(Status.None);
+
+        return log;
     }
 
     public void EmitLog(ILogEntry log)
