@@ -41,14 +41,14 @@ public class LogManager implements ILogManager {
 
     public void SetRetriever(ILogRetriever retriever)
     {
-        if(_retriever != null) return;      //Set once only to avoid threading complications
+        if(_retriever != null) throw new IllegalArgumentException("retriever already setup");      //Set once only to avoid threading complications
 
         _retriever = retriever;
     }
 
     public void SetEmitter(ILogEmitter emitter)
     {
-        if(_emitter != null) return;      //Set once only to avoid threading complications
+        if(_emitter != null)  throw new IllegalArgumentException("emitter already setup");      //Set once only to avoid threading complications
 
         _emitter = emitter;
     }
