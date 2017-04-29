@@ -1,5 +1,8 @@
 package com.codeflowcrafter.LogManagement;
 
+import com.codeflowcrafter.LogManagement.Interfaces.ILogCreator;
+import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
+
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -19,11 +22,10 @@ interface ILogEmitter
     void OnLogEmit(ILogEntry log);
 }
 
-interface ILogManager
+interface ILogManager extends ILogCreator
 {
     void SetRetriever(ILogRetriever retriever);
     void SetEmitter(ILogEmitter emitter);
-    ILogEntry CreateLogEntry(Priority priority);
     void EmitLog(ILogEntry log);
 }
 

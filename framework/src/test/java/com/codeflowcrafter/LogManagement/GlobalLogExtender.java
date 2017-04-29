@@ -1,5 +1,7 @@
 package com.codeflowcrafter.LogManagement;
 
+import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
+
 /**
  * Created by aiko on 4/29/17.
  */

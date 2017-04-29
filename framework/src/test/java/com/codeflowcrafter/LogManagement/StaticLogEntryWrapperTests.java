@@ -1,5 +1,7 @@
 package com.codeflowcrafter.LogManagement;
 
+import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
+
 import static org.junit.Assert.assertEquals;
 
 /**

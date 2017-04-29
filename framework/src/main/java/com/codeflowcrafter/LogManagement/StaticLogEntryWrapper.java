@@ -1,16 +1,20 @@
 package com.codeflowcrafter.LogManagement;
 
+import com.codeflowcrafter.LogManagement.Interfaces.ILogCreator;
+import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
+
 /**
  * Created by aiko on 4/29/17.
  */
 
-interface IStaticLogEntryWrapper {
+interface IStaticLogEntryWrapper extends ILogCreator{
     void SetSystem(String system);
     void SetApplication(String application);
     void SetComponent(String component);
     void SetEvent(String event);
 
-    ILogEntry CreateLogEntry(Priority priority);
+    ILogEntry CreateLogEntry(Priority priority, String description);
+    void EmitLog(Priority priority, String description);
 }
 
 public class StaticLogEntryWrapper implements IStaticLogEntryWrapper {
@@ -83,5 +87,21 @@ public class StaticLogEntryWrapper implements IStaticLogEntryWrapper {
         entry.SetEvent(_event);
 
         return entry;
+    }
+
+    public ILogEntry CreateLogEntry(Priority priority, String description)
+    {
+        ILogEntry entry = CreateLogEntry(priority);
+
+        entry.SetDescription(description);
+
+        return entry;
+    }
+
+    public void EmitLog(Priority priority, String description)
+    {
+        ILogEntry entry = CreateLogEntry(priority, description);
+
+        _manager.EmitLog(entry);
     }
 }
