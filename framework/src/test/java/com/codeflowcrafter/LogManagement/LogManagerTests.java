@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by aiko on 4/29/17.
  */
-
 public class LogManagerTests {
     GlobalLogExtender _logExtender = new GlobalLogExtender();
     ILogManager _logManager = LogManager.GetInstance();
