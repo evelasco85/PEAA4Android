@@ -1,4 +1,4 @@
-package com.codeflowcrafter.DatabaseAccess;
+package com.codeflowcrafter.Utilities;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +9,7 @@ import java.util.Locale;
  * Created by aiko on 4/29/17.
  */
 
-public class DataHelper {
+public class DateHelper {
     public static String DateToString(Date date)
     {
         return DateToString(date, "yyyy-MM-dd HH:mm:ss");
