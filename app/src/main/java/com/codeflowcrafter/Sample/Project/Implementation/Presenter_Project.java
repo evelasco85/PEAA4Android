@@ -13,4 +13,9 @@ public class Presenter_Project implements IProjectRequests {
 
         _view = view;
     }
+
+    public void OpenProjectEntry()
+    {
+        _view.OnOpenProjectEntryCompletion();
+    }
 }

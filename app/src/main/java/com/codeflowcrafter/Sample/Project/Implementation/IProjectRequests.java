@@ -5,4 +5,5 @@ package com.codeflowcrafter.Sample.Project.Implementation;
  */
 
 public interface IProjectRequests {
+    void OpenProjectEntry();
 }

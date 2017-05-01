@@ -54,12 +54,12 @@ public class MainActivity
         _btnAddProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InvokeAddProjectEntry();
+                _viewRequest.OpenProjectEntry();
             }
         });
     }
 
-    public void InvokeAddProjectEntry()
+    public void OnOpenProjectEntryCompletion()
     {
         Intent projectEntryIntent = new Intent(this, ProjectActivity.class);
 
