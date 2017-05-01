@@ -1,4 +1,4 @@
-package com.codeflowcrafter.Sample.Project.Implementation.DB;
+package com.codeflowcrafter.Sample;
 
 import android.content.Context;
 
@@ -6,27 +6,29 @@ import com.codeflowcrafter.DatabaseAccess.BaseDataAccess;
 import com.codeflowcrafter.DatabaseAccess.BaseDatabaseHelper;
 import com.codeflowcrafter.DatabaseAccess.DatabaseHelperBuilder;
 import com.codeflowcrafter.DatabaseAccess.Interfaces.IDatabaseHelperBuilder_Setup;
+import com.codeflowcrafter.Sample.Project.Implementation.DB.ProjectMapper;
+import com.codeflowcrafter.Sample.Project.Implementation.DB.ProjectProvider;
 
 /**
  * Created by aiko on 5/1/17.
  */
 
 
-public class HabitAtDataAccess extends BaseDataAccess {
+public class SampleApplicationDataAccess extends BaseDataAccess {
 
-    public static final String APPLICATION_NAME = "habitAt";
-    public static final String DATABASE_TAG_NAME = "HabitAtProvider";
-    static final String DATABASE_FILENAME = "habitAt.db";
+    public static final String APPLICATION_NAME = "sample";
+    public static final String DATABASE_TAG_NAME = "SampleProvider";
+    static final String DATABASE_FILENAME = "sample.db";
 
     ProjectProvider _projectProvider;
     ProjectMapper _projectMapper;
 
     IDatabaseHelperBuilder_Setup _dbHelperSetup;
 
-    static HabitAtDataAccess instance = new HabitAtDataAccess();
-    public static HabitAtDataAccess GetInstance(){ return instance;}
+    static SampleApplicationDataAccess instance = new SampleApplicationDataAccess();
+    public static SampleApplicationDataAccess GetInstance(){ return instance;}
 
-    private HabitAtDataAccess()
+    private SampleApplicationDataAccess()
     {
         super(DATABASE_TAG_NAME, DATABASE_FILENAME);
 

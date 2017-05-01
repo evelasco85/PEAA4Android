@@ -20,8 +20,6 @@ public class Presenter_Project implements IProjectRequests {
         _view = view;
 
         _slc.SetComponent("Project");
-        _view.AssociateViewToLocalVar();
-        _view.SetViewHandlers();
     }
 
     public void OpenProjectEntry()

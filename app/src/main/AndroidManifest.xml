@@ -21,5 +21,11 @@
         <activity
             android:name="com.codeflowcrafter.Sample.Project.ProjectActivity"
             android:label="@string/lblProject" />
+
+        <provider
+            android:name=".Project.Implementation.DB.ProjectProvider"
+            android:authorities="com.codeflowcrafter.Sample.Project.Implementation.DB.ProjectProvider"
+            />
+
     </application>
 </manifest>

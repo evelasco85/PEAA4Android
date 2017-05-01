@@ -7,7 +7,4 @@ package com.codeflowcrafter.MVP;
 public interface IView <TRequest> {
     TRequest GetViewRequest();
     void SetViewRequest(TRequest viewRequest);
-
-    void AssociateViewToLocalVar();
-    void SetViewHandlers();
 }

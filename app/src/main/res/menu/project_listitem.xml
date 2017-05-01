@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/mnuAmountList"
+        android:title="Amount List"
+        android:showAsAction="never"/>
+    <item android:id="@+id/mnuDelete"
+        android:title="Delete"
+        android:showAsAction="never"/>
+    <item android:id="@+id/mnuEdit"
+        android:title="Edit"
+        android:showAsAction="never"/>
+</menu>
