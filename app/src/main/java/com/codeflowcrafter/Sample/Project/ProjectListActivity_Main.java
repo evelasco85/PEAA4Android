@@ -9,7 +9,7 @@ import com.codeflowcrafter.Sample.R;
  * Created by aiko on 5/1/17.
  */
 
-public class ProjectListActivity extends Activity {
+public class ProjectListActivity_Main extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
