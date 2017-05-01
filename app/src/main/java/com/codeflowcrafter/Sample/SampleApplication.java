@@ -63,7 +63,7 @@ public class SampleApplication
             case Critical:
             case Alert:
             case Emergency:
-                Log.i(log.GetComponent(), GetCompleteLogDetail(log));
+                Log.e(log.GetComponent(), GetCompleteLogDetail(log));
                 break;
         }
 
