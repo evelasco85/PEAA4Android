@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PEAA4Android</string>
+
+    <!--Menu names-->
+    <string name="mnuEdit">Edit</string>
+    <string name="mnuMenu">...</string>
+    <!--**********-->
 </resources>

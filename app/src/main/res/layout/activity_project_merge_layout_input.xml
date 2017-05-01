@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge >
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TableRow
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+            <TextView
+                android:text="Name:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:hint="Project Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtName"
+                />
+
+        </TableRow>
+        <TableRow
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+            <TextView
+                android:text="Description:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:hint="Project Description (Optional)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDescription"
+                />
+
+        </TableRow>
+        <TableRow
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+            <TextView
+                android:text="Start Date:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:hint="Start Date (Required)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtStartDate"
+                />
+
+        </TableRow>
+        <TableRow
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+            <TextView
+                android:text="End Date:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:hint="End Date (Optional)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtEndDate"
+                />
+        </TableRow>
+    </TableLayout>
+</merge>

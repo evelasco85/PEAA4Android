@@ -1,4 +1,4 @@
-package com.codeflowcrafter.peaa4android;
+package com.codeflowcrafter.Sample;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
