@@ -17,7 +17,7 @@ import java.util.Date;
  * Created by aiko on 5/1/17.
  */
 
-public class Global_Fragment_TimePicker extends DialogFragment
+public class Fragment_TimePicker extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
     int _selectedHour, _selectedMinute;

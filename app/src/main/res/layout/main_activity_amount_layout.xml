@@ -16,9 +16,9 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.codeflowcrafter.UI.Persistency.Global_Fragment_SaveCancel"
+            android:name="com.codeflowcrafter.UI.Persistency.Fragment_SaveCancel"
             android:id="@+id/saveCancelFragmentPlaceholder"
             android:gravity="bottom"
-            tools:layout="@layout/global_fragment_savecancel_layout" />
+            tools:layout="@layout/fragment_savecancel_layout" />
     </TableRow>
 </TableLayout>
