@@ -2,23 +2,12 @@ package com.codeflowcrafter.DatabaseAccess;
 
 import android.content.Context;
 
+import com.codeflowcrafter.DatabaseAccess.Interfaces.IDatabaseHelperBuilder;
+import com.codeflowcrafter.DatabaseAccess.Interfaces.IDatabaseHelperBuilder_Setup;
+
 import java.util.HashMap;
 
-/**
- * Created by aiko on 4/29/17.
- */
-
-interface IDatabaseHelperBuilder_Setup {
-    public IDatabaseHelperBuilder_Setup AddTable(String tableName, String tableScript);
-    public BaseDatabaseHelper Create(Context context);
-}
-
-interface IDatabaseHelperBuilder {
-    public IDatabaseHelperBuilder_Setup SetDatabase(String databaseTagName, String databaseFilename);
-
-}
-
-public class DatabaseHelperBuilder implements  IDatabaseHelperBuilder
+public class DatabaseHelperBuilder implements IDatabaseHelperBuilder
         , IDatabaseHelperBuilder_Setup
 {
     String _tag;

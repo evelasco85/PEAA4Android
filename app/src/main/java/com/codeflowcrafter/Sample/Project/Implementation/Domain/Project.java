@@ -8,6 +8,8 @@ import com.codeflowcrafter.PEAA.Domain.DomainObject;
  */
 
 public class Project extends DomainObject {
+
+
     public Project(IBaseMapper mapper)
     {
         super(mapper);
