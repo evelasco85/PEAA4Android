@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.codeflowcrafter.DatabaseAccess.ContentProviderTemplate;
 import com.codeflowcrafter.Sample.Project.Implementation.DB.ProjectModel;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IView_Project;
@@ -41,14 +40,12 @@ public class MainActivity
 
     ArrayList<ProjectModel> _activityList;
     ProjectAdapter _activityAdapter;
-    ContentProviderTemplate _activityProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_project_layout);
 
-        _activityProvider = SampleApplicationDataAccess.GetInstance().GetProjectProvider();
         SampleApplicationDataAccess.GetInstance().GetProjectMapper().SetContentResolver(getContentResolver());
         getLoaderManager().restartLoader(0, null, this);
 
@@ -100,7 +97,7 @@ public class MainActivity
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args)
     {
-        CursorLoader loader = new CursorLoader(this, _activityProvider.GetContentUri(),
+        CursorLoader loader = new CursorLoader(this, SampleApplicationDataAccess.GetInstance().GetProjectProvider().GetContentUri(),
                 null, null, null, null
         );
 
