@@ -26,7 +26,6 @@ interface ILogManager extends ILogCreator
 {
     void SetRetriever(ILogRetriever retriever);
     void SetEmitter(ILogEmitter emitter);
-    void EmitLog(ILogEntry log);
 }
 
 public class LogManager implements ILogManager {

@@ -8,4 +8,5 @@ import com.codeflowcrafter.LogManagement.Priority;
 
 public interface ILogCreator {
     ILogEntry CreateLogEntry(Priority priority);
+    void EmitLog(ILogEntry log);
 }

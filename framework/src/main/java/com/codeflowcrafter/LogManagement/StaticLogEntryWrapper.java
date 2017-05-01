@@ -98,10 +98,15 @@ public class StaticLogEntryWrapper implements IStaticLogEntryWrapper {
         return entry;
     }
 
+    public void EmitLog(ILogEntry log)
+    {
+        _manager.EmitLog(log);
+    }
+
     public void EmitLog(Priority priority, String description)
     {
         ILogEntry entry = CreateLogEntry(priority, description);
 
-        _manager.EmitLog(entry);
+        EmitLog(entry);
     }
 }
