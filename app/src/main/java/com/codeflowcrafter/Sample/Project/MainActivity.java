@@ -37,19 +37,16 @@ public class MainActivity
         setContentView(R.layout.main_activity_project_layout);
 
         _presenter = new Presenter_Project(this);
-
-        AssociateViewToLocalVar();
-        SetViewHandlers();
     }
 
-    void AssociateViewToLocalVar()
+    public void AssociateViewToLocalVar()
     {
         _btnAddProject = (Button)findViewById(R.id.btnAddProject);
         _listImplementation = (Fragment_Project_List) getFragmentManager()
                 .findFragmentById(R.id.projectList);
     }
 
-    void SetViewHandlers()
+    public void SetViewHandlers()
     {
         _btnAddProject.setOnClickListener(new View.OnClickListener() {
             @Override

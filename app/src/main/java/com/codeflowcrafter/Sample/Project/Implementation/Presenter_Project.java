@@ -12,6 +12,9 @@ public class Presenter_Project implements IProjectRequests {
         view.SetViewRequest(this);
 
         _view = view;
+
+        _view.AssociateViewToLocalVar();
+        _view.SetViewHandlers();
     }
 
     public void OpenProjectEntry()
