@@ -4,6 +4,8 @@ import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
 import com.codeflowcrafter.LogManagement.Interfaces.ILogManager;
 import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
 
+import java.util.HashMap;
+
 public class StaticLogEntryWrapper implements IStaticLogEntryWrapper {
     ILogManager _manager;
 
@@ -102,6 +104,25 @@ public class StaticLogEntryWrapper implements IStaticLogEntryWrapper {
         ILogEntry entry = CreateLogEntry(priority, "");
 
         entry.SetStatus(status);
+
+        EmitLog(entry);
+    }
+
+    public void EmitLog(Priority priority, Status status, HashMap<String, String> params)
+    {
+        ILogEntry entry = CreateLogEntry(priority, "");
+
+        entry.SetStatus(status);
+        entry.SetParameters(params);
+
+        EmitLog(entry);
+    }
+
+    public void EmitLog(Priority priority, String description, HashMap<String, String> params)
+    {
+        ILogEntry entry = CreateLogEntry(priority, description);
+
+        entry.SetParameters(params);
 
         EmitLog(entry);
     }

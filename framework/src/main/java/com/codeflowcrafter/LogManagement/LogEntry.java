@@ -82,6 +82,11 @@ public class LogEntry implements ILogEntry {
         _parameters.put(paramKey, paramValue);
     }
 
+    public void SetParameters(HashMap<String, String> params)
+    {
+        _parameters = params;
+    }
+
     public LogEntry(TimeZone timeZoneInfo, Date occurence,
                     Priority priority) {
         _parameters = new HashMap < String, String > ();

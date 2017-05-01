@@ -43,6 +43,7 @@ public interface ILogEntry {
     void SetDescription(String value);
 
     HashMap<String, String> GetParameters();
+    void SetParameters(HashMap<String, String> params);
 
     void AddParameter(String paramKey, String paramValue);
 }

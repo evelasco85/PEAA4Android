@@ -14,6 +14,8 @@ import com.codeflowcrafter.Utilities.DateHelper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -43,19 +45,22 @@ public class SampleApplication
     }
 
     @Override
-    public void OnLogEmit(ILogEntry log)
-    {
-        if(log == null) return;
+    public void OnLogEmit(ILogEntry log) {
+        if (log == null) return;
 
-        switch (log.GetPriority())
-        {
+        switch (log.GetPriority()) {
             case Info:
                 Log.i(log.GetComponent(), GetInfoLogDetail(log));
+
                 break;
             case Emergency:
                 Log.i(log.GetComponent(), GetCompleteLogDetail(log));
                 break;
         }
+
+        HashMap<String, String> params = log.GetParameters();
+
+        if ((params != null) && (!params.isEmpty())) EmitLogParams(log.GetEvent(), params);
     }
 
     String GetInfoLogDetail(ILogEntry log)
@@ -115,6 +120,13 @@ public class SampleApplication
         return logString;
     }
 
+    void EmitLogParams(String event, HashMap<String, String> params)
+    {
+        for(Map.Entry<String, String> entry : params.entrySet()) {
+
+            Log.i(String.format("Event[%s] Param", event), String.format("%s = %s", entry.getKey(), entry.getValue()));
+        }
+    }
     @Override
     public final void onCreate()
     {
