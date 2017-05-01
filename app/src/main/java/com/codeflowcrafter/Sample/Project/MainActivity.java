@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.codeflowcrafter.Sample.Project.Implementation.IProjectRequests;
-import com.codeflowcrafter.Sample.Project.Implementation.IView_Project;
-import com.codeflowcrafter.Sample.Project.Implementation.Presenter_Project;
+import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
+import com.codeflowcrafter.Sample.Project.Implementation.MVP.IView_Project;
+import com.codeflowcrafter.Sample.Project.Implementation.MVP.Presenter_Project;
 import com.codeflowcrafter.Sample.R;
 
 /**

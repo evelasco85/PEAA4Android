@@ -1,11 +1,9 @@
-package com.codeflowcrafter.Sample.Project.Implementation;
+package com.codeflowcrafter.Sample.Project.Implementation.MVP;
 
 import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
 import com.codeflowcrafter.LogManagement.Priority;
 import com.codeflowcrafter.LogManagement.Status;
 import com.codeflowcrafter.Sample.SampleApplication;
-
-import java.util.HashMap;
 
 /**
  * Created by aiko on 5/1/17.

@@ -1,4 +1,4 @@
-package com.codeflowcrafter.Sample.Project.Implementation;
+package com.codeflowcrafter.Sample.Project.Implementation.MVP;
 
 import com.codeflowcrafter.MVP.IView;
 

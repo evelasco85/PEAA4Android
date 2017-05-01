@@ -7,14 +7,22 @@ import com.codeflowcrafter.LogManagement.Interfaces.ILogEmitter;
 import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
 import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
 import com.codeflowcrafter.LogManagement.LogManager;
-import com.codeflowcrafter.LogManagement.Priority;
 import com.codeflowcrafter.LogManagement.StaticLogEntryWrapper;
+import com.codeflowcrafter.PEAA.DataManipulation.BaseQueryObjectInterfaces.IBaseQueryObjectConcrete;
+import com.codeflowcrafter.PEAA.DataSynchronizationManager;
+import com.codeflowcrafter.PEAA.Interfaces.IDataSynchronizationManager;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.ProjectMapper;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryAllProjects;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryProjectById;
 import com.codeflowcrafter.Utilities.DateHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
@@ -26,9 +34,9 @@ public class SampleApplication
         extends Application
     implements ILogEmitter
 {
-    private static SampleApplication s_instance ;
-
-    IStaticLogEntryWrapper _slc = new StaticLogEntryWrapper(
+    private static SampleApplication s_instance;
+    private IDataSynchronizationManager _dsManager = DataSynchronizationManager.GetInstance();
+    private IStaticLogEntryWrapper _slc = new StaticLogEntryWrapper(
             LogManager.GetInstance(),
             "Mobile",
             "com.codeflowcrafter.Sample"
@@ -142,6 +150,17 @@ public class SampleApplication
         LogManager.GetInstance().SetEmitter(this);
         super.onCreate();
 
+        RegisterProjectDomain(_dsManager);
+
         s_instance = this;
+    }
+
+    void RegisterProjectDomain(IDataSynchronizationManager dsManager)
+    {
+        List<IBaseQueryObjectConcrete<Project>> projectQueryObjects = new ArrayList<IBaseQueryObjectConcrete<Project>>();
+
+        projectQueryObjects.add(new QueryAllProjects());
+        projectQueryObjects.add(new QueryProjectById());
+        dsManager.RegisterEntity(Project.class, new ProjectMapper(), projectQueryObjects);
     }
 }
