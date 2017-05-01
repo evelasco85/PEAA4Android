@@ -1,6 +1,8 @@
 package com.codeflowcrafter.LogManagement;
 
 import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
+import com.codeflowcrafter.LogManagement.Interfaces.ILogManager;
+import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,7 +20,6 @@ public class StaticLogEntryWrapperTests {
     {
         _manager = LogManager.GetInstance();
 
-        _manager.SetRetriever(_logExtender);
         _manager.SetEmitter(_logExtender);
     }
 

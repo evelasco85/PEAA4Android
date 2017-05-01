@@ -16,12 +16,6 @@ public interface ILogEntry {
 
     Date GetOccurence();
 
-    String GetUser();
-
-    String GetSessionId();
-
-    String GetTransactionId();
-
     String GetSystem();
 
     void SetSystem(String system);

@@ -1,6 +1,7 @@
 package com.codeflowcrafter.LogManagement;
 
 import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
+import com.codeflowcrafter.LogManagement.Interfaces.ILogManager;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,7 +15,6 @@ public class LogManagerTests {
     @org.junit.Before
     public void Initialize()
     {
-        _logManager.SetRetriever(_logExtender);
         _logManager.SetEmitter(_logExtender);
     }
 

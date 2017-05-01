@@ -10,9 +10,6 @@ public class LogEntry implements ILogEntry {
     TimeZone _timeZoneInfo;
 
     Date _occurence;
-    String _user;
-    String _sessionId;
-    String _transactionId;
     Priority _priority;
 
     String _system;
@@ -29,16 +26,6 @@ public class LogEntry implements ILogEntry {
     }
     public Date GetOccurence() {
         return _occurence;
-    }
-
-    public String GetUser() {
-        return _user;
-    }
-    public String GetSessionId() {
-        return _sessionId;
-    }
-    public String GetTransactionId() {
-        return _transactionId;
     }
 
     public String GetSystem() {
@@ -96,14 +83,11 @@ public class LogEntry implements ILogEntry {
     }
 
     public LogEntry(TimeZone timeZoneInfo, Date occurence,
-                    String user, String sessionId, String transactionId, Priority priority) {
+                    Priority priority) {
         _parameters = new HashMap < String, String > ();
 
         _timeZoneInfo = timeZoneInfo;
         _occurence = occurence;
-        _user = user;
-        _sessionId = sessionId;
-        _transactionId = transactionId;
         _priority = priority;
     }
 }
