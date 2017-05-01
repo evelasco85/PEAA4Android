@@ -49,10 +49,19 @@ public class SampleApplication
         if (log == null) return;
 
         switch (log.GetPriority()) {
+            case Debug:
             case Info:
+            case Notice:
                 Log.i(log.GetComponent(), GetInfoLogDetail(log));
-
                 break;
+
+            case Warning:
+                Log.w(log.GetComponent(), GetInfoLogDetail(log));
+                break;
+
+            case Error:
+            case Critical:
+            case Alert:
             case Emergency:
                 Log.i(log.GetComponent(), GetCompleteLogDetail(log));
                 break;
