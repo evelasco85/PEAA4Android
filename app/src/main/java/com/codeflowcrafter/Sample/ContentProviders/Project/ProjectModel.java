@@ -1,9 +1,7 @@
 package com.codeflowcrafter.Sample.ContentProviders.Project;
 
-import com.codeflowcrafter.Sample.ContentProviders.IIdentityField;
-
 //Domain Object
-public class ProjectModel implements IIdentityField {
+public class ProjectModel{
     int _id;
     String _name;
     String _description;
@@ -43,4 +41,6 @@ public class ProjectModel implements IIdentityField {
 
         _endedDate = endedDate;
     }
+
+
 }

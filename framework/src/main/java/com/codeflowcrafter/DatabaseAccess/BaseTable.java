@@ -4,20 +4,9 @@ import android.content.UriMatcher;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
-import java.util.HashMap;
+import com.codeflowcrafter.DatabaseAccess.Interfaces.IBaseTable;
 
-/**
- * Created by aiko on 4/29/17.
- */
-interface IBaseTable
-{
-    Uri GetContentUri();
-    String GetRecordKeyColumnName();
-    String GetTableName();
-    String GetTableCreationScript();
-    HashMap<String, String> GetSearchProjectionMap();
-    SQLiteQueryBuilder GetQueryBuilder(Uri uri);
-}
+import java.util.HashMap;
 
 public abstract class BaseTable implements IBaseTable {
     public abstract String GetRecordKeyColumnName();

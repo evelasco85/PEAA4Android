@@ -6,7 +6,6 @@ import com.codeflowcrafter.DatabaseAccess.BaseDataAccess;
 import com.codeflowcrafter.DatabaseAccess.DatabaseHelper;
 import com.codeflowcrafter.DatabaseAccess.DatabaseHelperBuilder;
 import com.codeflowcrafter.DatabaseAccess.Interfaces.IDatabaseHelperBuilder_Setup;
-import com.codeflowcrafter.Sample.Project.Implementation.DB.ProjectMapper;
 import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectProvider;
 
 /**
@@ -21,7 +20,6 @@ public class SampleApplicationDataAccess extends BaseDataAccess {
     static final String DATABASE_FILENAME = "sample.db";
 
     ProjectProvider _projectProvider;
-    ProjectMapper _projectMapper;
 
     IDatabaseHelperBuilder_Setup _dbHelperSetup;
 
@@ -33,7 +31,6 @@ public class SampleApplicationDataAccess extends BaseDataAccess {
         super(DATABASE_TAG_NAME, DATABASE_FILENAME);
 
         _projectProvider = new ProjectProvider();
-        _projectMapper = new ProjectMapper(_projectProvider);
 
         _dbHelperSetup = DatabaseHelperBuilder.GetInstance()
                 .SetDatabase(GetDatabaseTagName(), GetDatabaseFilename())
@@ -48,12 +45,6 @@ public class SampleApplicationDataAccess extends BaseDataAccess {
     {
         return _projectProvider;
     }
-
-    public ProjectMapper GetProjectMapper()
-    {
-        return _projectMapper;
-    }
-
 
     public DatabaseHelper GetDatabaseHelper(Context context)
     {

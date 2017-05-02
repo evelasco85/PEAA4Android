@@ -46,14 +46,12 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_project_layout);
 
-        SampleApplicationDataAccess.GetInstance().GetProjectMapper().SetContentResolver(getContentResolver());
         getLoaderManager().restartLoader(0, null, this);
 
         _activityList = new ArrayList<ProjectModel>();
         _activityAdapter = new MainActivity_ProjectAdapter(this,
                 R.layout.activity_project_layout_fragment_listitem,
-                _activityList,
-                SampleApplicationDataAccess.GetInstance().GetProjectMapper());
+                _activityList);
 
 
         _presenter = new Presenter_Project(this);
@@ -107,7 +105,7 @@ public class MainActivity
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
         _activityList.clear();
-        _activityList.addAll(SampleApplicationDataAccess.GetInstance().GetProjectMapper().LoadAll(cursor));
+//        _activityList.addAll(SampleApplicationDataAccess.GetInstance().GetProjectMapper().LoadAll(cursor));
         _activityAdapter.notifyDataSetChanged();
     }
 

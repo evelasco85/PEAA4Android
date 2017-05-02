@@ -12,16 +12,7 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.text.TextUtils;
 
-/**
- * Created by aiko on 4/29/17.
- */
-
-interface IContentProviderTemplate
-{
-    UriMatcher GetUriMatcher();
-    Uri GetContentUri();
-    BaseTable GetUnderlyingTable();
-}
+import com.codeflowcrafter.DatabaseAccess.Interfaces.IContentProviderTemplate;
 
 public class ContentProviderTemplate extends ContentProvider
         implements IContentProviderTemplate

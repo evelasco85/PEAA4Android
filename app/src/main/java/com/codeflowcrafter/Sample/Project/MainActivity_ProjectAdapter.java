@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.codeflowcrafter.DatabaseAccess.Deprecated.MapperTemplate;
 import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectModel;
 import com.codeflowcrafter.Sample.R;
 
@@ -31,15 +30,13 @@ public class MainActivity_ProjectAdapter extends ArrayAdapter<ProjectModel> {
 
     int _resource;
     Activity _activity;
-    MapperTemplate<ProjectModel> _itemMapper;
 
-    public MainActivity_ProjectAdapter(MainActivity activity, int resource, List<ProjectModel> items, MapperTemplate<ProjectModel> projectMapper)
+    public MainActivity_ProjectAdapter(MainActivity activity, int resource, List<ProjectModel> items)
     {
         super( activity.getApplicationContext(), resource, items);
 
         _resource = resource;
         _activity = activity;
-        _itemMapper = projectMapper;
     }
 
     LinearLayout GetLayout(View view, Context context, int resource)

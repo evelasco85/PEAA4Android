@@ -3,10 +3,10 @@ package com.codeflowcrafter.Sample.Project.Implementation.DB;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.database.Cursor;
+import android.net.Uri;
 
-import com.codeflowcrafter.DatabaseAccess.ContentProviderTemplate;
-import com.codeflowcrafter.DatabaseAccess.Deprecated.MapperTemplate;
 import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectModel;
 import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectTable;
 
@@ -17,12 +17,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class ProjectMapper extends MapperTemplate<ProjectModel> {
-    public ProjectMapper(ContentProviderTemplate provider)
-    {
-        super(provider);
-    }
-
+public class ProjectContentResolver {
     int _idIndex = 0;
     int _nameIndex = 0;
     int _descriptionIndex = 0;
@@ -52,11 +47,10 @@ public class ProjectMapper extends MapperTemplate<ProjectModel> {
     }
 
     //Query Object
-    public ProjectModel SelectFirst(Context context, int projectId)
+    public ProjectModel SelectFirst(ContentResolver resolver, Uri uri, int projectId)
     {
-        ContentResolver resolver = GetContentResolver();
         String where = ProjectTable.COLUMN_ID + "=" +  projectId;
-        Cursor cursor = resolver.query(GetProviderTemplate().GetContentUri(), null, where, null, null);
+        Cursor cursor = resolver.query(uri, null, where, null, null);
         ProjectModel project = new ProjectModel(0, "", "", "");
 
         if(cursor == null)
@@ -87,54 +81,39 @@ public class ProjectMapper extends MapperTemplate<ProjectModel> {
     }
 
     //Data mapper
-    public boolean AddItem(ProjectModel project)
+    public boolean AddItem(ContentResolver resolver, Uri uri, ProjectModel project)
     {
-        ContentResolver resolver = GetContentResolver();
-
-        resolver.insert(
-                GetProviderTemplate().GetContentUri(),
-                EntityToContentValues(project));
-
-        if(GetAddItemCallback() != null)
-            GetAddItemCallback().run();
+        resolver.insert(uri, EntityToContentValues(project));
 
         return true;
     }
 
     //Data mapper
-    public int UpdateItem(ProjectModel existingProject)
+    public int UpdateItem(ContentResolver resolver, Uri uri, ProjectModel existingProject)
     {
         int updatedRecords = 0;
 
         if(existingProject == null)
             return updatedRecords;
 
-        ContentResolver resolver = GetContentResolver();
         String where = ProjectTable.COLUMN_ID + "=" +  existingProject.GetId();
 
         updatedRecords = resolver
                 .update(
-                        GetProviderTemplate().GetContentUri(),
+                        uri,
                         EntityToContentValues(existingProject),
                         where, null);
-
-        if(GetUpdateItemCallback() != null)
-            GetUpdateItemCallback().run();
 
         return updatedRecords;
     }
 
     //Data mapper
-    public int DeleteItem(int projectId)
+    public int DeleteItem(ContentResolver resolver, Uri uri, int projectId)
     {
-        ContentResolver resolver = GetContentResolver();
         String where = ProjectTable.COLUMN_ID + "=" +  projectId;
 
         int deletedRecords = resolver
-                .delete(GetProviderTemplate().GetContentUri(), where, null );
-
-        if(GetDeleteItemCallback() != null)
-            GetDeleteItemCallback().run();
+                .delete(uri, where, null );
 
         return  deletedRecords;
     }
@@ -153,6 +132,18 @@ public class ProjectMapper extends MapperTemplate<ProjectModel> {
         {
             entityList.add(CursorToEntity(cursor));
         }
+
+        return  entityList;
+    }
+
+    public List LoadAll(Context context, Uri uri)
+    {
+        CursorLoader loader = new CursorLoader(context, uri,
+                null, null, null, null
+        );
+
+        Cursor cursor = loader.loadInBackground();
+        List entityList = LoadAll(cursor);
 
         return  entityList;
     }
