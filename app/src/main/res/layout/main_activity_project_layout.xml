@@ -20,7 +20,7 @@
 
         <fragment
             android:id="@+id/projectList"
-            android:name="com.codeflowcrafter.Sample.Project.MainActivity_Fragment_Project_List"
+            android:name="com.codeflowcrafter.Sample.Project.Activity_Main_Fragment_Project_List"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="bottom"

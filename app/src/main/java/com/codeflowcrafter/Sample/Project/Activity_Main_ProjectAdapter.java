@@ -21,7 +21,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class MainActivity_ProjectAdapter extends ArrayAdapter<ProjectModel> {
+public class Activity_Main_ProjectAdapter extends ArrayAdapter<ProjectModel> {
 
     TextView _idView;
     TextView _nameView;
@@ -31,7 +31,7 @@ public class MainActivity_ProjectAdapter extends ArrayAdapter<ProjectModel> {
     int _resource;
     Activity _activity;
 
-    public MainActivity_ProjectAdapter(MainActivity activity, int resource, List<ProjectModel> items)
+    public Activity_Main_ProjectAdapter(Activity_Main activity, int resource, List<ProjectModel> items)
     {
         super( activity.getApplicationContext(), resource, items);
 
@@ -82,7 +82,7 @@ public class MainActivity_ProjectAdapter extends ArrayAdapter<ProjectModel> {
 //        _idView.setText(String.valueOf(item.GetId()));
 //        _nameView.setText(item.GetName());
 
-        final MainActivity activity = (MainActivity)_activity;
+        final Activity_Main activity = (Activity_Main)_activity;
         final PopupMenu popMenu = new PopupMenu(activity, _btnMenu);
         final ProjectModel projectItem = item;
 

@@ -2,7 +2,6 @@ package com.codeflowcrafter.Sample.Project.Implementation.Domain;
 
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.InvocationDelegates;
-import com.codeflowcrafter.Sample.Project.ProjectActivity;
 
 /**
  * Created by aiko on 5/1/17.

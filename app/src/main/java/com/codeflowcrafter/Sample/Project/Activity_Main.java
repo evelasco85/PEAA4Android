@@ -23,14 +23,14 @@ import java.util.ArrayList;
  * Created by aiko on 5/1/17.
  */
 
-public class MainActivity
+public class Activity_Main
         extends Activity
     implements IView_Project, LoaderManager.LoaderCallbacks<Cursor>
 {
     Presenter_Project _presenter;
     IProjectRequests _viewRequest;
     Button _btnAddProject;
-    MainActivity_Fragment_Project_List _listImplementation;
+    Activity_Main_Fragment_Project_List _listImplementation;
 
     public static final int REQUEST_BY_PROJECT_ADD = 1;
     public static final int REQUEST_BY_PROJECT_EDIT = 2;
@@ -39,7 +39,7 @@ public class MainActivity
     public void SetViewRequest(IProjectRequests viewRequest){_viewRequest = viewRequest;}
 
     ArrayList<ProjectModel> _activityList;
-    MainActivity_ProjectAdapter _activityAdapter;
+    Activity_Main_ProjectAdapter _activityAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class MainActivity
         getLoaderManager().restartLoader(0, null, this);
 
         _activityList = new ArrayList<ProjectModel>();
-        _activityAdapter = new MainActivity_ProjectAdapter(this,
+        _activityAdapter = new Activity_Main_ProjectAdapter(this,
                 R.layout.activity_project_layout_fragment_listitem,
                 _activityList);
 
@@ -64,7 +64,7 @@ public class MainActivity
     public void AssociateViewToLocalVar()
     {
         _btnAddProject = (Button)findViewById(R.id.btnAddProject);
-        _listImplementation = (MainActivity_Fragment_Project_List) getFragmentManager()
+        _listImplementation = (Activity_Main_Fragment_Project_List) getFragmentManager()
                 .findFragmentById(R.id.projectList);
     }
 
@@ -86,11 +86,11 @@ public class MainActivity
 
     public void OnOpenProjectEntryCompletion()
     {
-        Intent projectEntryIntent = new Intent(this, ProjectActivity.class);
+        Intent projectEntryIntent = new Intent(this, Activity_Project.class);
 
-        projectEntryIntent.setAction(ProjectActivity.ACTION_ADD);
+        projectEntryIntent.setAction(Activity_Project.ACTION_ADD);
 
-        this.startActivityForResult(projectEntryIntent, MainActivity.REQUEST_BY_PROJECT_ADD);
+        this.startActivityForResult(projectEntryIntent, Activity_Main.REQUEST_BY_PROJECT_ADD);
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args)

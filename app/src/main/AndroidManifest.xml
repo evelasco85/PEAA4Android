@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme"
         android:name=".SampleApplication"
         >
-        <activity android:name="com.codeflowcrafter.Sample.Project.MainActivity">
+        <activity android:name="com.codeflowcrafter.Sample.Project.Activity_Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
         </activity>
 
         <activity
-            android:name="com.codeflowcrafter.Sample.Project.ProjectActivity"
+            android:name="com.codeflowcrafter.Sample.Project.Activity_Project"
             android:label="@string/lblProject" />
 
         <provider

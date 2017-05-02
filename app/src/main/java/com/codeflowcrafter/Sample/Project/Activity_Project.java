@@ -19,7 +19,7 @@ import java.util.Calendar;
  * Created by aiko on 5/1/17.
  */
 
-public class ProjectActivity extends Activity {
+public class Activity_Project extends Activity {
     Button _btnSave, _btnCancel;
     EditText _txtName, _txtDescription;
     TextView _txtStartDate, _txtEndDate;
