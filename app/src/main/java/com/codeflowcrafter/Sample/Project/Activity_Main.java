@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectModel;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IView_Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.Presenter_Project;
@@ -38,7 +38,7 @@ public class Activity_Main
     public IProjectRequests GetViewRequest(){return _viewRequest;}
     public void SetViewRequest(IProjectRequests viewRequest){_viewRequest = viewRequest;}
 
-    ArrayList<ProjectModel> _activityList;
+    ArrayList<Project> _activityList;
     Activity_Main_ProjectAdapter _activityAdapter;
 
     @Override
@@ -48,7 +48,7 @@ public class Activity_Main
 
         getLoaderManager().restartLoader(0, null, this);
 
-        _activityList = new ArrayList<ProjectModel>();
+        _activityList = new ArrayList<Project>();
         _activityAdapter = new Activity_Main_ProjectAdapter(this,
                 R.layout.activity_project_layout_fragment_listitem,
                 _activityList);

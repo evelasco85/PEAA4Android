@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectModel;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.R;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class Activity_Main_ProjectAdapter extends ArrayAdapter<ProjectModel> {
+public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
 
     TextView _idView;
     TextView _nameView;
@@ -31,7 +31,7 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<ProjectModel> {
     int _resource;
     Activity _activity;
 
-    public Activity_Main_ProjectAdapter(Activity_Main activity, int resource, List<ProjectModel> items)
+    public Activity_Main_ProjectAdapter(Activity_Main activity, int resource, List<Project> items)
     {
         super( activity.getApplicationContext(), resource, items);
 
@@ -59,7 +59,7 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<ProjectModel> {
 
     public View getView(int position, final View convertView, final ViewGroup parent)
     {
-        final ProjectModel item = getItem(position);
+        final Project item = getItem(position);
         final LinearLayout itemLayout = this.GetLayout(convertView, getContext(), _resource);
 
         this.SetViewToLocalVarAssociation(itemLayout);
@@ -77,14 +77,14 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<ProjectModel> {
 
     }
 
-    public void SetItemViewHandler(LinearLayout itemLayout, ProjectModel item)
+    public void SetItemViewHandler(LinearLayout itemLayout, Project item)
     {
 //        _idView.setText(String.valueOf(item.GetId()));
 //        _nameView.setText(item.GetName());
 
         final Activity_Main activity = (Activity_Main)_activity;
         final PopupMenu popMenu = new PopupMenu(activity, _btnMenu);
-        final ProjectModel projectItem = item;
+        final Project projectItem = item;
 
         popMenu.inflate(R.menu.project_listitem);
         popMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

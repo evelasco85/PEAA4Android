@@ -2,7 +2,7 @@ package com.codeflowcrafter.Sample.Project.Implementation.Domain;
 
 import android.database.Cursor;
 
-import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectModel;
+import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
 import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectTable;
 
 /**
@@ -27,9 +27,9 @@ public class ToProjectTranslator {
     }
 
     //Query Object
-    public ProjectModel CursorToEntity(Cursor cursor)
+    public Project CursorToEntity(Cursor cursor)
     {
-        return new ProjectModel(
+        return new Project(null,
                 cursor.getInt(_idIndex),
                 cursor.getString(_nameIndex),
                 cursor.getString(_descriptionIndex),
