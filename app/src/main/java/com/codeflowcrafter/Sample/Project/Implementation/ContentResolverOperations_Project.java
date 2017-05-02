@@ -1,4 +1,4 @@
-package com.codeflowcrafter.Sample.Project.Implementation.DB;
+package com.codeflowcrafter.Sample.Project.Implementation;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -17,7 +17,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class ProjectContentResolver {
+public class ContentResolverOperations_Project {
     int _idIndex = 0;
     int _nameIndex = 0;
     int _descriptionIndex = 0;
