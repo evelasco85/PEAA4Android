@@ -1,7 +1,13 @@
 package com.codeflowcrafter.Sample.Project.Implementation.Domain;
 
-import com.codeflowcrafter.PEAA.DataManipulation.BaseQueryObject;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
 
+import com.codeflowcrafter.PEAA.DataManipulation.BaseQueryObject;
+import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectTable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +15,9 @@ import java.util.List;
  */
 
 public class QueryProjectById  extends BaseQueryObject<Project, QueryProjectById.Criteria> {
+    Context _context;
+    Uri _uri;
+    ToProjectTranslator _translator = new ToProjectTranslator();
 
     public static class Criteria {
         public int ProjectId;
@@ -18,12 +27,29 @@ public class QueryProjectById  extends BaseQueryObject<Project, QueryProjectById
         }
     }
 
-    public QueryProjectById() {
+    public QueryProjectById(Context context, Uri uri) {
         super( QueryProjectById.Criteria.class);
+
+        _context = context;
+        _uri = uri;
     }
 
     @Override
     public List<Project> PerformSearchOperation(Criteria criteria) {
-        return null;
+        String where = ProjectTable.COLUMN_ID + "=" +  criteria.ProjectId;
+        Cursor cursor = _context.getContentResolver().query(_uri, null, where, null, null);
+        List entityList = new ArrayList();
+
+        if(cursor == null) {
+            return entityList;
+        }
+
+        _translator.UpdateColumnOrdinals(cursor);
+
+        if(cursor.moveToFirst()) {
+            entityList.add(_translator.CursorToEntity(cursor));
+        }
+
+        return entityList;
     }
 }

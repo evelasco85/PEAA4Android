@@ -1,7 +1,7 @@
 package com.codeflowcrafter.Sample.Project.Implementation.ContentProvider;
 
 //Domain Object
-public class ProjectModel{
+public class ProjectModel {
     int _id;
     String _name;
     String _description;

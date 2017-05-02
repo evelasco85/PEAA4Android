@@ -1,8 +1,12 @@
 package com.codeflowcrafter.Sample;
 
 import android.app.Application;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
+import com.codeflowcrafter.DatabaseAccess.ContentProviderTemplate;
 import com.codeflowcrafter.LogManagement.Interfaces.ILogEmitter;
 import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
 import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
@@ -157,10 +161,17 @@ public class SampleApplication
 
     void RegisterProjectDomain(IDataSynchronizationManager dsManager)
     {
-        List<IBaseQueryObjectConcrete<Project>> projectQueryObjects = new ArrayList<IBaseQueryObjectConcrete<Project>>();
+        ContentResolver resolver = getContentResolver();
 
-        projectQueryObjects.add(new QueryAllProjects());
-        projectQueryObjects.add(new QueryProjectById());
-        dsManager.RegisterEntity(Project.class, new ProjectMapper(), projectQueryObjects);
+        List<IBaseQueryObjectConcrete<Project>> projectQueryObjects = new ArrayList<IBaseQueryObjectConcrete<Project>>();
+        Uri uri = SampleApplicationContentProviders.GetInstance().GetProjectProvider().GetContentUri();
+        Context context = this.getApplicationContext();
+
+        projectQueryObjects.add(new QueryAllProjects(context, uri));
+        projectQueryObjects.add(new QueryProjectById(context, uri));
+        dsManager.RegisterEntity(
+                Project.class,
+                new ProjectMapper(resolver, uri),
+                projectQueryObjects);
     }
 }
