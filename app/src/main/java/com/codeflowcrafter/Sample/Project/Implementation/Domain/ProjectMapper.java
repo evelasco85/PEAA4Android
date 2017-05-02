@@ -5,7 +5,7 @@ import android.content.ContentValues;
 import android.net.Uri;
 
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapper;
-import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.InvocationDelegates;
+import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
 import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectTable;
 
 /**
@@ -25,7 +25,7 @@ public class ProjectMapper extends BaseMapper<Project> {
     }
 
     @Override
-    public boolean ConcreteUpdate(Project project, InvocationDelegates invocationDelegates) {
+    public boolean ConcreteUpdate(Project project, IInvocationDelegates invocationDelegates) {
         int updatedRecords = 0;
 
         if(project == null)
@@ -43,14 +43,14 @@ public class ProjectMapper extends BaseMapper<Project> {
     }
 
     @Override
-    public boolean ConcreteInsert(Project project, InvocationDelegates invocationDelegates) {
+    public boolean ConcreteInsert(Project project, IInvocationDelegates invocationDelegates) {
         _resolver.insert(_uri, EntityToContentValues(project));
 
         return true;
     }
 
     @Override
-    public boolean ConcreteDelete(Project project, InvocationDelegates invocationDelegates) {
+    public boolean ConcreteDelete(Project project, IInvocationDelegates invocationDelegates) {
         String where = ProjectTable.COLUMN_ID + "=" +  project.GetId();
 
         int deletedRecords = _resolver

@@ -9,7 +9,7 @@ import com.codeflowcrafter.PEAA.Domain.Interfaces.IDomainObject;
 public interface IBaseMapper
 {
     String GetEntityTypeName();
-    boolean Update(IDomainObject entity, InvocationDelegates invocationDelegates);
-    boolean Insert(IDomainObject entity, InvocationDelegates invocationDelegates);
-    boolean Delete(IDomainObject entity, InvocationDelegates invocationDelegates);
+    boolean Update(IDomainObject entity, IInvocationDelegates invocationDelegates);
+    boolean Insert(IDomainObject entity, IInvocationDelegates invocationDelegates);
+    boolean Delete(IDomainObject entity, IInvocationDelegates invocationDelegates);
 }

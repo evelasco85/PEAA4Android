@@ -24,7 +24,7 @@
 
         <provider
             android:name=".Project.Implementation.ContentProvider.ProjectProvider"
-            android:authorities="com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectProvider"
+            android:authorities="com.codeflowcrafter.SampleApplication.ProjectProvider"
             />
 
     </application>

@@ -33,7 +33,7 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
 
     public Activity_Main_ProjectAdapter(Activity_Main activity, int resource, List<Project> items)
     {
-        super( activity.getApplicationContext(), resource, items);
+        super(activity, resource, items);
 
         _resource = resource;
         _activity = activity;
@@ -74,13 +74,12 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
         _nameView = (TextView) itemLayout.findViewById(R.id.projectName);
         _btnMenu = (Button) itemLayout.findViewById(R.id.btnProjectMenu);
         _btnAddAmount = (Button) itemLayout.findViewById(R.id.btnAddAmount);
-
     }
 
     public void SetItemViewHandler(LinearLayout itemLayout, Project item)
     {
-//        _idView.setText(String.valueOf(item.GetId()));
-//        _nameView.setText(item.GetName());
+        _idView.setText(String.valueOf(item.GetId()));
+        _nameView.setText(item.GetName());
 
         final Activity_Main activity = (Activity_Main)_activity;
         final PopupMenu popMenu = new PopupMenu(activity, _btnMenu);

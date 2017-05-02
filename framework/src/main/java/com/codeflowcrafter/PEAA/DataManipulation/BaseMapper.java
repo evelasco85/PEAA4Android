@@ -1,7 +1,7 @@
 package com.codeflowcrafter.PEAA.DataManipulation;
 
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapperConcrete;
-import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.InvocationDelegates;
+import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
 import com.codeflowcrafter.PEAA.Domain.Interfaces.IDomainObject;
 
 import java.util.Hashtable;
@@ -24,25 +24,25 @@ public abstract class BaseMapper<TEntity extends IDomainObject> implements IBase
         return _entityClass.getName();
     }
 
-    abstract public boolean ConcreteUpdate(TEntity entity, InvocationDelegates invocationDelegates);
-    abstract public boolean ConcreteInsert(TEntity entity, InvocationDelegates invocationDelegates);
-    abstract public boolean ConcreteDelete(TEntity entity, InvocationDelegates invocationDelegates);
+    abstract public boolean ConcreteUpdate(TEntity entity, IInvocationDelegates invocationDelegates);
+    abstract public boolean ConcreteInsert(TEntity entity, IInvocationDelegates invocationDelegates);
+    abstract public boolean ConcreteDelete(TEntity entity, IInvocationDelegates invocationDelegates);
 
-    public boolean Update(IDomainObject entity, InvocationDelegates invocationDelegates)
+    public boolean Update(IDomainObject entity, IInvocationDelegates invocationDelegates)
     {
         TEntity instance = (TEntity) entity;
 
         return ConcreteUpdate(instance, invocationDelegates);
     }
 
-    public boolean Insert(IDomainObject entity, InvocationDelegates invocationDelegates)
+    public boolean Insert(IDomainObject entity, IInvocationDelegates invocationDelegates)
     {
         TEntity instance = (TEntity) entity;
 
         return ConcreteInsert(instance, invocationDelegates);
     }
 
-    public boolean Delete(IDomainObject entity, InvocationDelegates invocationDelegates)
+    public boolean Delete(IDomainObject entity, IInvocationDelegates invocationDelegates)
     {
         TEntity instance = (TEntity) entity;
 

@@ -7,7 +7,7 @@ import com.codeflowcrafter.PEAA.Domain.Interfaces.IDomainObject;
  */
 
 public interface IBaseMapperConcrete<TEntity extends IDomainObject> extends IBaseMapper {
-    boolean ConcreteUpdate(TEntity entity, InvocationDelegates invocationDelegates);
-    boolean ConcreteInsert(TEntity entity, InvocationDelegates invocationDelegates);
-    boolean ConcreteDelete(TEntity entity, InvocationDelegates invocationDelegates);
+    boolean ConcreteUpdate(TEntity entity, IInvocationDelegates invocationDelegates);
+    boolean ConcreteInsert(TEntity entity, IInvocationDelegates invocationDelegates);
+    boolean ConcreteDelete(TEntity entity, IInvocationDelegates invocationDelegates);
 }

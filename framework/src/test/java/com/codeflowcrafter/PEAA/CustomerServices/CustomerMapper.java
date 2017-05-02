@@ -2,7 +2,7 @@ package com.codeflowcrafter.PEAA.CustomerServices;
 
 
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapper;
-import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.InvocationDelegates;
+import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -28,7 +28,7 @@ public class CustomerMapper extends BaseMapper<Customer> {
     }
 
     @Override
-    public boolean ConcreteInsert(Customer customer, InvocationDelegates invocationDelegates) {
+    public boolean ConcreteInsert(Customer customer, IInvocationDelegates invocationDelegates) {
         if(_internalData.containsKey(customer.Number))
             _internalData.remove(customer.Number);
 
@@ -45,7 +45,7 @@ public class CustomerMapper extends BaseMapper<Customer> {
     }
 
     @Override
-    public boolean ConcreteUpdate(Customer customer, InvocationDelegates invocationDelegates) {
+    public boolean ConcreteUpdate(Customer customer, IInvocationDelegates invocationDelegates) {
         if(_internalData.containsKey(customer.Number))
             _internalData.remove(customer.Number);
 
@@ -62,7 +62,7 @@ public class CustomerMapper extends BaseMapper<Customer> {
     }
 
     @Override
-    public boolean ConcreteDelete(Customer customer, InvocationDelegates invocationDelegates) {
+    public boolean ConcreteDelete(Customer customer, IInvocationDelegates invocationDelegates) {
         if(_internalData.containsKey(customer.Number))
             _internalData.remove(customer.Number);
 

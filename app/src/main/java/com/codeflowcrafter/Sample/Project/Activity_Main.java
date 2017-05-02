@@ -10,10 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.codeflowcrafter.PEAA.DataSynchronizationManager;
-import com.codeflowcrafter.PEAA.Interfaces.IRepository;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
-import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryAllProjects;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IView_Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.Presenter_Project;
@@ -21,7 +18,6 @@ import com.codeflowcrafter.Sample.R;
 import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by aiko on 5/1/17.
@@ -32,19 +28,20 @@ public class Activity_Main
     implements IView_Project, LoaderManager.LoaderCallbacks<Cursor>
 {
     Presenter_Project _presenter;
-    IProjectRequests _viewRequest;
+    static IProjectRequests s_viewRequest;
     Button _btnAddProject;
     Activity_Main_Fragment_Project_List _listImplementation;
 
     public static final int REQUEST_BY_PROJECT_ADD = 1;
     public static final int REQUEST_BY_PROJECT_EDIT = 2;
 
-    public IProjectRequests GetViewRequest(){return _viewRequest;}
-    public void SetViewRequest(IProjectRequests viewRequest){_viewRequest = viewRequest;}
+    public static IProjectRequests GetStaticViewRequest(){return s_viewRequest;}
+    public IProjectRequests GetViewRequest(){return s_viewRequest;}
+    public void SetViewRequest(IProjectRequests viewRequest){
+        s_viewRequest = viewRequest;}
 
     ArrayList<Project> _activityList;
     Activity_Main_ProjectAdapter _activityAdapter;
-    IRepository<Project> _repository = DataSynchronizationManager.GetInstance().GetRepository(Project.class);
 
 
     @Override
@@ -79,7 +76,7 @@ public class Activity_Main
         _btnAddProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _viewRequest.OpenProjectEntry();
+                s_viewRequest.OpenAddProjectEntry();
             }
         });
     }
@@ -90,7 +87,7 @@ public class Activity_Main
         getLoaderManager().initLoader(0, null, this);
     }
 
-    public void OnOpenProjectEntryCompletion()
+    public void OnOpenAddProjectEntryCompletion()
     {
         Intent projectEntryIntent = new Intent(this, Activity_Project.class);
 
@@ -111,7 +108,7 @@ public class Activity_Main
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
         _activityList.clear();
-        _activityList.addAll(_repository.Matching(new QueryAllProjects.Criteria()));
+        _activityList.addAll(s_viewRequest.GetAllProjects());
         _activityAdapter.notifyDataSetChanged();
     }
 

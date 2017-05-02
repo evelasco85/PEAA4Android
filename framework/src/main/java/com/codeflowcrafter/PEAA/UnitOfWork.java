@@ -4,7 +4,7 @@ import com.codeflowcrafter.PEAA.Interfaces.UoWInvocationDelegates;
 import com.codeflowcrafter.PEAA.Interfaces.IUnitOfWork;
 import com.codeflowcrafter.PEAA.Interfaces.UnitOfWorkAction;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
-import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.InvocationDelegates;
+import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
 import com.codeflowcrafter.PEAA.Domain.Interfaces.IDomainObject;
 
 import java.util.ArrayList;
@@ -20,14 +20,14 @@ public class UnitOfWork implements IUnitOfWork {
     HashMap<UUID, IDomainObject> _insertionObjects = new HashMap<UUID, IDomainObject>();
     HashMap<UUID, IDomainObject> _updatingObjects = new HashMap<UUID, IDomainObject>();
     HashMap<UUID, IDomainObject> _deletionObjects = new HashMap<UUID, IDomainObject>();
-    HashMap<UUID, InvocationDelegates> _invocationDelegates = new HashMap<UUID, InvocationDelegates>();
+    HashMap<UUID, IInvocationDelegates> _invocationDelegates = new HashMap<UUID, IInvocationDelegates>();
 
     boolean ContainsKey(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject)
     {
         return domainDictionary.containsKey(domainObject.GetSystemId());
     }
 
-    void AddEntity(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject, InvocationDelegates invocationDelegates)
+    void AddEntity(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject, IInvocationDelegates invocationDelegates)
     {
         domainDictionary.put(domainObject.GetSystemId(), domainObject);
         _invocationDelegates.put(domainObject.GetSystemId(), invocationDelegates);
@@ -50,7 +50,7 @@ public class UnitOfWork implements IUnitOfWork {
             throw new NullPointerException("A 'mapper' implementation is required for an entity to be observed");
     }
 
-    public <TEntity extends IDomainObject> TEntity RegisterNew(TEntity entity, InvocationDelegates invocationDelegates)
+    public <TEntity extends IDomainObject> TEntity RegisterNew(TEntity entity, IInvocationDelegates invocationDelegates)
             throws NullPointerException
     {
         try {
@@ -75,7 +75,7 @@ public class UnitOfWork implements IUnitOfWork {
         return entity;
     }
 
-    public <TEntity extends IDomainObject> TEntity RegisterDirty(TEntity entity, InvocationDelegates invocationDelegates)
+    public <TEntity extends IDomainObject> TEntity RegisterDirty(TEntity entity, IInvocationDelegates invocationDelegates)
             throws NullPointerException
     {
         try {
@@ -98,7 +98,7 @@ public class UnitOfWork implements IUnitOfWork {
         return entity;
     }
 
-    public <TEntity extends IDomainObject> TEntity RegisterRemoved(TEntity entity, InvocationDelegates invocationDelegates)
+    public <TEntity extends IDomainObject> TEntity RegisterRemoved(TEntity entity, IInvocationDelegates invocationDelegates)
             throws NullPointerException
     {
         try {
@@ -159,7 +159,7 @@ public class UnitOfWork implements IUnitOfWork {
                 continue;
 
             IBaseMapper mapper = entity.GetMapper();
-            InvocationDelegates invocation = _invocationDelegates.get(entity.GetSystemId());
+            IInvocationDelegates invocation = _invocationDelegates.get(entity.GetSystemId());
             boolean success = false;
 
             if (invocation != null)
