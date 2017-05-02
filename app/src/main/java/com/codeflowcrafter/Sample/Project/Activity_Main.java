@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.codeflowcrafter.PEAA.DataSynchronizationManager;
+import com.codeflowcrafter.PEAA.Interfaces.IRepository;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryAllProjects;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IView_Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.Presenter_Project;
@@ -18,6 +21,7 @@ import com.codeflowcrafter.Sample.R;
 import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by aiko on 5/1/17.
@@ -40,6 +44,8 @@ public class Activity_Main
 
     ArrayList<Project> _activityList;
     Activity_Main_ProjectAdapter _activityAdapter;
+    IRepository<Project> _repository = DataSynchronizationManager.GetInstance().GetRepository(Project.class);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +111,7 @@ public class Activity_Main
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
         _activityList.clear();
-//        _activityList.addAll(SampleApplicationContentProviders.GetInstance().GetProjectMapper().LoadAll(cursor));
+        _activityList.addAll(_repository.Matching(new QueryAllProjects.Criteria()));
         _activityAdapter.notifyDataSetChanged();
     }
 
