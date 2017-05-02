@@ -12,13 +12,13 @@ import java.util.Map;
  * Created by aiko on 4/29/17.
  */
 
-public class BaseDatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
     String _tag;
     String _databaseFilename;
     static final int DATABASE_VERSION = 1;
     HashMap<String, String> _tableScripts  = new HashMap<String, String>();
 
-    public BaseDatabaseHelper(
+    public DatabaseHelper(
             String tagName, String databaseFilename,
             Context context, HashMap<String, String> tableStructureSet)
     {

@@ -1,12 +1,6 @@
-package com.codeflowcrafter.Sample.Project.Implementation.DB;
+package com.codeflowcrafter.Sample.ContentProviders.Project;
 
-/**
- * Created by aiko on 5/1/17.
- */
-
-interface IIdentityField {
-    public int GetId();
-}
+import com.codeflowcrafter.Sample.ContentProviders.IIdentityField;
 
 //Domain Object
 public class ProjectModel implements IIdentityField {

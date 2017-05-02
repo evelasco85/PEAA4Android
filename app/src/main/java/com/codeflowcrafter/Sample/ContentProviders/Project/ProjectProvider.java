@@ -1,4 +1,4 @@
-package com.codeflowcrafter.Sample.Project.Implementation.DB;
+package com.codeflowcrafter.Sample.ContentProviders.Project;
 
 import com.codeflowcrafter.DatabaseAccess.ContentProviderTemplate;
 import com.codeflowcrafter.Sample.SampleApplicationDataAccess;

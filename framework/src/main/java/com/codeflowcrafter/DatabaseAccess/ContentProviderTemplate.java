@@ -20,7 +20,7 @@ interface IContentProviderTemplate
 {
     UriMatcher GetUriMatcher();
     Uri GetContentUri();
-    TableTemplate GetUnderlyingTable();
+    BaseTable GetUnderlyingTable();
 }
 
 public class ContentProviderTemplate extends ContentProvider
@@ -32,8 +32,8 @@ public class ContentProviderTemplate extends ContentProvider
     public static final int URI_SEARCH_SPECIFIC = 2;
     public static final int URI_SEARCH_GLOBAL = 3;
 
-    TableTemplate _tableTemplate;
-    BaseDatabaseHelper _dbHelper;
+    BaseTable _tableTemplate;
+    DatabaseHelper _dbHelper;
     BaseDataAccess _dataAccess;
     String _fullProviderAuthorityName;
     UriMatcher _uriMatcher;
@@ -42,7 +42,7 @@ public class ContentProviderTemplate extends ContentProvider
     public ContentProviderTemplate(
             String applicationName, BaseDataAccess dataAccess,
             String providerAuthorityName, String uriPath,
-            TableTemplate tableTemplate)
+            BaseTable tableTemplate)
     {
         _dataAccess = dataAccess;
         _tableTemplate = tableTemplate;
@@ -71,7 +71,7 @@ public class ContentProviderTemplate extends ContentProvider
         return _contentUri;
     }
 
-    public TableTemplate GetUnderlyingTable()
+    public BaseTable GetUnderlyingTable()
     {
         return _tableTemplate;
     }

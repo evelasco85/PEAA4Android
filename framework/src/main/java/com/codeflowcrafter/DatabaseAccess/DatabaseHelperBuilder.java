@@ -13,7 +13,7 @@ public class DatabaseHelperBuilder implements IDatabaseHelperBuilder
     String _tag;
     String _databaseFilename;
     HashMap<String, String> _tableScripts = new HashMap<String, String>();
-    BaseDatabaseHelper _dbHelper;
+    DatabaseHelper _dbHelper;
 
     static  IDatabaseHelperBuilder instance = new DatabaseHelperBuilder();
 
@@ -39,10 +39,10 @@ public class DatabaseHelperBuilder implements IDatabaseHelperBuilder
         return this;
     }
 
-    public BaseDatabaseHelper Create(Context context)
+    public DatabaseHelper Create(Context context)
     {
         if(_dbHelper == null)
-            _dbHelper = new BaseDatabaseHelper(_tag, _databaseFilename, context, _tableScripts);
+            _dbHelper = new DatabaseHelper(_tag, _databaseFilename, context, _tableScripts);
 
         return _dbHelper;
     }

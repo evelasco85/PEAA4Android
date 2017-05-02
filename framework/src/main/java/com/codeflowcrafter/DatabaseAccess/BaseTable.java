@@ -9,7 +9,7 @@ import java.util.HashMap;
 /**
  * Created by aiko on 4/29/17.
  */
-interface ITableTemplate
+interface IBaseTable
 {
     Uri GetContentUri();
     String GetRecordKeyColumnName();
@@ -19,7 +19,7 @@ interface ITableTemplate
     SQLiteQueryBuilder GetQueryBuilder(Uri uri);
 }
 
-public abstract class TableTemplate implements ITableTemplate{
+public abstract class BaseTable implements IBaseTable {
     public abstract String GetRecordKeyColumnName();
     public abstract String GetTableName();
     public abstract String GetTableCreationScript();

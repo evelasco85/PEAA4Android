@@ -2,15 +2,7 @@ package com.codeflowcrafter.DatabaseAccess;
 
 import android.content.Context;
 
-/**
- * Created by aiko on 4/29/17.
- */
-
-interface IBaseDataAccess
-{
-    String GetDatabaseTagName();
-    BaseDatabaseHelper GetDatabaseHelper(Context context);
-}
+import com.codeflowcrafter.DatabaseAccess.Interfaces.IBaseDataAccess;
 
 public abstract class BaseDataAccess implements IBaseDataAccess {
     String _databaseTagName;
@@ -32,5 +24,5 @@ public abstract class BaseDataAccess implements IBaseDataAccess {
         _databaseFilename = databaseFilename;
     }
 
-    public abstract BaseDatabaseHelper GetDatabaseHelper(Context context);
+    public abstract DatabaseHelper GetDatabaseHelper(Context context);
 }

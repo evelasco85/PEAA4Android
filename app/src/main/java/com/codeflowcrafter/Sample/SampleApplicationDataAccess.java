@@ -3,11 +3,11 @@ package com.codeflowcrafter.Sample;
 import android.content.Context;
 
 import com.codeflowcrafter.DatabaseAccess.BaseDataAccess;
-import com.codeflowcrafter.DatabaseAccess.BaseDatabaseHelper;
+import com.codeflowcrafter.DatabaseAccess.DatabaseHelper;
 import com.codeflowcrafter.DatabaseAccess.DatabaseHelperBuilder;
 import com.codeflowcrafter.DatabaseAccess.Interfaces.IDatabaseHelperBuilder_Setup;
 import com.codeflowcrafter.Sample.Project.Implementation.DB.ProjectMapper;
-import com.codeflowcrafter.Sample.Project.Implementation.DB.ProjectProvider;
+import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectProvider;
 
 /**
  * Created by aiko on 5/1/17.
@@ -55,9 +55,9 @@ public class SampleApplicationDataAccess extends BaseDataAccess {
     }
 
 
-    public BaseDatabaseHelper GetDatabaseHelper(Context context)
+    public DatabaseHelper GetDatabaseHelper(Context context)
     {
-        BaseDatabaseHelper dbHelper = _dbHelperSetup.Create(context);
+        DatabaseHelper dbHelper = _dbHelperSetup.Create(context);
 
         return dbHelper;
     }

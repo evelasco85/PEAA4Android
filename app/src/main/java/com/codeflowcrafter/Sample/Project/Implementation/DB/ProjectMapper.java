@@ -6,7 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.codeflowcrafter.DatabaseAccess.ContentProviderTemplate;
-import com.codeflowcrafter.DatabaseAccess.MapperTemplate;
+import com.codeflowcrafter.DatabaseAccess.Deprecated.MapperTemplate;
+import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectModel;
+import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectTable;
 
 import java.util.ArrayList;
 import java.util.List;

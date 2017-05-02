@@ -1,43 +1,69 @@
 package com.codeflowcrafter.Sample.Project;
 
+import android.app.Activity;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.codeflowcrafter.DatabaseAccess.AdapterHelper;
-import com.codeflowcrafter.DatabaseAccess.MapperTemplate;
-import com.codeflowcrafter.Sample.Project.Implementation.DB.ProjectModel;
-import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
+import com.codeflowcrafter.DatabaseAccess.Deprecated.MapperTemplate;
+import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectModel;
 import com.codeflowcrafter.Sample.R;
 
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 /**
  * Created by aiko on 5/1/17.
  */
 
-public class ProjectAdapter extends AdapterHelper<ProjectModel> {
+public class MainActivity_ProjectAdapter extends ArrayAdapter<ProjectModel> {
 
     TextView _idView;
     TextView _nameView;
     Button _btnMenu;
     Button _btnAddAmount;
 
-    public ProjectAdapter(MainActivity activity, int resource, List<ProjectModel> items, MapperTemplate<ProjectModel> projectMapper)
+    int _resource;
+    Activity _activity;
+    MapperTemplate<ProjectModel> _itemMapper;
+
+    public MainActivity_ProjectAdapter(MainActivity activity, int resource, List<ProjectModel> items, MapperTemplate<ProjectModel> projectMapper)
     {
-        super(activity, resource, items, projectMapper);
+        super( activity.getApplicationContext(), resource, items);
+
+        _resource = resource;
+        _activity = activity;
+        _itemMapper = projectMapper;
+    }
+
+    LinearLayout GetLayout(View view, Context context, int resource)
+    {
+        LinearLayout layout;
+
+        if(view == null)
+        {
+            LayoutInflater li = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            layout = new LinearLayout(context);
+
+            li.inflate(resource, layout, true);
+        }
+        else
+            layout = (LinearLayout) view;
+
+        return layout;
     }
 
     public View getView(int position, final View convertView, final ViewGroup parent)
     {
         final ProjectModel item = getItem(position);
-        final LinearLayout itemLayout = this.GetLayout(convertView, getContext(), this.GetResource());
+        final LinearLayout itemLayout = this.GetLayout(convertView, getContext(), _resource);
 
         this.SetViewToLocalVarAssociation(itemLayout);
         this.SetItemViewHandler(itemLayout, item);
@@ -59,7 +85,7 @@ public class ProjectAdapter extends AdapterHelper<ProjectModel> {
 //        _idView.setText(String.valueOf(item.GetId()));
 //        _nameView.setText(item.GetName());
 
-        final MainActivity activity = (MainActivity)this.GetActivity();
+        final MainActivity activity = (MainActivity)_activity;
         final PopupMenu popMenu = new PopupMenu(activity, _btnMenu);
         final ProjectModel projectItem = item;
 

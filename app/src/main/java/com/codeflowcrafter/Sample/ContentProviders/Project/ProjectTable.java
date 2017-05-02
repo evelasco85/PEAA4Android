@@ -1,11 +1,11 @@
-package com.codeflowcrafter.Sample.Project.Implementation.DB;
+package com.codeflowcrafter.Sample.ContentProviders.Project;
 
 import android.app.SearchManager;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 
 import com.codeflowcrafter.DatabaseAccess.ContentProviderTemplate;
-import com.codeflowcrafter.DatabaseAccess.TableTemplate;
+import com.codeflowcrafter.DatabaseAccess.BaseTable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by aiko on 5/1/17.
  */
 
-public class ProjectTable extends TableTemplate {
+public class ProjectTable extends BaseTable {
     public static final String TABLE_NAME = "project";
 
     /*COLUMNS SECTION HERE*/

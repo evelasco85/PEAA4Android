@@ -1,10 +1,12 @@
-package com.codeflowcrafter.DatabaseAccess;
+package com.codeflowcrafter.DatabaseAccess.Deprecated;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.database.Cursor;
+
+import com.codeflowcrafter.DatabaseAccess.ContentProviderTemplate;
 
 import java.util.List;
 
@@ -15,12 +17,14 @@ import java.util.List;
 interface IMapperTemplate<TEntity>
 {
     void SetContentResolver(ContentResolver resolver);
+
     boolean AddItem(TEntity newItem);
     int DeleteItem(int itemId);
     int UpdateItem(TEntity existingItem);
     void SetAddItemCallback(Runnable addItemCallback);
     void SetDeleteItemCallback(Runnable deleteItemCallback);
     void SetUpdateItemCallback(Runnable updateItemCallback);
+
     List LoadAll(Cursor cursor);
     void UpdateColumnOrdinals(Cursor cursor);
     TEntity CursorToEntity(Cursor cursor);
@@ -81,13 +85,20 @@ public abstract class MapperTemplate<TEntity> implements IMapperTemplate<TEntity
     }
 
     public abstract List LoadAll(Cursor cursor);
+
     public abstract boolean AddItem(TEntity newItem);
     public abstract int UpdateItem(TEntity existingItem);
     public abstract int DeleteItem(int itemId);
+
     public abstract TEntity SelectFirst(Context context, int itemId);
     public abstract ContentValues EntityToContentValues(TEntity item);
     public abstract void UpdateColumnOrdinals(Cursor cursor);
     public abstract TEntity CursorToEntity(Cursor cursor);
+
+
+
+
+
 
     public void SetAddItemCallback(Runnable addItemCallback)
     {
