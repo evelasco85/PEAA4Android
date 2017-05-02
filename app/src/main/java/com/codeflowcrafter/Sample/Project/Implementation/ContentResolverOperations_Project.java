@@ -7,8 +7,8 @@ import android.content.CursorLoader;
 import android.database.Cursor;
 import android.net.Uri;
 
-import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectModel;
-import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectTable;
+import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectModel;
+import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectTable;
 
 import java.util.ArrayList;
 import java.util.List;

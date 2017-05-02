@@ -1,7 +1,7 @@
-package com.codeflowcrafter.Sample.ContentProviders.Project;
+package com.codeflowcrafter.Sample.Project.Implementation.ContentProvider;
 
 import com.codeflowcrafter.DatabaseAccess.ContentProviderTemplate;
-import com.codeflowcrafter.Sample.SampleApplicationDataAccess;
+import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
 
 /**
  * Created by aiko on 5/1/17.
@@ -10,8 +10,8 @@ import com.codeflowcrafter.Sample.SampleApplicationDataAccess;
 public class ProjectProvider extends ContentProviderTemplate {
     public ProjectProvider() {
         super(
-                SampleApplicationDataAccess.APPLICATION_NAME,
-                SampleApplicationDataAccess.GetInstance(),
+                SampleApplicationContentProviders.APPLICATION_NAME,
+                SampleApplicationContentProviders.GetInstance(),
                 "ProjectProvider", "projects",
                 new ProjectTable());
     }

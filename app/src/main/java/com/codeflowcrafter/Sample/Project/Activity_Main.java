@@ -10,12 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectModel;
+import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectModel;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IView_Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.Presenter_Project;
 import com.codeflowcrafter.Sample.R;
-import com.codeflowcrafter.Sample.SampleApplicationDataAccess;
+import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
 
 import java.util.ArrayList;
 
@@ -95,7 +95,7 @@ public class Activity_Main
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args)
     {
-        CursorLoader loader = new CursorLoader(this, SampleApplicationDataAccess.GetInstance().GetProjectProvider().GetContentUri(),
+        CursorLoader loader = new CursorLoader(this, SampleApplicationContentProviders.GetInstance().GetProjectProvider().GetContentUri(),
                 null, null, null, null
         );
 
@@ -105,7 +105,7 @@ public class Activity_Main
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
         _activityList.clear();
-//        _activityList.addAll(SampleApplicationDataAccess.GetInstance().GetProjectMapper().LoadAll(cursor));
+//        _activityList.addAll(SampleApplicationContentProviders.GetInstance().GetProjectMapper().LoadAll(cursor));
         _activityAdapter.notifyDataSetChanged();
     }
 

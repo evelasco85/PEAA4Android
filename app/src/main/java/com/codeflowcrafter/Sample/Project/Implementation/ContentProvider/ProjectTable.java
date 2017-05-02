@@ -1,4 +1,4 @@
-package com.codeflowcrafter.Sample.ContentProviders.Project;
+package com.codeflowcrafter.Sample.Project.Implementation.ContentProvider;
 
 import android.app.SearchManager;
 import android.database.sqlite.SQLiteQueryBuilder;

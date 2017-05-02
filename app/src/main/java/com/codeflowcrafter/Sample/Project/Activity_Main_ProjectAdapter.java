@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.codeflowcrafter.Sample.ContentProviders.Project.ProjectModel;
+import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectModel;
 import com.codeflowcrafter.Sample.R;
 
 import java.util.List;

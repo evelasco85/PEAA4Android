@@ -25,13 +25,13 @@ public class ContentProviderTemplate extends ContentProvider
 
     BaseTable _tableTemplate;
     DatabaseHelper _dbHelper;
-    BaseDataAccess _dataAccess;
+    BaseContentProviders _dataAccess;
     String _fullProviderAuthorityName;
     UriMatcher _uriMatcher;
     Uri _contentUri;
 
     public ContentProviderTemplate(
-            String applicationName, BaseDataAccess dataAccess,
+            String applicationName, BaseContentProviders dataAccess,
             String providerAuthorityName, String uriPath,
             BaseTable tableTemplate)
     {

@@ -23,8 +23,8 @@
             android:label="@string/lblProject" />
 
         <provider
-            android:name=".ContentProviders.Project.ProjectProvider"
-            android:authorities="com.codeflowcrafter.Sample.ContentProviders.Project.ProjectProvider"
+            android:name=".Project.Implementation.ContentProvider.ProjectProvider"
+            android:authorities="com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectProvider"
             />
 
     </application>

@@ -1,4 +1,4 @@
-package com.codeflowcrafter.Sample.ContentProviders.Project;
+package com.codeflowcrafter.Sample.Project.Implementation.ContentProvider;
 
 //Domain Object
 public class ProjectModel{
