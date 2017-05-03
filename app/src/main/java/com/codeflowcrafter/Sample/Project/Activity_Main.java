@@ -51,10 +51,7 @@ public class Activity_Main
         getLoaderManager().restartLoader(0, null, this);
 
         _activityList = new ArrayList<Project>();
-        _activityAdapter = new Activity_Main_ProjectAdapter(this,
-                R.layout.activity_project_fragment_listitem,
-                _activityList);
-
+        _activityAdapter = new Activity_Main_ProjectAdapter(this, _activityList);
 
         _presenter = new Presenter_Project(this);
 
