@@ -33,7 +33,7 @@ public class Activity_Main
     Presenter_Project _presenter;
     IProjectRequests _viewRequest;
     Button _btnAddProject;
-    Activity_Main_Fragment_Project_List _listImplementation;
+    Activity_Main_Project_List _listImplementation;
 
     public IProjectRequests GetViewRequest(){return _viewRequest;}
     public void SetViewRequest(IProjectRequests viewRequest){
@@ -63,7 +63,7 @@ public class Activity_Main
     public void AssociateViewToLocalVar()
     {
         _btnAddProject = (Button)findViewById(R.id.btnAddProject);
-        _listImplementation = (Activity_Main_Fragment_Project_List) getFragmentManager()
+        _listImplementation = (Activity_Main_Project_List) getFragmentManager()
                 .findFragmentById(R.id.projectList);
     }
 

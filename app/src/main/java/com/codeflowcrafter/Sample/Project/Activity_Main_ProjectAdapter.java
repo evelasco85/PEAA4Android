@@ -34,9 +34,9 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
 
     public Activity_Main_ProjectAdapter(Activity_Main activity, List<Project> items)
     {
-        super(activity, R.layout.activity_project_fragment_listitem, items);
+        super(activity, R.layout.activity_project_listitem, items);
 
-        _resource = R.layout.activity_project_fragment_listitem;
+        _resource = R.layout.activity_project_listitem;
         _activity = activity;
     }
 
