@@ -1,17 +1,20 @@
 package com.codeflowcrafter.Sample.Project;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.codeflowcrafter.PEAA.DataSynchronizationManager;
-import com.codeflowcrafter.Sample.Amount.MainActivity;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
 import com.codeflowcrafter.Sample.R;
@@ -21,51 +24,72 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * Created by aiko on 5/1/17.
+ * Created by aiko on 5/3/17.
  */
 
-public class Activity_Project extends Activity {
+public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
     Button _btnSave, _btnCancel;
     EditText _txtName, _txtDescription;
     TextView _txtStartDate, _txtEndDate;
 
-    public static final String ACTION_NONE = "NONE";
+    public static final String FRAGMENT_NAME = "Add/Edit Project";
+
     public static final String ACTION_ADD = "ADD";
     public static final String ACTION_EDIT = "EDIT";
-    public static final String FILTER_BY_PROJECTID = "ProjectId";
 
-    String _action = ACTION_NONE;
-    int _projectId = 0;
+    private static String KEY_ACTION = "action";
+    private static String KEY_PROJECT_ID = "project id";
+    private String _selectedAction;
+    private int _projectId;
 
-    IProjectRequests _viewRequest = Activity_Main.GetStaticViewRequest();
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_layout_add_edit);
+    private IProjectRequests _viewRequest;
 
-        if(IntentValidated())
-            _action = getIntent().getAction();
-
-        _projectId  = getIntent().getIntExtra(FILTER_BY_PROJECTID, 0);
-
-
-        AssociateViewToLocalVar();
-        SetViewHandlers();
-        this.SetViewData();
-    }
-
-    public boolean IntentValidated()
+    public void SetViewRequest(IProjectRequests viewRequest)
     {
-        return (getIntent() != null) && (getIntent().getAction() != null);
+        _viewRequest = viewRequest;
     }
 
-    void AssociateViewToLocalVar() {
-        _btnSave = (Button)findViewById(R.id.btnSave);
-        _btnCancel = (Button)findViewById(R.id.btnCancel);
-        _txtName = (EditText)findViewById(R.id.txtName);
-        _txtDescription = (EditText) findViewById(R.id.txtDescription);
-        _txtStartDate = (TextView) findViewById(R.id.txtStartDate);
-        _txtEndDate = (TextView) findViewById(R.id.txtEndDate);
+    public static Activity_Main_Fragment_Project_AddEdit newInstance(String action, int projectId)
+    {
+        Bundle args = new Bundle();
+
+        args.putString(KEY_ACTION, action);
+        args.putInt(KEY_PROJECT_ID, projectId);
+
+        Activity_Main_Fragment_Project_AddEdit fragment = new Activity_Main_Fragment_Project_AddEdit();
+
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+
+        _selectedAction = getArguments().getString(KEY_ACTION);
+        _projectId = getArguments().getInt(KEY_PROJECT_ID);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.activity_main_fragment_project_add_edit, container, false);
+
+        AssociateViewToLocalVar(view);
+        SetViewHandlers();
+
+        return view;
+    }
+
+    void AssociateViewToLocalVar(View view) {
+        _btnSave = (Button)view.findViewById(R.id.btnSave);
+        _btnCancel = (Button)view.findViewById(R.id.btnCancel);
+        _txtName = (EditText)view.findViewById(R.id.txtName);
+        _txtDescription = (EditText) view.findViewById(R.id.txtDescription);
+        _txtStartDate = (TextView) view.findViewById(R.id.txtStartDate);
+        _txtEndDate = (TextView) view.findViewById(R.id.txtEndDate);
     }
 
     void SetViewHandlers()
@@ -74,16 +98,14 @@ public class Activity_Project extends Activity {
             @Override
             public void onClick(View v) {
                 InvokeActionBasedPersistency();
-                setResult(RESULT_OK);
-                finish();
+                dismiss();
             }
         });
 
         _btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(RESULT_CANCELED);
-                finish();
+                dismiss();
             }
         });
 
@@ -136,24 +158,9 @@ public class Activity_Project extends Activity {
         });
     }
 
-    public void SetViewData()
-    {
-        switch (_action)
-        {
-            case ACTION_ADD:
-                ModelToViewData(_viewRequest.ConstructEmptyProject());
-                break;
-            case ACTION_EDIT:
-                ModelToViewData(_viewRequest.GetProjectById(_projectId));
-                break;
-            default:
-                break;
-        }
-    }
-
     public void InvokeActionBasedPersistency()
     {
-        switch (_action)
+        switch (_selectedAction)
         {
             case ACTION_ADD:
                 _viewRequest.AddProject(ViewDataToModel());
@@ -191,5 +198,23 @@ public class Activity_Project extends Activity {
 
         if(!TextUtils.isEmpty(project.GetEndedDate()))
             this._txtEndDate.setText(project.GetEndedDate());
+    }
+
+    @Override
+    public void onDestroyView()
+    {
+        try{
+            Fragment childFragment = getFragmentManager().findFragmentById(R.id.saveCancelFragmentPlaceholder);
+
+            FragmentTransaction transaction = getFragmentManager()
+                    .beginTransaction();
+
+            transaction.remove(childFragment);
+
+            transaction.commit();
+        }catch(Exception e){
+        }
+
+        super.onDestroyView();
     }
 }

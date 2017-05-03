@@ -18,10 +18,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="com.codeflowcrafter.Sample.Project.Activity_Project"
-            android:label="@string/lblProject" />
-
         <provider
             android:name=".Project.Implementation.ContentProvider.ProjectProvider"
             android:authorities="com.codeflowcrafter.SampleApplication.ProjectProvider"

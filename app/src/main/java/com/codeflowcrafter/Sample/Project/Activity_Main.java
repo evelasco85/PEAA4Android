@@ -3,7 +3,6 @@ package com.codeflowcrafter.Sample.Project;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -32,9 +31,6 @@ public class Activity_Main
     static IProjectRequests s_viewRequest;
     Button _btnAddProject;
     Activity_Main_Fragment_Project_List _listImplementation;
-
-    public static final int REQUEST_BY_PROJECT_ADD = 1;
-    public static final int REQUEST_BY_PROJECT_EDIT = 2;
 
     public static IProjectRequests GetStaticViewRequest(){return s_viewRequest;}
     public IProjectRequests GetViewRequest(){return s_viewRequest;}
@@ -90,11 +86,11 @@ public class Activity_Main
 
     public void OnOpenAddProjectEntryCompletion()
     {
-        Intent projectEntryIntent = new Intent(this, Activity_Project.class);
+        Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
+                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD, 0);
 
-        projectEntryIntent.setAction(Activity_Project.ACTION_ADD);
-
-        this.startActivityForResult(projectEntryIntent, Activity_Main.REQUEST_BY_PROJECT_ADD);
+        fragment.SetViewRequest(s_viewRequest);
+        fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args)
