@@ -18,6 +18,7 @@ import com.codeflowcrafter.Sample.R;
 import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by aiko on 5/1/17.
@@ -107,9 +108,7 @@ public class Activity_Main
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
-        _activityList.clear();
-        _activityList.addAll(s_viewRequest.GetAllProjects());
-        _activityAdapter.notifyDataSetChanged();
+       s_viewRequest.LoadAllProjects();
     }
 
     public void onLoaderReset(Loader<Cursor> loader){}
@@ -119,5 +118,12 @@ public class Activity_Main
     {
         super.onResume();
         getLoaderManager().restartLoader(0, null, this);
+    }
+
+    public void OnLoadAllProjectsCompletion(List<Project> projects)
+    {
+        _activityList.clear();
+        _activityList.addAll(projects);
+        _activityAdapter.notifyDataSetChanged();
     }
 }

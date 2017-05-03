@@ -41,9 +41,9 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         _slc.EmitLog(Priority.Info, Status.Success);
     }
 
-    public List<Project> GetAllProjects()
+    public void LoadAllProjects()
     {
-        return _repository.Matching(new QueryAllProjects.Criteria());
+        _view.OnLoadAllProjectsCompletion(_repository.Matching(new QueryAllProjects.Criteria()));
     }
 
     public Project GetProjectById(int projectId)
