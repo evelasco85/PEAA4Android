@@ -7,7 +7,7 @@
         android:padding="5dp"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content">
-        <include layout="@layout/activity_amount_merge_layout_amount_input"/>
+        <include layout="@layout/activity_amount_merge_amount_input"/>
     </TableRow>
     <TableRow
         android:padding="5dp"

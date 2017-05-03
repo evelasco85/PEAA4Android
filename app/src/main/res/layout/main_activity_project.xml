@@ -24,6 +24,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="bottom"
-            tools:layout="@layout/activity_project_layout_fragment_listitem" />
+            tools:layout="@layout/activity_project_fragment_listitem" />
     </TableRow>
 </TableLayout>

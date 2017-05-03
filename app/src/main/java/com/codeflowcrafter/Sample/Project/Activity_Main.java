@@ -28,14 +28,13 @@ public class Activity_Main
     implements IView_Project, LoaderManager.LoaderCallbacks<Cursor>
 {
     Presenter_Project _presenter;
-    static IProjectRequests s_viewRequest;
+    IProjectRequests _viewRequest;
     Button _btnAddProject;
     Activity_Main_Fragment_Project_List _listImplementation;
 
-    public static IProjectRequests GetStaticViewRequest(){return s_viewRequest;}
-    public IProjectRequests GetViewRequest(){return s_viewRequest;}
+    public IProjectRequests GetViewRequest(){return _viewRequest;}
     public void SetViewRequest(IProjectRequests viewRequest){
-        s_viewRequest = viewRequest;}
+        _viewRequest = viewRequest;}
 
     ArrayList<Project> _activityList;
     Activity_Main_ProjectAdapter _activityAdapter;
@@ -44,13 +43,13 @@ public class Activity_Main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity_project_layout);
+        setContentView(R.layout.main_activity_project);
 
         getLoaderManager().restartLoader(0, null, this);
 
         _activityList = new ArrayList<Project>();
         _activityAdapter = new Activity_Main_ProjectAdapter(this,
-                R.layout.activity_project_layout_fragment_listitem,
+                R.layout.activity_project_fragment_listitem,
                 _activityList);
 
 
@@ -73,7 +72,7 @@ public class Activity_Main
         _btnAddProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                s_viewRequest.OpenAddProjectEntry();
+                _viewRequest.OpenAddProjectEntry();
             }
         });
     }
@@ -89,7 +88,7 @@ public class Activity_Main
         Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
                 .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD, 0);
 
-        fragment.SetViewRequest(s_viewRequest);
+        fragment.SetViewRequest(_viewRequest);
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
     }
 
@@ -104,7 +103,7 @@ public class Activity_Main
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
-       s_viewRequest.LoadAllProjects();
+       _viewRequest.LoadAllProjects();
     }
 
     public void onLoaderReset(Loader<Cursor> loader){}
