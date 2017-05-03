@@ -37,7 +37,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
     public static final String ACTION_ADD = "ADD";
     public static final String ACTION_EDIT = "EDIT";
 
-    private static String KEY_ACTION = "action";
+    private static final String KEY_ACTION = "action";
     private String _selectedAction;
 
     private IProjectRequests _viewRequest;

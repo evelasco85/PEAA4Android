@@ -13,10 +13,9 @@ interface IView_Project_Events
 {
     void OnOpenAddProjectEntryCompletion();
     void OnOpenEditProjectEntryCompletion(Project project);
+    void OnPerformDeleteProjectEntryCompletion(Project project);
 
     void OnLoadAllProjectsCompletion(List<Project> projects);
-    void OnGetProjectByIdCompletion(Project project);
-
 }
 
 public interface IView_Project extends IView_Project_Events, IView<IProjectRequests> {

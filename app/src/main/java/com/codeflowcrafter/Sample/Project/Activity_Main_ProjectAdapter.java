@@ -100,7 +100,7 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
 //                        activity.InvokeShowAmountList(projectItem.GetId());
                         return true;
                     case (R.id.mnuDelete):
-//                        activity.InvokeDeleteProjectEntry(projectItem);
+                        viewrequest.PerformDeleteProjectEntry(projectItem);
                         return true;
                     default:
                         return false;

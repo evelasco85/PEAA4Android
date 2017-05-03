@@ -11,9 +11,11 @@ import java.util.List;
 public interface IProjectRequests {
     void OpenAddProjectEntry();
     void OpenEditProjectEntry(Project project);
+    void PerformDeleteProjectEntry(Project project);
 
     void AddProject(Project project);
     void UpdateProject(Project project);
+    void DeleteProject(Project project);
 
     void LoadAllProjects();
 }

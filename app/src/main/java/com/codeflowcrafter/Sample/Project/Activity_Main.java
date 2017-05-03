@@ -1,13 +1,16 @@
 package com.codeflowcrafter.Sample.Project;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
@@ -103,8 +106,36 @@ public class Activity_Main
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
     }
 
-    public void OnGetProjectByIdCompletion(Project project) {
+    public void OnPerformDeleteProjectEntryCompletion(final Project project)
+    {
+        AlertDialog.Builder verify = new AlertDialog.Builder(this);
 
+        verify.setTitle("Are you sure you want to delete?");
+        verify.setMessage("You are about to delete this item");
+
+        verify.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int arg) {
+                        _viewRequest.DeleteProject(project);
+                        String message = project.GetName() + " item deleted";
+                        Toast
+                                .makeText(getApplicationContext(), message, Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+
+        verify.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int arg) {
+                        //No action takes
+                    }
+                }
+        );
+
+        verify.show();
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args)

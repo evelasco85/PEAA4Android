@@ -50,6 +50,11 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         _view.OnOpenEditProjectEntryCompletion(project);
     }
 
+    public void PerformDeleteProjectEntry(Project project)
+    {
+        _view.OnPerformDeleteProjectEntryCompletion(project);
+    }
+
     public void AddProject(Project project)
     {
         IBaseMapper mapper = project.GetMapper();
@@ -62,6 +67,13 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         IBaseMapper mapper = project.GetMapper();
 
         mapper.Update(project, this);
+    }
+
+    public void DeleteProject(Project project)
+    {
+        IBaseMapper mapper = project.GetMapper();
+
+        mapper.Delete(project, this);
     }
 
     @Override
