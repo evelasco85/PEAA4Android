@@ -3,6 +3,7 @@ package com.codeflowcrafter.Sample.Project.Implementation.Domain;
 import android.database.Cursor;
 
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
+import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectTable;
 
 /**
@@ -26,10 +27,10 @@ public class ToProjectTranslator {
         _endedDate = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_ENDED_AT);
     }
 
-    //Query Object
+    //non-static to avoid race condition
     public Project CursorToEntity(Cursor cursor)
     {
-        return new Project(null,
+        return new Project(DataSynchronizationManager.GetInstance().GetMapper(Project.class),
                 cursor.getInt(_idIndex),
                 cursor.getString(_nameIndex),
                 cursor.getString(_descriptionIndex),

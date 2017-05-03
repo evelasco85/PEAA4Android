@@ -1,5 +1,8 @@
 package com.codeflowcrafter.Sample.Project.Implementation.MVP;
 
+import android.content.CursorLoader;
+import android.database.Cursor;
+
 import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
 import com.codeflowcrafter.LogManagement.Priority;
 import com.codeflowcrafter.LogManagement.Status;
@@ -9,10 +12,10 @@ import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.PEAA.Domain.Interfaces.IDomainObject;
 import com.codeflowcrafter.PEAA.Interfaces.IRepository;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
-import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryAllProjects;
-import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryProjectById;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.ToProjectTranslator;
 import com.codeflowcrafter.Sample.SampleApplication;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
     IView_Project _view;
     IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().GetSLC();
     IRepository<Project> _repository = DataSynchronizationManager.GetInstance().GetRepository(Project.class);
+    ToProjectTranslator _translator = new ToProjectTranslator();
 
     public Presenter_Project(IView_Project view)
     {
@@ -41,9 +45,25 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         _slc.EmitLog(Priority.Info, Status.Success);
     }
 
-    public void LoadAllProjects()
+    public void LoadProjectsViaLoader(CursorLoader loader)
     {
-        _view.OnLoadAllProjectsCompletion(_repository.Matching(new QueryAllProjects.Criteria()));
+        Cursor cursor = loader.loadInBackground();
+        List<Project>  entityList = new ArrayList();
+
+        if(cursor == null) {
+            _view.OnLoadProjectsViaLoaderCompletion(entityList);
+
+            return;
+        }
+
+        _translator.UpdateColumnOrdinals(cursor);
+
+        while (cursor.moveToNext())
+        {
+            entityList.add(_translator.CursorToEntity(cursor));
+        }
+
+        _view.OnLoadProjectsViaLoaderCompletion(entityList);
     }
 
     public void OpenEditProjectEntry(Project project) {

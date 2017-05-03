@@ -146,7 +146,7 @@ public class Activity_Main
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
-       _viewRequest.LoadAllProjects();
+       _viewRequest.LoadProjectsViaLoader((CursorLoader)loader);
     }
 
     public void onLoaderReset(Loader<Cursor> loader){}
@@ -158,7 +158,7 @@ public class Activity_Main
         getLoaderManager().restartLoader(0, null, this);
     }
 
-    public void OnLoadAllProjectsCompletion(List<Project> projects)
+    public void OnLoadProjectsViaLoaderCompletion(List<Project> projects)
     {
         _activityList.clear();
         _activityList.addAll(projects);

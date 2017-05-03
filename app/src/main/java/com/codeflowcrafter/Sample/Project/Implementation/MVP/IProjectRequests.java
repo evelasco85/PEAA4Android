@@ -1,5 +1,7 @@
 package com.codeflowcrafter.Sample.Project.Implementation.MVP;
 
+import android.content.CursorLoader;
+
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 
 import java.util.List;
@@ -17,5 +19,5 @@ public interface IProjectRequests {
     void UpdateProject(Project project);
     void DeleteProject(Project project);
 
-    void LoadAllProjects();
+    void LoadProjectsViaLoader(CursorLoader loader);
 }
