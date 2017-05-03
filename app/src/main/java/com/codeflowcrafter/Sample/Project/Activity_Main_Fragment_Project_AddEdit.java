@@ -38,23 +38,23 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
     public static final String ACTION_EDIT = "EDIT";
 
     private static String KEY_ACTION = "action";
-    private static String KEY_PROJECT_ID = "project id";
     private String _selectedAction;
-    private int _projectId;
 
     private IProjectRequests _viewRequest;
+    private Project _projectToEdit;
+    private int _projectId = 0;
 
     public void SetViewRequest(IProjectRequests viewRequest)
     {
         _viewRequest = viewRequest;
     }
+    public void SetProjectToEdit(Project project){_projectToEdit = project;}
 
-    public static Activity_Main_Fragment_Project_AddEdit newInstance(String action, int projectId)
+    public static Activity_Main_Fragment_Project_AddEdit newInstance(String action)
     {
         Bundle args = new Bundle();
 
         args.putString(KEY_ACTION, action);
-        args.putInt(KEY_PROJECT_ID, projectId);
 
         Activity_Main_Fragment_Project_AddEdit fragment = new Activity_Main_Fragment_Project_AddEdit();
 
@@ -69,7 +69,6 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         super.onCreate(savedInstanceState);
 
         _selectedAction = getArguments().getString(KEY_ACTION);
-        _projectId = getArguments().getInt(KEY_PROJECT_ID);
     }
 
     @Override
@@ -79,6 +78,8 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
 
         AssociateViewToLocalVar(view);
         SetViewHandlers();
+
+        if(_selectedAction == ACTION_EDIT) SetModelToViewData(_projectToEdit);
 
         return view;
     }
@@ -158,7 +159,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         });
     }
 
-    public void InvokeActionBasedPersistency()
+    void InvokeActionBasedPersistency()
     {
         switch (_selectedAction)
         {
@@ -173,7 +174,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         }
     }
 
-    public Project ViewDataToModel()
+    Project ViewDataToModel()
     {
         return new Project(
                 DataSynchronizationManager.GetInstance().GetMapper(Project.class),
@@ -185,11 +186,12 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         );
     }
 
-    public void ModelToViewData(Project project)
+    void SetModelToViewData(Project project)
     {
         if(project == null)
             return;
 
+        this._projectId = project.GetId();
         this._txtName.setText(project.GetName());
         this._txtDescription.setText(project.GetDescription());
 

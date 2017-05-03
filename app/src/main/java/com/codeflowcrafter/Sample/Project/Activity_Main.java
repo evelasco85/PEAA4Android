@@ -86,10 +86,25 @@ public class Activity_Main
     public void OnOpenAddProjectEntryCompletion()
     {
         Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
-                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD, 0);
+                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD);
 
         fragment.SetViewRequest(_viewRequest);
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
+    }
+
+    public void OnOpenEditProjectEntryCompletion(Project project)
+    {
+        Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
+                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_EDIT);
+
+        fragment.SetViewRequest(_viewRequest);
+        fragment.SetProjectToEdit(project);
+
+        fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
+    }
+
+    public void OnGetProjectByIdCompletion(Project project) {
+
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args)

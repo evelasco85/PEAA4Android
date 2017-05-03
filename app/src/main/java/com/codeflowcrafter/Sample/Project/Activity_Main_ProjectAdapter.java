@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
+import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
 import com.codeflowcrafter.Sample.R;
 
 import java.util.List;
@@ -85,23 +86,25 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
         final PopupMenu popMenu = new PopupMenu(activity, _btnMenu);
         final Project projectItem = item;
 
+        final IProjectRequests viewrequest = activity.GetViewRequest();
+
         popMenu.inflate(R.menu.project_listitem);
         popMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem mnuItem) {
-//                switch (mnuItem.getItemId()) {
-//                    case (R.id.mnuEdit):
-//                        activity.InvokeEditProjectEntry(projectItem.GetId());
-//                        return true;
-//                    case R.id.mnuAmountList:
+                switch (mnuItem.getItemId()) {
+                    case (R.id.mnuEdit):
+                        viewrequest.OpenEditProjectEntry(projectItem);
+                        return true;
+                    case R.id.mnuAmountList:
 //                        activity.InvokeShowAmountList(projectItem.GetId());
-//                        return true;
-//                    case (R.id.mnuDelete):
+                        return true;
+                    case (R.id.mnuDelete):
 //                        activity.InvokeDeleteProjectEntry(projectItem);
-//                        return true;
-//                    default:
+                        return true;
+                    default:
                         return false;
-//                }
+                }
             }
         });
 

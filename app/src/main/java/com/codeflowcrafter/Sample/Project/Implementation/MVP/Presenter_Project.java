@@ -46,15 +46,8 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         _view.OnLoadAllProjectsCompletion(_repository.Matching(new QueryAllProjects.Criteria()));
     }
 
-    public Project GetProjectById(int projectId)
-    {
-        QueryProjectById.Criteria criteria = new QueryProjectById.Criteria(projectId);
-
-        List<Project> results = _repository.Matching(criteria);
-
-        if(!results.isEmpty()) return results.get(0);
-
-        return null;
+    public void OpenEditProjectEntry(Project project) {
+        _view.OnOpenEditProjectEntryCompletion(project);
     }
 
     public void AddProject(Project project)
@@ -69,14 +62,6 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         IBaseMapper mapper = project.GetMapper();
 
         mapper.Update(project, this);
-    }
-
-    public Project ConstructEmptyProject()
-    {
-        return new Project(
-                DataSynchronizationManager.GetInstance().GetMapper(Project.class),
-                0, "", "", ""
-        );
     }
 
     @Override

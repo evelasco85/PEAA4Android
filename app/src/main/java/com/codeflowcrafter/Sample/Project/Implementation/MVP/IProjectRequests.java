@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface IProjectRequests {
     void OpenAddProjectEntry();
-    Project GetProjectById(int projectId);
-    Project ConstructEmptyProject();
+    void OpenEditProjectEntry(Project project);
+
     void AddProject(Project project);
     void UpdateProject(Project project);
 
