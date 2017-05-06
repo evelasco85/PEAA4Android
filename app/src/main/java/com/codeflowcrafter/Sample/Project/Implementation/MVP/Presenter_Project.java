@@ -28,7 +28,7 @@ public class Presenter_Project implements IProjectRequests {
     private IView_Project _view;
     private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().GetSLC();
     private ToProjectTranslator _translator = new ToProjectTranslator();
-    private IInvocationDelegates _invocationDelegate = new InvocationDelegate();
+    private IInvocationDelegates _invocationDelegate = new InvocationDelegate(_slc);
 
     public Presenter_Project(IView_Project view)
     {
