@@ -6,4 +6,6 @@
     <string name="mnuEdit">Edit</string>
     <string name="mnuMenu">...</string>
     <!--**********-->
+
+    <string name="lblProjectId">Project ID:</string>
 </resources>

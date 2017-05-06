@@ -165,9 +165,10 @@ public class Activity_Main
 
     public void OnPromptExecution_ProjectDetail(Project project)
     {
-        Toast
-                .makeText(getApplicationContext(), "Show Project Related Info. Here", Toast.LENGTH_SHORT)
-                .show();
+        Activity_Main_Fragment_Project_Show_Detail fragment = Activity_Main_Fragment_Project_Show_Detail
+                .newInstance(project);
+
+        fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_Show_Detail.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_AddAmountEntry(Project project)
