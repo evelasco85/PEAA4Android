@@ -30,7 +30,7 @@ public class Activity_Main_Project_List_Item_Handler extends ArrayAdapter<Projec
     private Button _btnAddAmount;
 
     private int _resource;
-    private Activity _activity;
+    private Activity_Main _activity;
 
     public Activity_Main_Project_List_Item_Handler(Activity_Main activity, List<Project> items)
     {
@@ -82,7 +82,7 @@ public class Activity_Main_Project_List_Item_Handler extends ArrayAdapter<Projec
         _idView.setText(String.valueOf(item.GetId()));
         _nameView.setText(item.GetName());
 
-        final Activity_Main activity = (Activity_Main)_activity;
+        final Activity_Main activity = _activity;
         final PopupMenu popMenu = new PopupMenu(activity, _btnMenu);
         final Project projectItem = item;
 
@@ -98,7 +98,6 @@ public class Activity_Main_Project_List_Item_Handler extends ArrayAdapter<Projec
                         return true;
                     case R.id.mnuAmountList:
                         viewrequest.Prompt_AmountList(projectItem);
-//                        activity.InvokeShowAmountList(projectItem.GetId());
                         return true;
                     case (R.id.mnuDelete):
                         viewrequest.Prompt_DeleteProjectEntry(projectItem);
