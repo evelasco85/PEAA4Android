@@ -11,9 +11,13 @@ import java.util.List;
 
 interface IView_Project_Events
 {
-    void OnOpenAddProjectEntryCompletion();
-    void OnOpenEditProjectEntryCompletion(Project project);
-    void OnPerformDeleteProjectEntryCompletion(Project project);
+    //UI Prompting Events
+    void OnPromptCompletion_AddProjectEntry();
+    void OnPromptCompletion_EditProjectEntry(Project project);
+    void OnPromptCompletion_DeleteProjectEntry(Project project);
+    void OnPromptCompletion_ProjectDetail(Project project);
+    void OnPromptCompletion_AddAmountEntry(Project project);
+    void OnPromptCompletion_AmountList(Project project);
 
     void OnLoadProjectsViaLoaderCompletion(List<Project> projects);
 }

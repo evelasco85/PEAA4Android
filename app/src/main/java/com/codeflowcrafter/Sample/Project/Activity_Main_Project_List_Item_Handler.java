@@ -22,7 +22,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
+public class Activity_Main_Project_List_Item_Handler extends ArrayAdapter<Project> {
 
     private TextView _idView;
     private TextView _nameView;
@@ -32,7 +32,7 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
     private int _resource;
     private Activity _activity;
 
-    public Activity_Main_ProjectAdapter(Activity_Main activity, List<Project> items)
+    public Activity_Main_Project_List_Item_Handler(Activity_Main activity, List<Project> items)
     {
         super(activity, R.layout.activity_project_listitem, items);
 
@@ -94,13 +94,14 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
             public boolean onMenuItemClick(MenuItem mnuItem) {
                 switch (mnuItem.getItemId()) {
                     case (R.id.mnuEdit):
-                        viewrequest.OpenEditProjectEntry(projectItem);
+                        viewrequest.Prompt_EditProjectEntry(projectItem);
                         return true;
                     case R.id.mnuAmountList:
+                        viewrequest.Prompt_AmountList(projectItem);
 //                        activity.InvokeShowAmountList(projectItem.GetId());
                         return true;
                     case (R.id.mnuDelete):
-                        viewrequest.PerformDeleteProjectEntry(projectItem);
+                        viewrequest.Prompt_DeleteProjectEntry(projectItem);
                         return true;
                     default:
                         return false;
@@ -117,14 +118,14 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
         _btnAddAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                activity.InvokeAddAmountEntry(projectItem.GetId());
+                viewrequest.Prompt_AddAmountEntry(projectItem);
             }
         });
 
         itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                activity.InvokeShowProjectEntryDetail();
+                viewrequest.Prompt_ProjectDetail(projectItem);
             }
         });
     }

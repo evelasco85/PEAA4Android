@@ -38,9 +38,9 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         _slc.SetComponent("Project");
     }
 
-    public void OpenAddProjectEntry()
+    public void Prompt_AddProjectEntry()
     {
-        _view.OnOpenAddProjectEntryCompletion();
+        _view.OnPromptCompletion_AddProjectEntry();
         _slc.SetEvent("Open Project Entry").EmitLog(Priority.Info, Status.Success);
     }
 
@@ -68,14 +68,14 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
                 .EmitLog(Priority.Info, Status.Success);
     }
 
-    public void OpenEditProjectEntry(Project project) {
-        _view.OnOpenEditProjectEntryCompletion(project);
+    public void Prompt_EditProjectEntry(Project project) {
+        _view.OnPromptCompletion_EditProjectEntry(project);
         _slc.SetEvent("Open project editing").EmitLog(Priority.Info, Status.Success);
     }
 
-    public void PerformDeleteProjectEntry(Project project)
+    public void Prompt_DeleteProjectEntry(Project project)
     {
-        _view.OnPerformDeleteProjectEntryCompletion(project);
+        _view.OnPromptCompletion_DeleteProjectEntry(project);
     }
 
     public void AddProject(Project project)
@@ -107,6 +107,29 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
                 .EmitLog(Priority.Info, Status.Success);
     }
 
+    public void Prompt_ProjectDetail(Project project)
+    {
+        _view.OnPromptCompletion_ProjectDetail(project);
+        _slc
+                .SetEvent(String.format("Showing details of project id %s", project.GetId()))
+                .EmitLog(Priority.Info, Status.Success);
+    }
+
+    public void Prompt_AddAmountEntry(Project project)
+    {
+        _view.OnPromptCompletion_AddAmountEntry(project);
+        _slc
+                .SetEvent(String.format("Open add amount view for project id %s", project.GetId()))
+                .EmitLog(Priority.Info, Status.Success);
+    }
+
+    public void Prompt_AmountList(Project project)
+    {
+        _view.OnPromptCompletion_AmountList(project);
+        _slc
+                .SetEvent(String.format("Open amount list view for project id %s", project.GetId()))
+                .EmitLog(Priority.Info, Status.Success);
+    }
 
     @Override
     public Hashtable GetResults() {

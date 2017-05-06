@@ -11,10 +11,15 @@ import java.util.List;
  */
 
 public interface IProjectRequests {
-    void OpenAddProjectEntry();
-    void OpenEditProjectEntry(Project project);
-    void PerformDeleteProjectEntry(Project project);
+    //User prompting operations (See corresponding events)
+    void Prompt_AddProjectEntry();
+    void Prompt_EditProjectEntry(Project project);
+    void Prompt_DeleteProjectEntry(Project project);
+    void Prompt_ProjectDetail(Project project);
+    void Prompt_AddAmountEntry(Project project);
+    void Prompt_AmountList(Project project);
 
+    //Data source interactions
     void AddProject(Project project);
     void UpdateProject(Project project);
     void DeleteProject(Project project);

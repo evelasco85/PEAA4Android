@@ -40,7 +40,7 @@ public class Activity_Main
         _viewRequest = viewRequest;}
 
     private ArrayList<Project> _activityList;
-    private Activity_Main_ProjectAdapter _activityAdapter;
+    private Activity_Main_Project_List_Item_Handler _activityAdapter;
 
 
     @Override
@@ -51,7 +51,7 @@ public class Activity_Main
         getLoaderManager().restartLoader(0, null, this);
 
         _activityList = new ArrayList<Project>();
-        _activityAdapter = new Activity_Main_ProjectAdapter(this, _activityList);
+        _activityAdapter = new Activity_Main_Project_List_Item_Handler(this, _activityList);
 
         _presenter = new Presenter_Project(this);
 
@@ -72,7 +72,7 @@ public class Activity_Main
         _btnAddProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _viewRequest.OpenAddProjectEntry();
+                _viewRequest.Prompt_AddProjectEntry();
             }
         });
     }
@@ -83,7 +83,7 @@ public class Activity_Main
         getLoaderManager().initLoader(0, null, this);
     }
 
-    public void OnOpenAddProjectEntryCompletion()
+    public void OnPromptCompletion_AddProjectEntry()
     {
         Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
                 .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD);
@@ -92,7 +92,7 @@ public class Activity_Main
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
     }
 
-    public void OnOpenEditProjectEntryCompletion(Project project)
+    public void OnPromptCompletion_EditProjectEntry(Project project)
     {
         Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
                 .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_EDIT);
@@ -103,7 +103,7 @@ public class Activity_Main
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
     }
 
-    public void OnPerformDeleteProjectEntryCompletion(final Project project)
+    public void OnPromptCompletion_DeleteProjectEntry(final Project project)
     {
         AlertDialog.Builder verify = new AlertDialog.Builder(this);
 
@@ -163,5 +163,26 @@ public class Activity_Main
         _activityList.clear();
         _activityList.addAll(projects);
         _activityAdapter.notifyDataSetChanged();
+    }
+
+    public void OnPromptCompletion_ProjectDetail(Project project)
+    {
+        Toast
+                .makeText(getApplicationContext(), "Show Project Related Info. Here", Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    public void OnPromptCompletion_AddAmountEntry(Project project)
+    {
+        Toast
+                .makeText(getApplicationContext(), "Show add amount here", Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    public void OnPromptCompletion_AmountList(Project project)
+    {
+        Toast
+                .makeText(getApplicationContext(), "Show amount list here", Toast.LENGTH_SHORT)
+                .show();
     }
 }
