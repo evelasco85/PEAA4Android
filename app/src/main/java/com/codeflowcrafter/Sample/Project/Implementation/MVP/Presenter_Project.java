@@ -63,11 +63,14 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         }
 
         _view.OnLoadProjectsViaLoaderCompletion(entityList);
-        _slc.SetEvent("Loaded all projects").EmitLog(Priority.Info, Status.Success);
+        _slc
+                .SetEvent(String.format("Loaded project count %d", entityList.size()))
+                .EmitLog(Priority.Info, Status.Success);
     }
 
     public void OpenEditProjectEntry(Project project) {
         _view.OnOpenEditProjectEntryCompletion(project);
+        _slc.SetEvent("Open project editing").EmitLog(Priority.Info, Status.Success);
     }
 
     public void PerformDeleteProjectEntry(Project project)
@@ -80,6 +83,7 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         IBaseMapper mapper = project.GetMapper();
 
         mapper.Insert(project, this);
+        _slc.SetEvent("Project Added").EmitLog(Priority.Info, Status.Success);
     }
 
     public void UpdateProject(Project project)
@@ -87,6 +91,9 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         IBaseMapper mapper = project.GetMapper();
 
         mapper.Update(project, this);
+        _slc
+                .SetEvent(String.format("Updated project id %s", project.GetId()))
+                .EmitLog(Priority.Info, Status.Success);
     }
 
     public void DeleteProject(Project project)
@@ -94,6 +101,10 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         IBaseMapper mapper = project.GetMapper();
 
         mapper.Delete(project, this);
+        _slc.SetEvent("").EmitLog(Priority.Info, Status.Success);
+        _slc
+                .SetEvent(String.format("Deleted project id %s", project.GetId()))
+                .EmitLog(Priority.Info, Status.Success);
     }
 
 
