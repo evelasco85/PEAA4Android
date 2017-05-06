@@ -11,6 +11,7 @@ import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocatio
 import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.PEAA.Domain.Interfaces.IDomainObject;
 import com.codeflowcrafter.PEAA.Interfaces.IRepository;
+import com.codeflowcrafter.Sample.InvocationDelegate;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.ToProjectTranslator;
 import com.codeflowcrafter.Sample.SampleApplication;
@@ -23,11 +24,11 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class Presenter_Project implements IProjectRequests, IInvocationDelegates {
+public class Presenter_Project implements IProjectRequests {
     private IView_Project _view;
     private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().GetSLC();
-    private IRepository<Project> _repository = DataSynchronizationManager.GetInstance().GetRepository(Project.class);
     private ToProjectTranslator _translator = new ToProjectTranslator();
+    private IInvocationDelegates _invocationDelegate = new InvocationDelegate();
 
     public Presenter_Project(IView_Project view)
     {
@@ -82,7 +83,7 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
     {
         IBaseMapper mapper = project.GetMapper();
 
-        mapper.Insert(project, this);
+        mapper.Insert(project, _invocationDelegate);
         _slc.SetEvent("Project Added").EmitLog(Priority.Info, Status.Success);
     }
 
@@ -90,7 +91,7 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
     {
         IBaseMapper mapper = project.GetMapper();
 
-        mapper.Update(project, this);
+        mapper.Update(project, _invocationDelegate);
         _slc
                 .SetEvent(String.format("Updated project id %s", project.GetId()))
                 .EmitLog(Priority.Info, Status.Success);
@@ -100,7 +101,7 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
     {
         IBaseMapper mapper = project.GetMapper();
 
-        mapper.Delete(project, this);
+        mapper.Delete(project, _invocationDelegate);
         _slc.SetEvent("").EmitLog(Priority.Info, Status.Success);
         _slc
                 .SetEvent(String.format("Deleted project id %s", project.GetId()))
@@ -129,25 +130,5 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         _slc
                 .SetEvent(String.format("Open amount list view for project id %s", project.GetId()))
                 .EmitLog(Priority.Info, Status.Success);
-    }
-
-    @Override
-    public Hashtable GetResults() {
-        return null;
-    }
-
-    @Override
-    public void SetResults(Hashtable results) {
-
-    }
-
-    @Override
-    public void SuccessfulInvocation(IDomainObject domainObject) {
-
-    }
-
-    @Override
-    public void FailedInvocationDelegate(IDomainObject domainObject) {
-
     }
 }

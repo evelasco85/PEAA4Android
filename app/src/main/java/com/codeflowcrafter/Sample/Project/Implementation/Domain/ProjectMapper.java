@@ -8,11 +8,17 @@ import com.codeflowcrafter.PEAA.DataManipulation.BaseMapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
 import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectTable;
 
+import java.util.Hashtable;
+
 /**
  * Created by aiko on 5/1/17.
  */
 
 public class ProjectMapper extends BaseMapper<Project> {
+    public final static String MAPPER_NAME = "Mapper Name";
+    public final static String OPERATION = "Operation";
+    public final static String COUNT = "Count";
+
     private ContentResolver _resolver;
     private Uri _uri;
 
@@ -39,12 +45,30 @@ public class ProjectMapper extends BaseMapper<Project> {
                         EntityToContentValues(project),
                         where, null);
 
+        Hashtable results = new Hashtable();
+
+        results.put(MAPPER_NAME, this.getClass().getName());
+        results.put(OPERATION, "Update");
+        results.put(COUNT, String.valueOf(updatedRecords));
+
+        invocationDelegates.SetResults(results);
+        invocationDelegates.SuccessfulInvocation(project);
+
         return true;
     }
 
     @Override
     public boolean ConcreteInsert(Project project, IInvocationDelegates invocationDelegates) {
         _resolver.insert(_uri, EntityToContentValues(project));
+
+        Hashtable results = new Hashtable();
+
+        results.put(MAPPER_NAME, this.getClass().getName());
+        results.put(OPERATION, "Insertion");
+        results.put(COUNT, "1");
+
+        invocationDelegates.SetResults(results);
+        invocationDelegates.SuccessfulInvocation(project);
 
         return true;
     }
@@ -55,6 +79,15 @@ public class ProjectMapper extends BaseMapper<Project> {
 
         int deletedRecords = _resolver
                 .delete(_uri, where, null );
+
+        Hashtable results = new Hashtable();
+
+        results.put(MAPPER_NAME, this.getClass().getName());
+        results.put(OPERATION, "Deletion");
+        results.put(COUNT, String.valueOf(deletedRecords));
+
+        invocationDelegates.SetResults(results);
+        invocationDelegates.SuccessfulInvocation(project);
 
         return true;
     }
