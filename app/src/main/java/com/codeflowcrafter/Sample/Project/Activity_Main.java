@@ -83,7 +83,7 @@ public class Activity_Main
         getLoaderManager().initLoader(0, null, this);
     }
 
-    public void OnPromptCompletion_AddProjectEntry()
+    public void OnPromptExecution_AddProjectEntry()
     {
         Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
                 .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD);
@@ -92,7 +92,7 @@ public class Activity_Main
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
     }
 
-    public void OnPromptCompletion_EditProjectEntry(Project project)
+    public void OnPromptExecution_EditProjectEntry(Project project)
     {
         Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
                 .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_EDIT);
@@ -103,7 +103,7 @@ public class Activity_Main
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
     }
 
-    public void OnPromptCompletion_DeleteProjectEntry(final Project project)
+    public void OnPromptExecution_DeleteProjectEntry(final Project project)
     {
         AlertDialog.Builder verify = new AlertDialog.Builder(this);
 
@@ -165,21 +165,21 @@ public class Activity_Main
         _activityAdapter.notifyDataSetChanged();
     }
 
-    public void OnPromptCompletion_ProjectDetail(Project project)
+    public void OnPromptExecution_ProjectDetail(Project project)
     {
         Toast
                 .makeText(getApplicationContext(), "Show Project Related Info. Here", Toast.LENGTH_SHORT)
                 .show();
     }
 
-    public void OnPromptCompletion_AddAmountEntry(Project project)
+    public void OnPromptExecution_AddAmountEntry(Project project)
     {
         Toast
                 .makeText(getApplicationContext(), "Show add amount here", Toast.LENGTH_SHORT)
                 .show();
     }
 
-    public void OnPromptCompletion_AmountList(Project project)
+    public void OnPromptExecution_AmountList(Project project)
     {
         Toast
                 .makeText(getApplicationContext(), "Show amount list here", Toast.LENGTH_SHORT)
