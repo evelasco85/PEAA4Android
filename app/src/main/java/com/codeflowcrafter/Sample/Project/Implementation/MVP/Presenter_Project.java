@@ -40,9 +40,8 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
 
     public void OpenAddProjectEntry()
     {
-        _slc.SetEvent("Open Project Entry");
         _view.OnOpenAddProjectEntryCompletion();
-        _slc.EmitLog(Priority.Info, Status.Success);
+        _slc.SetEvent("Open Project Entry").EmitLog(Priority.Info, Status.Success);
     }
 
     public void LoadProjectsViaLoader(CursorLoader loader)
@@ -64,6 +63,7 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
         }
 
         _view.OnLoadProjectsViaLoaderCompletion(entityList);
+        _slc.SetEvent("Loaded all projects").EmitLog(Priority.Info, Status.Success);
     }
 
     public void OpenEditProjectEntry(Project project) {
@@ -95,6 +95,7 @@ public class Presenter_Project implements IProjectRequests, IInvocationDelegates
 
         mapper.Delete(project, this);
     }
+
 
     @Override
     public Hashtable GetResults() {

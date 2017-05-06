@@ -3,6 +3,7 @@ package com.codeflowcrafter.LogManagement;
 import com.codeflowcrafter.LogManagement.Interfaces.ILogEntry;
 import com.codeflowcrafter.LogManagement.Interfaces.ILogManager;
 import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
+import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper_Emitter;
 
 import java.util.HashMap;
 
@@ -14,20 +15,28 @@ public class StaticLogEntryWrapper implements IStaticLogEntryWrapper {
     private String _component;
     private String _event;
 
-    public void SetSystem(String system) {
+    public IStaticLogEntryWrapper SetSystem(String system) {
         _system = system;
+
+        return this;
     }
 
-    public void SetApplication(String application) {
+    public IStaticLogEntryWrapper SetApplication(String application) {
         _application = application;
+
+        return this;
     }
 
-    public void SetComponent(String component) {
+    public IStaticLogEntryWrapper SetComponent(String component) {
         _component = component;
+
+        return this;
     }
 
-    public void SetEvent(String event) {
+    public IStaticLogEntryWrapper_Emitter SetEvent(String event) {
         _event = event;
+
+        return this;
     }
 
     public StaticLogEntryWrapper(ILogManager manager) {

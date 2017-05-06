@@ -5,18 +5,11 @@ import com.codeflowcrafter.LogManagement.Status;
 
 import java.util.HashMap;
 
-/**
- * Created by aiko on 4/29/17.
- */
-
-public interface IStaticLogEntryWrapper extends ILogCreator{
-    void SetSystem(String system);
-    void SetApplication(String application);
-    void SetComponent(String component);
-    void SetEvent(String event);
+public interface IStaticLogEntryWrapper extends ILogCreator, IStaticLogEntryWrapper_Emitter{
+    IStaticLogEntryWrapper SetSystem(String system);
+    IStaticLogEntryWrapper SetApplication(String application);
+    IStaticLogEntryWrapper SetComponent(String component);
+    IStaticLogEntryWrapper_Emitter SetEvent(String event);
 
     ILogEntry CreateLogEntry(Priority priority, String description);
-    void EmitLog(Priority priority, String description, HashMap<String, String> params);
-    void EmitLog(Priority priority, Status status);
-    void EmitLog(Priority priority, Status status, HashMap<String, String> params);
 }
