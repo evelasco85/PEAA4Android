@@ -86,7 +86,7 @@ public class Activity_Main
     public void OnPromptExecution_AddProjectEntry()
     {
         Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
-                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD);
+                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD, null);
 
         fragment.SetViewRequest(_viewRequest);
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
@@ -95,11 +95,9 @@ public class Activity_Main
     public void OnPromptExecution_EditProjectEntry(Project project)
     {
         Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
-                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_EDIT);
+                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_EDIT, project);
 
         fragment.SetViewRequest(_viewRequest);
-        fragment.SetProjectToEdit(project);
-
         fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
     }
 

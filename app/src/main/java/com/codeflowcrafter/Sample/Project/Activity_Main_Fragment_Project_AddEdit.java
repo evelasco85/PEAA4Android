@@ -38,7 +38,6 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
     public static final String ACTION_EDIT = "EDIT";
 
     private static final String KEY_ACTION = "action";
-    private String _selectedAction;
 
     private IProjectRequests _viewRequest;
     private Project _projectToEdit;
@@ -50,7 +49,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
     }
     public void SetProjectToEdit(Project project){_projectToEdit = project;}
 
-    public static Activity_Main_Fragment_Project_AddEdit newInstance(String action)
+    public static Activity_Main_Fragment_Project_AddEdit newInstance(String action, Project project)
     {
         Bundle args = new Bundle();
 
@@ -59,6 +58,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         Activity_Main_Fragment_Project_AddEdit fragment = new Activity_Main_Fragment_Project_AddEdit();
 
         fragment.setArguments(args);
+        fragment.SetProjectToEdit(project);
 
         return fragment;
     }
@@ -67,8 +67,6 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-        _selectedAction = getArguments().getString(KEY_ACTION);
     }
 
     @Override
@@ -77,9 +75,12 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         View view = inflater.inflate(R.layout.activity_main_fragment_project_add_edit, container, false);
 
         AssociateViewToLocalVar(view);
-        SetViewHandlers();
 
-        if(_selectedAction == ACTION_EDIT) SetModelToViewData(_projectToEdit);
+        String selectedAction = getArguments().getString(KEY_ACTION);
+
+        SetViewHandlers(selectedAction);
+
+        if(selectedAction == ACTION_EDIT) SetModelToViewData(_projectToEdit);
 
         return view;
     }
@@ -93,12 +94,12 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         _txtEndDate = (TextView) view.findViewById(R.id.txtEndDate);
     }
 
-    private void SetViewHandlers()
+    private void SetViewHandlers(final String selectedAction)
     {
         _btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InvokeActionBasedPersistency();
+                InvokeActionBasedPersistency(selectedAction);
                 dismiss();
             }
         });
@@ -159,9 +160,9 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         });
     }
 
-    private void InvokeActionBasedPersistency()
+    private void InvokeActionBasedPersistency(String selectedAction)
     {
-        switch (_selectedAction)
+        switch (selectedAction)
         {
             case ACTION_ADD:
                 _viewRequest.AddProject(ViewDataToModel());
