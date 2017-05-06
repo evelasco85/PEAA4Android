@@ -15,9 +15,9 @@ import java.util.List;
  */
 
 public class QueryProjectById  extends BaseQueryObject<Project, QueryProjectById.Criteria> {
-    Context _context;
-    Uri _uri;
-    ToProjectTranslator _translator = new ToProjectTranslator();
+    private Context _context;
+    private Uri _uri;
+    private ToProjectTranslator _translator = new ToProjectTranslator();
 
     public static class Criteria {
         public int ProjectId;

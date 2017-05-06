@@ -13,9 +13,9 @@ import java.util.UUID;
  */
 
 public class DomainObject implements IDomainObject, ISystemManipulation {
-    IBaseMapper _mapper;
-    UUID _systemId;
-    IBaseQueryObject _queryObject;
+    private IBaseMapper _mapper;
+    private UUID _systemId;
+    private IBaseQueryObject _queryObject;
 
     public DomainObject(IBaseMapper mapper)
     {

@@ -7,19 +7,19 @@ import java.util.TimeZone;
 import java.util.Date;
 
 public class LogEntry implements ILogEntry {
-    TimeZone _timeZoneInfo;
+    private TimeZone _timeZoneInfo;
 
-    Date _occurence;
-    Priority _priority;
+    private Date _occurence;
+    private Priority _priority;
 
-    String _system;
-    String _application;
-    String _component;
-    String _event;
+    private String _system;
+    private String _application;
+    private String _component;
+    private String _event;
 
-    Status _status;
-    String _description;
-    HashMap < String, String > _parameters;
+    private Status _status;
+    private String _description;
+    private HashMap < String, String > _parameters;
 
     public TimeZone GetTimeZone() {
         return _timeZoneInfo;

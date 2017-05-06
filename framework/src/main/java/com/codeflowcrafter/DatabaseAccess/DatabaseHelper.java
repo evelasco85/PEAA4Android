@@ -13,10 +13,10 @@ import java.util.Map;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    String _tag;
-    String _databaseFilename;
-    static final int DATABASE_VERSION = 1;
-    HashMap<String, String> _tableScripts  = new HashMap<String, String>();
+    private String _tag;
+    private String _databaseFilename;
+    private static final int DATABASE_VERSION = 1;
+    private HashMap<String, String> _tableScripts  = new HashMap<String, String>();
 
     public DatabaseHelper(
             String tagName, String databaseFilename,

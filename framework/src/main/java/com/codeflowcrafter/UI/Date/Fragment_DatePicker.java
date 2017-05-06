@@ -21,16 +21,16 @@ public class Fragment_DatePicker extends DialogFragment
         implements DatePickerDialog.OnDateSetListener
 {
 
-    int _selectedYear;
-    int _selectedMonth;
-    int _selectedDay;
-    Date _selectedDate;
+    private int _selectedYear;
+    private int _selectedMonth;
+    private int _selectedDay;
+    private Date _selectedDate;
 
     public int GetSelectedYear(){return _selectedYear;}
     public int GetSelectedMonth() {return  _selectedMonth;}
     public int GetSelectedDay(){return _selectedDay;}
 
-    DatePickerDialog.OnDateSetListener _onDateSetListener;
+    private DatePickerDialog.OnDateSetListener _onDateSetListener;
 
     public void SetOnDateSetListener(DatePickerDialog.OnDateSetListener onDateSetListener)
     {

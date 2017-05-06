@@ -10,7 +10,7 @@ import java.util.TimeZone;
 public class LogManager implements ILogManager {
     private static ILogManager s_instance = new LogManager();
 
-    ILogEmitter _emitter;
+    private ILogEmitter _emitter;
 
     private LogManager()
     {

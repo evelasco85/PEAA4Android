@@ -12,9 +12,9 @@ import java.util.List;
  */
 
 public class ForeignKeyMappingManager implements IForeignKeyMappingManager {
-    static IForeignKeyMappingManager s_instance = new ForeignKeyMappingManager();
+    private static IForeignKeyMappingManager s_instance = new ForeignKeyMappingManager();
 
-    HashMap<String, HashMap<String, Object>> _foreignKeMapping = new HashMap<String, HashMap<String, Object>>();
+    private HashMap<String, HashMap<String, Object>> _foreignKeMapping = new HashMap<String, HashMap<String, Object>>();
 
     private ForeignKeyMappingManager(){}
 

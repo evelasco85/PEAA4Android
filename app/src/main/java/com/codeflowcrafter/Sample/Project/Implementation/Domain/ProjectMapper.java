@@ -59,7 +59,7 @@ public class ProjectMapper extends BaseMapper<Project> {
         return true;
     }
 
-    ContentValues EntityToContentValues(Project project)
+    private ContentValues EntityToContentValues(Project project)
     {
         ContentValues values = new ContentValues();
 

@@ -28,9 +28,9 @@ import java.util.Calendar;
  */
 
 public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
-    Button _btnSave, _btnCancel;
-    EditText _txtName, _txtDescription;
-    TextView _txtStartDate, _txtEndDate;
+    private Button _btnSave, _btnCancel;
+    private EditText _txtName, _txtDescription;
+    private TextView _txtStartDate, _txtEndDate;
 
     public static final String FRAGMENT_NAME = "Add/Edit Project";
 
@@ -84,7 +84,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         return view;
     }
 
-    void AssociateViewToLocalVar(View view) {
+    private void AssociateViewToLocalVar(View view) {
         _btnSave = (Button)view.findViewById(R.id.btnSave);
         _btnCancel = (Button)view.findViewById(R.id.btnCancel);
         _txtName = (EditText)view.findViewById(R.id.txtName);
@@ -93,7 +93,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         _txtEndDate = (TextView) view.findViewById(R.id.txtEndDate);
     }
 
-    void SetViewHandlers()
+    private void SetViewHandlers()
     {
         _btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,7 +159,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         });
     }
 
-    void InvokeActionBasedPersistency()
+    private void InvokeActionBasedPersistency()
     {
         switch (_selectedAction)
         {
@@ -174,7 +174,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         }
     }
 
-    Project ViewDataToModel()
+    private Project ViewDataToModel()
     {
         return new Project(
                 DataSynchronizationManager.GetInstance().GetMapper(Project.class),
@@ -186,7 +186,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
         );
     }
 
-    void SetModelToViewData(Project project)
+    private void SetModelToViewData(Project project)
     {
         if(project == null)
             return;

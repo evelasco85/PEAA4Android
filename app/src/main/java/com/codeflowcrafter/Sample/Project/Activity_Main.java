@@ -30,17 +30,17 @@ public class Activity_Main
         extends Activity
     implements IView_Project, LoaderManager.LoaderCallbacks<Cursor>
 {
-    Presenter_Project _presenter;
-    IProjectRequests _viewRequest;
-    Button _btnAddProject;
-    Activity_Main_Project_List _listImplementation;
+    private Presenter_Project _presenter;
+    private IProjectRequests _viewRequest;
+    private Button _btnAddProject;
+    private Activity_Main_Project_List _listImplementation;
 
     public IProjectRequests GetViewRequest(){return _viewRequest;}
     public void SetViewRequest(IProjectRequests viewRequest){
         _viewRequest = viewRequest;}
 
-    ArrayList<Project> _activityList;
-    Activity_Main_ProjectAdapter _activityAdapter;
+    private ArrayList<Project> _activityList;
+    private Activity_Main_ProjectAdapter _activityAdapter;
 
 
     @Override

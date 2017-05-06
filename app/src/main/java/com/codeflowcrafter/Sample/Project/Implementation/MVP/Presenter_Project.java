@@ -24,10 +24,10 @@ import java.util.List;
  */
 
 public class Presenter_Project implements IProjectRequests, IInvocationDelegates {
-    IView_Project _view;
-    IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().GetSLC();
-    IRepository<Project> _repository = DataSynchronizationManager.GetInstance().GetRepository(Project.class);
-    ToProjectTranslator _translator = new ToProjectTranslator();
+    private IView_Project _view;
+    private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().GetSLC();
+    private IRepository<Project> _repository = DataSynchronizationManager.GetInstance().GetRepository(Project.class);
+    private ToProjectTranslator _translator = new ToProjectTranslator();
 
     public Presenter_Project(IView_Project view)
     {

@@ -8,11 +8,11 @@ import com.codeflowcrafter.PEAA.Domain.DomainObject;
  */
 
 public class Project extends DomainObject {
-    int _id;
-    String _name;
-    String _description;
-    String _createdDate;
-    String _endedDate;
+    private int _id;
+    private String _name;
+    private String _description;
+    private String _createdDate;
+    private String _endedDate;
 
     public int GetId(){return  _id;}
 

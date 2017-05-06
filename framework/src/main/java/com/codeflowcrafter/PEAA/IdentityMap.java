@@ -21,11 +21,11 @@ import java.util.UUID;
 
 public class IdentityMap<TEntity extends IDomainObject> implements
         IIdentityMapConcrete<TEntity>, IIdentityMapQuery<TEntity> {
-    List<Field> _identityFields = new ArrayList<Field>();
-    HashMap<UUID, IDomainObject> _guidToDomainObjectDictionary = new HashMap<UUID, IDomainObject>();
-    HashMap<String, UUID> _hashToGuidDictionary = new HashMap<String, UUID>();
-    HashMap<String, Object> _currentSearchDictionary = new HashMap<String, Object>();
-    Class<TEntity> _class;
+    private List<Field> _identityFields = new ArrayList<Field>();
+    private HashMap<UUID, IDomainObject> _guidToDomainObjectDictionary = new HashMap<UUID, IDomainObject>();
+    private HashMap<String, UUID> _hashToGuidDictionary = new HashMap<String, UUID>();
+    private HashMap<String, Object> _currentSearchDictionary = new HashMap<String, Object>();
+    private Class<TEntity> _class;
 
     public IdentityMap(Class<TEntity> thisClass){
         _class = thisClass;
@@ -37,7 +37,7 @@ public class IdentityMap<TEntity extends IDomainObject> implements
         return _guidToDomainObjectDictionary.size();
     }
 
-    List<Field> GetIdentities()
+    private List<Field> GetIdentities()
     {
         Field []fields = _class.getDeclaredFields();
         List<Field> identityFields = new ArrayList<Field>();
@@ -138,14 +138,14 @@ public class IdentityMap<TEntity extends IDomainObject> implements
         }
     }
 
-    String CreateHash(TEntity entity)
+    private String CreateHash(TEntity entity)
     {
         List<Object> values = GetValuesByFieldOrdinals_CreateHash(entity);
 
         return CreateHash(values);
     }
 
-    List<Object> GetValuesByFieldOrdinals_CreateHash(Object entity)
+    private List<Object> GetValuesByFieldOrdinals_CreateHash(Object entity)
     {
         List<Object> values = new ArrayList<>();
 
@@ -174,7 +174,7 @@ public class IdentityMap<TEntity extends IDomainObject> implements
         return values;
     }
 
-    List<Object> GetValuesByFieldOrdinals_Search(HashMap<String, Object> seachMap)
+    private List<Object> GetValuesByFieldOrdinals_Search(HashMap<String, Object> seachMap)
     {
         List<Object> values = new ArrayList<>();
 
@@ -200,7 +200,7 @@ public class IdentityMap<TEntity extends IDomainObject> implements
         return values;
     }
 
-    String CreateHash(List<Object> values)
+    private String CreateHash(List<Object> values)
     {
         StringBuilder hashSet = new StringBuilder();
         IHashService service = HashService.getInstance();
@@ -217,7 +217,7 @@ public class IdentityMap<TEntity extends IDomainObject> implements
         return accumulatedHash;
     }
 
-    boolean VerifyEntityExistence(String hash, UUID systemId)
+    private boolean VerifyEntityExistence(String hash, UUID systemId)
     {
         //Verify hash dictionary
         if ((hash != null) && (hash.length() > 0) && (_hashToGuidDictionary.containsKey(hash)))
@@ -234,7 +234,7 @@ public class IdentityMap<TEntity extends IDomainObject> implements
         return false;
     }
 
-    void FixDictionaryAnomalies(String hash, UUID systemId)
+    private void FixDictionaryAnomalies(String hash, UUID systemId)
     {
         //Anomalies found, possibly by change of primary key(s) values
         //Perform reverse-lookup

@@ -7,12 +7,12 @@ import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
 import java.util.HashMap;
 
 public class StaticLogEntryWrapper implements IStaticLogEntryWrapper {
-    ILogManager _manager;
+    private ILogManager _manager;
 
-    String _system;
-    String _application;
-    String _component;
-    String _event;
+    private String _system;
+    private String _application;
+    private String _component;
+    private String _event;
 
     public void SetSystem(String system) {
         _system = system;

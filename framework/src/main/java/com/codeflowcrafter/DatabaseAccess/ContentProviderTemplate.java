@@ -17,18 +17,18 @@ import com.codeflowcrafter.DatabaseAccess.Interfaces.IContentProviderTemplate;
 public class ContentProviderTemplate extends ContentProvider
         implements IContentProviderTemplate
 {
-    static final String ROOT_AUTHORITY_BASE = "com.codeflowcrafter";
+    private static final String ROOT_AUTHORITY_BASE = "com.codeflowcrafter";
 
     public static final int URI_SEARCH_GENERIC = 1;
     public static final int URI_SEARCH_SPECIFIC = 2;
     public static final int URI_SEARCH_GLOBAL = 3;
 
-    BaseTable _tableTemplate;
-    DatabaseHelper _dbHelper;
-    BaseContentProviders _dataAccess;
-    String _fullProviderAuthorityName;
-    UriMatcher _uriMatcher;
-    Uri _contentUri;
+    private BaseTable _tableTemplate;
+    private DatabaseHelper _dbHelper;
+    private BaseContentProviders _dataAccess;
+    private String _fullProviderAuthorityName;
+    private UriMatcher _uriMatcher;
+    private Uri _contentUri;
 
     public ContentProviderTemplate(
             String applicationName, BaseContentProviders dataAccess,

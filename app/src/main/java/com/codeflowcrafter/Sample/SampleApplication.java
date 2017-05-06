@@ -84,7 +84,7 @@ public class SampleApplication
         if ((params != null) && (!params.isEmpty())) EmitLogParams(log.GetEvent(), params);
     }
 
-    String GetInfoLogDetail(ILogEntry log)
+    private String GetInfoLogDetail(ILogEntry log)
     {
         JSONObject jsonLog = new JSONObject();
         String logString = "";
@@ -110,7 +110,7 @@ public class SampleApplication
         return logString;
     }
 
-    String GetCompleteLogDetail(ILogEntry log)
+    private String GetCompleteLogDetail(ILogEntry log)
     {
         JSONObject jsonLog = new JSONObject();
         String logString = "";
@@ -141,7 +141,7 @@ public class SampleApplication
         return logString;
     }
 
-    void EmitLogParams(String event, HashMap<String, String> params)
+    private void EmitLogParams(String event, HashMap<String, String> params)
     {
         for(Map.Entry<String, String> entry : params.entrySet()) {
 
@@ -159,7 +159,7 @@ public class SampleApplication
         s_instance = this;
     }
 
-    void RegisterProjectDomain(IDataSynchronizationManager dsManager)
+    private void RegisterProjectDomain(IDataSynchronizationManager dsManager)
     {
         ContentResolver resolver = getContentResolver();
 

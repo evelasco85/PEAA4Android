@@ -12,7 +12,7 @@ public class LazyLoadList<
         TEntity extends LazyLoadDomainObject<TSearchInput>,
         TSearchInput> extends ArrayList<TEntity> {
 
-    ILazyLoader<TEntity, TSearchInput> _loader;
+    private ILazyLoader<TEntity, TSearchInput> _loader;
 
     public LazyLoadList(ILazyLoader<TEntity, TSearchInput> loader)
     {

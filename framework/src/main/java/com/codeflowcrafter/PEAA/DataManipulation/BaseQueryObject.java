@@ -9,8 +9,8 @@ import java.util.List;
 
 public abstract class BaseQueryObject<TEntity, TSearchInput>
         implements IBaseQueryObjectSearchableConcrete<TEntity, TSearchInput> {
-    TSearchInput _searchInput;
-    Class _searchInputType;
+    private TSearchInput _searchInput;
+    private Class _searchInputType;
 
     public TSearchInput GetSearchInput() {
         return _searchInput;

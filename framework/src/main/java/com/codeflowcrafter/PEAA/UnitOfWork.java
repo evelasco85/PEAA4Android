@@ -17,23 +17,23 @@ import java.util.UUID;
  */
 
 public class UnitOfWork implements IUnitOfWork {
-    HashMap<UUID, IDomainObject> _insertionObjects = new HashMap<UUID, IDomainObject>();
-    HashMap<UUID, IDomainObject> _updatingObjects = new HashMap<UUID, IDomainObject>();
-    HashMap<UUID, IDomainObject> _deletionObjects = new HashMap<UUID, IDomainObject>();
-    HashMap<UUID, IInvocationDelegates> _invocationDelegates = new HashMap<UUID, IInvocationDelegates>();
+    private HashMap<UUID, IDomainObject> _insertionObjects = new HashMap<UUID, IDomainObject>();
+    private HashMap<UUID, IDomainObject> _updatingObjects = new HashMap<UUID, IDomainObject>();
+    private HashMap<UUID, IDomainObject> _deletionObjects = new HashMap<UUID, IDomainObject>();
+    private HashMap<UUID, IInvocationDelegates> _invocationDelegates = new HashMap<UUID, IInvocationDelegates>();
 
-    boolean ContainsKey(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject)
+    private boolean ContainsKey(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject)
     {
         return domainDictionary.containsKey(domainObject.GetSystemId());
     }
 
-    void AddEntity(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject, IInvocationDelegates invocationDelegates)
+    private void AddEntity(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject, IInvocationDelegates invocationDelegates)
     {
         domainDictionary.put(domainObject.GetSystemId(), domainObject);
         _invocationDelegates.put(domainObject.GetSystemId(), invocationDelegates);
     }
 
-    void RemoveEntity(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject)
+    private void RemoveEntity(HashMap<UUID, IDomainObject> domainDictionary, IDomainObject domainObject)
     {
         if (ContainsKey(domainDictionary, domainObject)) {
             domainDictionary.remove(domainObject.GetSystemId());
@@ -41,7 +41,7 @@ public class UnitOfWork implements IUnitOfWork {
         }
     }
 
-    <TEntity extends IDomainObject> void ValidateEntityPrerequisites(TEntity entity) throws NullPointerException
+    private <TEntity extends IDomainObject> void ValidateEntityPrerequisites(TEntity entity) throws NullPointerException
     {
         if (entity == null)
             throw new NullPointerException("'entity' parameter is required");
@@ -146,7 +146,7 @@ public class UnitOfWork implements IUnitOfWork {
         return (!_insertionObjects.isEmpty()) || (!_updatingObjects.isEmpty()) || (!_deletionObjects.isEmpty());
     }
 
-    void ApplyOperation(
+    private void ApplyOperation(
             UnitOfWorkAction action, List<IDomainObject> affectedEntities,
             UoWInvocationDelegates uoWInvocationDelegates
     )

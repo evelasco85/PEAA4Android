@@ -14,7 +14,7 @@ public abstract class BaseTable implements IBaseTable {
     public abstract String GetTableCreationScript();
     public abstract SQLiteQueryBuilder GetQueryBuilder(Uri uri);
 
-    ContentProviderTemplate _contentProvider;
+    private ContentProviderTemplate _contentProvider;
     protected HashMap<String, String> _search_projection_map;
 
     public HashMap<String, String> GetSearchProjectionMap()

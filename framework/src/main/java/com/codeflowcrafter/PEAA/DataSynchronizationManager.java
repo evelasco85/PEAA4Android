@@ -16,9 +16,9 @@ import java.util.List;
 
 public class DataSynchronizationManager implements IDataSynchronizationManager{
 
-    static IDataSynchronizationManager s_instance = new DataSynchronizationManager();
+    private static IDataSynchronizationManager s_instance = new DataSynchronizationManager();
 
-    HashMap<String, Object> _serviceContainerDictionary = new HashMap<String, Object>();
+    private HashMap<String, Object> _serviceContainerDictionary = new HashMap<String, Object>();
 
     public static IDataSynchronizationManager GetInstance()
     {
@@ -44,7 +44,7 @@ public class DataSynchronizationManager implements IDataSynchronizationManager{
         _serviceContainerDictionary.put(key, serviceContainer);
     }
 
-    <TEntity extends IDomainObject>  HashMap<String, IBaseQueryObjectConcrete<TEntity>> ConvertQueryListToDictionary(List<IBaseQueryObjectConcrete<TEntity>> queryList)
+    private <TEntity extends IDomainObject>  HashMap<String, IBaseQueryObjectConcrete<TEntity>> ConvertQueryListToDictionary(List<IBaseQueryObjectConcrete<TEntity>> queryList)
     {
         HashMap<String, IBaseQueryObjectConcrete<TEntity>>  queryDictionary = new HashMap<String, IBaseQueryObjectConcrete<TEntity>>();
 
@@ -64,7 +64,7 @@ public class DataSynchronizationManager implements IDataSynchronizationManager{
         return queryDictionary;
     }
 
-    <TEntity extends IDomainObject>  HashMap<String, Field> GetPrimitiveFields(Class<TEntity> thisClass)
+    private <TEntity extends IDomainObject>  HashMap<String, Field> GetPrimitiveFields(Class<TEntity> thisClass)
     {
         HashMap<String, Field> fieldMap = new HashMap<String, Field>();
         Field []fields = thisClass.getDeclaredFields();
@@ -84,17 +84,17 @@ public class DataSynchronizationManager implements IDataSynchronizationManager{
         return fieldMap;
     }
 
-    <TEntity extends IDomainObject> String GetServiceContainerKey(Class<TEntity> thisClass)
+    private <TEntity extends IDomainObject> String GetServiceContainerKey(Class<TEntity> thisClass)
     {
         return thisClass.getName();
     }
 
-    boolean ServiceContainerExists(String key)
+    private boolean ServiceContainerExists(String key)
     {
         return _serviceContainerDictionary.containsKey(key);
     }
 
-    <TEntity extends IDomainObject> EntityServiceContainer<TEntity> GetServiceContainer(Class<TEntity> thisClass)
+    private <TEntity extends IDomainObject> EntityServiceContainer<TEntity> GetServiceContainer(Class<TEntity> thisClass)
             throws NullPointerException
     {
         String key = GetServiceContainerKey(thisClass);

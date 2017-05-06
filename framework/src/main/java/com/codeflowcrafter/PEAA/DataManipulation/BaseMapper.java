@@ -12,7 +12,7 @@ import java.util.Hashtable;
 
 public abstract class BaseMapper<TEntity extends IDomainObject> implements IBaseMapperConcrete<TEntity>
 {
-    final Class<TEntity> _entityClass;
+    private final Class<TEntity> _entityClass;
 
     public BaseMapper(Class<TEntity> entityClass)
     {

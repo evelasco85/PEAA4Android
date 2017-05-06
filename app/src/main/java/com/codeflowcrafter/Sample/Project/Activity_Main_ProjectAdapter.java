@@ -24,13 +24,13 @@ import java.util.List;
 
 public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
 
-    TextView _idView;
-    TextView _nameView;
-    Button _btnMenu;
-    Button _btnAddAmount;
+    private TextView _idView;
+    private TextView _nameView;
+    private Button _btnMenu;
+    private Button _btnAddAmount;
 
-    int _resource;
-    Activity _activity;
+    private int _resource;
+    private Activity _activity;
 
     public Activity_Main_ProjectAdapter(Activity_Main activity, List<Project> items)
     {
@@ -40,7 +40,7 @@ public class Activity_Main_ProjectAdapter extends ArrayAdapter<Project> {
         _activity = activity;
     }
 
-    LinearLayout GetLayout(View view, Context context, int resource)
+    private LinearLayout GetLayout(View view, Context context, int resource)
     {
         LinearLayout layout;
 

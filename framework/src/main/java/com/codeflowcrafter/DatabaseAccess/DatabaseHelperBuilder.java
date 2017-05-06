@@ -10,12 +10,12 @@ import java.util.HashMap;
 public class DatabaseHelperBuilder implements IDatabaseHelperBuilder
         , IDatabaseHelperBuilder_Setup
 {
-    String _tag;
-    String _databaseFilename;
-    HashMap<String, String> _tableScripts = new HashMap<String, String>();
-    DatabaseHelper _dbHelper;
+    private String _tag;
+    private String _databaseFilename;
+    private HashMap<String, String> _tableScripts = new HashMap<String, String>();
+    private DatabaseHelper _dbHelper;
 
-    static  IDatabaseHelperBuilder instance = new DatabaseHelperBuilder();
+    private static  IDatabaseHelperBuilder instance = new DatabaseHelperBuilder();
 
     private DatabaseHelperBuilder(){}
 

@@ -17,8 +17,8 @@ import java.util.List;
 
 public class Repository <TEntity extends IDomainObject> implements IRepository<TEntity>
 {
-    Class<TEntity> _class;
-    IDataSynchronizationManager _manager;
+    private Class<TEntity> _class;
+    private IDataSynchronizationManager _manager;
 
     public Repository(Class<TEntity> thisClass, IDataSynchronizationManager manager)
     {
@@ -26,7 +26,7 @@ public class Repository <TEntity extends IDomainObject> implements IRepository<T
         _manager = manager;
     }
 
-    void ApplyDomainObjectSettings(List<TEntity> newResult, IBaseQueryObject query)
+    private void ApplyDomainObjectSettings(List<TEntity> newResult, IBaseQueryObject query)
     {
         if ((newResult == null) || (newResult.size() < 1))
             return;
@@ -42,7 +42,7 @@ public class Repository <TEntity extends IDomainObject> implements IRepository<T
         }
     }
 
-    List<TEntity> Matching(IBaseQueryObjectConcrete<TEntity> query) {
+    private List<TEntity> Matching(IBaseQueryObjectConcrete<TEntity> query) {
         List<TEntity> results = new ArrayList<TEntity>();
 
         if (query != null)

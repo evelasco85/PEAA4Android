@@ -20,9 +20,9 @@ import java.util.Date;
 public class Fragment_TimePicker extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
-    int _selectedHour, _selectedMinute;
+    private int _selectedHour, _selectedMinute;
 
-    TimePickerDialog.OnTimeSetListener _onTimeSetListener;
+    private TimePickerDialog.OnTimeSetListener _onTimeSetListener;
 
     public void SetOnDateSetListener(TimePickerDialog.OnTimeSetListener onTimeSetListener)
     {

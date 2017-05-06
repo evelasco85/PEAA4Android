@@ -10,7 +10,7 @@ import com.codeflowcrafter.PEAA.Interfaces.Registries.IMapperRegistry;
  */
 
 public abstract class TransactionScript<TInput, TOutput> implements ITransactionScriptConcrete<TInput, TOutput> {
-        TInput _input;
+    private TInput _input;
 
         public TInput GetInput()
         {
@@ -22,7 +22,7 @@ public abstract class TransactionScript<TInput, TOutput> implements ITransaction
             _input = input;
         }
 
-    TOutput _output;
+    private TOutput _output;
 
     public TOutput GetOutput()
     {
@@ -34,8 +34,8 @@ public abstract class TransactionScript<TInput, TOutput> implements ITransaction
         _output = output;
     }
 
-    IRepositoryRegistry _repositoryRegistry;
-    IMapperRegistry _mapperRegistry;
+    private IRepositoryRegistry _repositoryRegistry;
+    private IMapperRegistry _mapperRegistry;
 
     public IRepositoryRegistry GetRepositoryRegistry(){return _repositoryRegistry;}
     public IMapperRegistry GetMapperRegistry(){return _mapperRegistry;}

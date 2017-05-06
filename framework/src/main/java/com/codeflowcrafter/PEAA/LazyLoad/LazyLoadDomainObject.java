@@ -10,7 +10,7 @@ import com.codeflowcrafter.PEAA.Interfaces.ILazyLoadDomainObject;
  */
 
 public abstract class LazyLoadDomainObject<TSearchInput> extends DomainObject implements ILazyLoadDomainObject<TSearchInput> {
-    TSearchInput _criteria;
+    private TSearchInput _criteria;
 
     public TSearchInput GetCriteria (){return _criteria;}
 

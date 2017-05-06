@@ -17,13 +17,13 @@ public class SampleApplicationContentProviders extends BaseContentProviders {
 
     public static final String APPLICATION_NAME = "SampleApplication";
     public static final String DATABASE_TAG_NAME = "SampleDatabase";
-    static final String DATABASE_FILENAME = "sample.db";
+    private static final String DATABASE_FILENAME = "sample.db";
 
-    ProjectProvider _projectProvider;
+    private ProjectProvider _projectProvider;
 
-    IDatabaseHelperBuilder_Setup _dbHelperSetup;
+    private IDatabaseHelperBuilder_Setup _dbHelperSetup;
 
-    static SampleApplicationContentProviders instance = new SampleApplicationContentProviders();
+    private static SampleApplicationContentProviders instance = new SampleApplicationContentProviders();
     public static SampleApplicationContentProviders GetInstance(){ return instance;}
 
     private SampleApplicationContentProviders()
