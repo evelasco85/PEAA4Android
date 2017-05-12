@@ -15,9 +15,9 @@ import java.util.Hashtable;
  */
 
 public class ProjectMapper extends BaseMapper<Project> {
-    public final static String MAPPER_NAME = "Mapper Name";
-    public final static String OPERATION = "Operation";
-    public final static String COUNT = "Count";
+    public final static String KEY_MAPPER_NAME = "[Mapper Name]";
+    public final static String KEY_OPERATION = "[Operation]";
+    public final static String KEY_COUNT = "[Count]";
 
     private ContentResolver _resolver;
     private Uri _uri;
@@ -47,9 +47,9 @@ public class ProjectMapper extends BaseMapper<Project> {
 
         Hashtable results = new Hashtable();
 
-        results.put(MAPPER_NAME, this.getClass().getName());
-        results.put(OPERATION, "Update");
-        results.put(COUNT, String.valueOf(updatedRecords));
+        results.put(KEY_MAPPER_NAME, this.getClass().getName());
+        results.put(KEY_OPERATION, "Update");
+        results.put(KEY_COUNT, String.valueOf(updatedRecords));
 
         invocationDelegates.SetResults(results);
         invocationDelegates.SuccessfulInvocation(project);
@@ -63,9 +63,9 @@ public class ProjectMapper extends BaseMapper<Project> {
 
         Hashtable results = new Hashtable();
 
-        results.put(MAPPER_NAME, this.getClass().getName());
-        results.put(OPERATION, "Insertion");
-        results.put(COUNT, "1");
+        results.put(KEY_MAPPER_NAME, this.getClass().getName());
+        results.put(KEY_OPERATION, "Insertion");
+        results.put(KEY_COUNT, "1");
 
         invocationDelegates.SetResults(results);
         invocationDelegates.SuccessfulInvocation(project);
@@ -82,9 +82,9 @@ public class ProjectMapper extends BaseMapper<Project> {
 
         Hashtable results = new Hashtable();
 
-        results.put(MAPPER_NAME, this.getClass().getName());
-        results.put(OPERATION, "Deletion");
-        results.put(COUNT, String.valueOf(deletedRecords));
+        results.put(KEY_MAPPER_NAME, this.getClass().getName());
+        results.put(KEY_OPERATION, "Deletion");
+        results.put(KEY_COUNT, String.valueOf(deletedRecords));
 
         invocationDelegates.SetResults(results);
         invocationDelegates.SuccessfulInvocation(project);

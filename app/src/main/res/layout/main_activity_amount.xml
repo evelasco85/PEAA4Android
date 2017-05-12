@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
     <TableRow
-        android:padding="5dp"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
-        <include layout="@layout/activity_amount_merge_amount_input"/>
+        android:layout_width="match_parent">
+        <LinearLayout>
+            <TextView
+                android:text="Project ID: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProjectId" />
+        </LinearLayout>
     </TableRow>
     <TableRow
-        android:padding="5dp"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content">
+        android:layout_width="match_parent">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Amount"
+            android:id="@+id/btnAddAmount" />
+    </TableRow>
+    <TableRow
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
         <fragment
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:name="com.codeflowcrafter.UI.Persistency.Fragment_SaveCancel"
-            android:id="@+id/saveCancelFragmentPlaceholder"
+            android:name="com.codeflowcrafter.Sample.Amount.Activity_Main_Fragment_Amount_List"
+            android:id="@+id/fragment_amountList"
             android:gravity="bottom"
-            tools:layout="@layout/fragment_savecancel_layout" />
+            tools:layout="@layout/activity_amount_listitem"
+            />
     </TableRow>
 </TableLayout>

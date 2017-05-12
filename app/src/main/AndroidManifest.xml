@@ -23,5 +23,6 @@
             android:authorities="com.codeflowcrafter.SampleApplication.ProjectProvider"
             />
 
+        <activity android:name=".Amount.Activity_Main" android:label="@string/lblAmount" />
     </application>
 </manifest>

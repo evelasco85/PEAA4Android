@@ -6,6 +6,7 @@ import com.codeflowcrafter.DatabaseAccess.BaseContentProviders;
 import com.codeflowcrafter.DatabaseAccess.DatabaseHelper;
 import com.codeflowcrafter.DatabaseAccess.DatabaseHelperBuilder;
 import com.codeflowcrafter.DatabaseAccess.Interfaces.IDatabaseHelperBuilder_Setup;
+import com.codeflowcrafter.Sample.Amount.Implementation.ContentProvider.AmountProvider;
 import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectProvider;
 
 /**
@@ -20,15 +21,16 @@ public class SampleApplicationContentProviders extends BaseContentProviders {
     private static final String DATABASE_FILENAME = "sample.db";
 
     private ProjectProvider _projectProvider;
+    private AmountProvider _amountProvider;
 
     private IDatabaseHelperBuilder_Setup _dbHelperSetup;
 
     private static SampleApplicationContentProviders instance = new SampleApplicationContentProviders();
     public static SampleApplicationContentProviders GetInstance(){ return instance;}
 
-    private SampleApplicationContentProviders()
-    {
+    private SampleApplicationContentProviders() {
         _projectProvider = new ProjectProvider();
+        _amountProvider = new AmountProvider();
 
         _dbHelperSetup = DatabaseHelperBuilder.GetInstance()
                 .SetDatabase(DATABASE_TAG_NAME, DATABASE_FILENAME)
@@ -36,12 +38,20 @@ public class SampleApplicationContentProviders extends BaseContentProviders {
                         _projectProvider.GetUnderlyingTable().GetTableName(),
                         _projectProvider.GetUnderlyingTable().GetTableCreationScript()
                 )
-        ;
+                .AddTable(
+                        _amountProvider.GetUnderlyingTable().GetTableName(),
+                        _amountProvider.GetUnderlyingTable().GetTableCreationScript()
+                );
     }
 
     public ProjectProvider GetProjectProvider()
     {
         return _projectProvider;
+    }
+
+    public AmountProvider GetAmountProvider()
+    {
+        return _amountProvider;
     }
 
     public DatabaseHelper GetDatabaseHelper(Context context)

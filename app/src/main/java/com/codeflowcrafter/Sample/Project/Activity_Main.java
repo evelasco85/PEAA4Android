@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -33,7 +34,6 @@ public class Activity_Main
     private Presenter_Project _presenter;
     private IProjectRequests _viewRequest;
     private Button _btnAddProject;
-    private Activity_Main_Project_List _listImplementation;
 
     public IProjectRequests GetViewRequest(){return _viewRequest;}
     public void SetViewRequest(IProjectRequests viewRequest){
@@ -41,6 +41,7 @@ public class Activity_Main
 
     private ArrayList<Project> _activityList;
     private Activity_Main_Project_List_Item_Handler _activityAdapter;
+    private Activity_Main_Fragment_Project_List _listImplementation;
 
 
     @Override
@@ -63,8 +64,8 @@ public class Activity_Main
     public void AssociateViewToLocalVar()
     {
         _btnAddProject = (Button)findViewById(R.id.btnAddProject);
-        _listImplementation = (Activity_Main_Project_List) getFragmentManager()
-                .findFragmentById(R.id.projectList);
+        _listImplementation = (Activity_Main_Fragment_Project_List) getFragmentManager()
+                .findFragmentById(R.id.fragment_projectList);
     }
 
     public void SetViewHandlers()
@@ -180,8 +181,10 @@ public class Activity_Main
 
     public void OnPromptExecution_AmountList(Project project)
     {
-        Toast
-                .makeText(getApplicationContext(), "Show amount list here", Toast.LENGTH_SHORT)
-                .show();
+        Intent amountListIntent = new Intent(this, com.codeflowcrafter.Sample.Amount.Activity_Main.class);
+
+        amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.FILTER_BY_PROJECTID, project.GetId());
+
+        this.startActivity(amountListIntent);
     }
 }
