@@ -22,7 +22,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class Activity_Main_Project_List_Item_Handler extends ArrayAdapter<Project> {
+public class Activity_Project_List_Item extends ArrayAdapter<Project> {
 
     private TextView _idView;
     private TextView _nameView;
@@ -32,7 +32,7 @@ public class Activity_Main_Project_List_Item_Handler extends ArrayAdapter<Projec
     private int _resource;
     private Activity_Main _activity;
 
-    public Activity_Main_Project_List_Item_Handler(Activity_Main activity, List<Project> items)
+    public Activity_Project_List_Item(Activity_Main activity, List<Project> items)
     {
         super(activity, R.layout.activity_project_listitem, items);
 

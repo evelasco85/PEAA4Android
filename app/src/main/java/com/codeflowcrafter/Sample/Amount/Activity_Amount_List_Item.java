@@ -16,12 +16,12 @@ import java.util.List;
  * Created by aiko on 5/12/17.
  */
 
-public class Activity_Main_Amount_List_Item_Handler extends ArrayAdapter<Amount> {
+public class Activity_Amount_List_Item extends ArrayAdapter<Amount> {
 
     private int _resource;
     private Activity_Main _activity;
 
-    public Activity_Main_Amount_List_Item_Handler(Activity_Main activity, List<Amount> items)
+    public Activity_Amount_List_Item(Activity_Main activity, List<Amount> items)
     {
         super(activity, R.layout.activity_amount_listitem, items);
 

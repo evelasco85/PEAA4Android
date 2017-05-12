@@ -21,8 +21,8 @@ public class Activity_Main extends Activity implements LoaderManager.LoaderCallb
     public static final String FILTER_BY_PROJECTID = "ProjectId";
 
     private ArrayList<Amount> _activityList;
-    private Activity_Main_Amount_List_Item_Handler _activityAdapter;
-    private Activity_Main_Fragment_Amount_List _listImplementation;
+    private Activity_Amount_List_Item _activityAdapter;
+    private Activity_Amount_Fragment_List _listImplementation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class Activity_Main extends Activity implements LoaderManager.LoaderCallb
         getLoaderManager().restartLoader(0, null, this);
 
         _activityList = new ArrayList<Amount>();
-        _activityAdapter = new Activity_Main_Amount_List_Item_Handler(this, _activityList);
+        _activityAdapter = new Activity_Amount_List_Item(this, _activityList);
 
         AssociateViewToLocalVar();
         SetViewHandlers();
@@ -41,7 +41,7 @@ public class Activity_Main extends Activity implements LoaderManager.LoaderCallb
 
     public void AssociateViewToLocalVar()
     {
-        _listImplementation = (Activity_Main_Fragment_Amount_List) getFragmentManager()
+        _listImplementation = (Activity_Amount_Fragment_List) getFragmentManager()
                 .findFragmentById(R.id.fragment_amountList);
     }
 

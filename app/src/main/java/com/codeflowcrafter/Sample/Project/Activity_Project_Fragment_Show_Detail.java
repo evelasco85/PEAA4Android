@@ -17,7 +17,7 @@ import com.codeflowcrafter.Sample.R;
  * Created by aiko on 5/6/17.
  */
 
-public class Activity_Main_Fragment_Project_Show_Detail extends DialogFragment{
+public class Activity_Project_Fragment_Show_Detail extends DialogFragment{
     private EditText _txtName, _txtDescription;
     private TextView _txtProjectId, _txtStartDate, _txtEndDate;
 
@@ -28,11 +28,11 @@ public class Activity_Main_Fragment_Project_Show_Detail extends DialogFragment{
 
     public static final String FRAGMENT_NAME = "Show Project Details";
 
-    public static Activity_Main_Fragment_Project_Show_Detail newInstance(Project project)
+    public static Activity_Project_Fragment_Show_Detail newInstance(Project project)
     {
         Bundle args = new Bundle();
 
-        Activity_Main_Fragment_Project_Show_Detail fragment = new Activity_Main_Fragment_Project_Show_Detail();
+        Activity_Project_Fragment_Show_Detail fragment = new Activity_Project_Fragment_Show_Detail();
 
         fragment.setArguments(args);
         fragment.SetProjectToEdit(project);
@@ -49,7 +49,7 @@ public class Activity_Main_Fragment_Project_Show_Detail extends DialogFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.activity_main_fragment_project_show_detail, container, false);
+        View view = inflater.inflate(R.layout.activity_project_fragment_show_detail, container, false);
 
         AssociateViewToLocalVar(view);
         SetModelToViewData(_projectToView);

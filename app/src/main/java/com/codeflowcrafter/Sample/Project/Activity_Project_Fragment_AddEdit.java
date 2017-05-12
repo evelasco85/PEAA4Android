@@ -27,7 +27,7 @@ import java.util.Calendar;
  * Created by aiko on 5/3/17.
  */
 
-public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
+public class Activity_Project_Fragment_AddEdit extends DialogFragment{
     private Button _btnSave, _btnCancel;
     private EditText _txtName, _txtDescription;
     private TextView _txtStartDate, _txtEndDate;
@@ -49,13 +49,13 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
     }
     public void SetProjectToEdit(Project project){_projectToEdit = project;}
 
-    public static Activity_Main_Fragment_Project_AddEdit newInstance(String action, Project project)
+    public static Activity_Project_Fragment_AddEdit newInstance(String action, Project project)
     {
         Bundle args = new Bundle();
 
         args.putString(KEY_ACTION, action);
 
-        Activity_Main_Fragment_Project_AddEdit fragment = new Activity_Main_Fragment_Project_AddEdit();
+        Activity_Project_Fragment_AddEdit fragment = new Activity_Project_Fragment_AddEdit();
 
         fragment.setArguments(args);
         fragment.SetProjectToEdit(project);
@@ -72,7 +72,7 @@ public class Activity_Main_Fragment_Project_AddEdit extends DialogFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.activity_main_fragment_project_add_edit, container, false);
+        View view = inflater.inflate(R.layout.activity_project_fragment_add_edit, container, false);
 
         AssociateViewToLocalVar(view);
 

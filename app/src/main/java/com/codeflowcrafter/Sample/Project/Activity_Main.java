@@ -40,8 +40,8 @@ public class Activity_Main
         _viewRequest = viewRequest;}
 
     private ArrayList<Project> _activityList;
-    private Activity_Main_Project_List_Item_Handler _activityAdapter;
-    private Activity_Main_Fragment_Project_List _listImplementation;
+    private Activity_Project_List_Item _activityAdapter;
+    private Activity_Project_Fragment_List _listImplementation;
 
 
     @Override
@@ -52,7 +52,7 @@ public class Activity_Main
         getLoaderManager().restartLoader(0, null, this);
 
         _activityList = new ArrayList<Project>();
-        _activityAdapter = new Activity_Main_Project_List_Item_Handler(this, _activityList);
+        _activityAdapter = new Activity_Project_List_Item(this, _activityList);
 
         _presenter = new Presenter_Project(this);
 
@@ -64,7 +64,7 @@ public class Activity_Main
     public void AssociateViewToLocalVar()
     {
         _btnAddProject = (Button)findViewById(R.id.btnAddProject);
-        _listImplementation = (Activity_Main_Fragment_Project_List) getFragmentManager()
+        _listImplementation = (Activity_Project_Fragment_List) getFragmentManager()
                 .findFragmentById(R.id.fragment_projectList);
     }
 
@@ -86,20 +86,20 @@ public class Activity_Main
 
     public void OnPromptExecution_AddProjectEntry()
     {
-        Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
-                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_ADD, null);
+        Activity_Project_Fragment_AddEdit fragment = Activity_Project_Fragment_AddEdit
+                .newInstance(Activity_Project_Fragment_AddEdit.ACTION_ADD, null);
 
         fragment.SetViewRequest(_viewRequest);
-        fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
+        fragment.show(getFragmentManager(), Activity_Project_Fragment_AddEdit.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_EditProjectEntry(Project project)
     {
-        Activity_Main_Fragment_Project_AddEdit fragment = Activity_Main_Fragment_Project_AddEdit
-                .newInstance(Activity_Main_Fragment_Project_AddEdit.ACTION_EDIT, project);
+        Activity_Project_Fragment_AddEdit fragment = Activity_Project_Fragment_AddEdit
+                .newInstance(Activity_Project_Fragment_AddEdit.ACTION_EDIT, project);
 
         fragment.SetViewRequest(_viewRequest);
-        fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_AddEdit.FRAGMENT_NAME);
+        fragment.show(getFragmentManager(), Activity_Project_Fragment_AddEdit.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_DeleteProjectEntry(final Project project)
@@ -166,10 +166,10 @@ public class Activity_Main
 
     public void OnPromptExecution_ProjectDetail(Project project)
     {
-        Activity_Main_Fragment_Project_Show_Detail fragment = Activity_Main_Fragment_Project_Show_Detail
+        Activity_Project_Fragment_Show_Detail fragment = Activity_Project_Fragment_Show_Detail
                 .newInstance(project);
 
-        fragment.show(getFragmentManager(), Activity_Main_Fragment_Project_Show_Detail.FRAGMENT_NAME);
+        fragment.show(getFragmentManager(), Activity_Project_Fragment_Show_Detail.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_AddAmountEntry(Project project)
