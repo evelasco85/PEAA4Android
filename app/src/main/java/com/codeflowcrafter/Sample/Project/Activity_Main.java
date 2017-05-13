@@ -86,20 +86,20 @@ public class Activity_Main
 
     public void OnPromptExecution_AddProjectEntry()
     {
-        Activity_Project_Fragment_AddEdit fragment = Activity_Project_Fragment_AddEdit
-                .newInstance(Activity_Project_Fragment_AddEdit.ACTION_ADD, null);
+        Activity_Project_Dialog_AddEdit fragment = Activity_Project_Dialog_AddEdit
+                .newInstance(Activity_Project_Dialog_AddEdit.ACTION_ADD, null);
 
         fragment.SetViewRequest(_viewRequest);
-        fragment.show(getFragmentManager(), Activity_Project_Fragment_AddEdit.FRAGMENT_NAME);
+        fragment.show(getFragmentManager(), Activity_Project_Dialog_AddEdit.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_EditProjectEntry(Project project)
     {
-        Activity_Project_Fragment_AddEdit fragment = Activity_Project_Fragment_AddEdit
-                .newInstance(Activity_Project_Fragment_AddEdit.ACTION_EDIT, project);
+        Activity_Project_Dialog_AddEdit fragment = Activity_Project_Dialog_AddEdit
+                .newInstance(Activity_Project_Dialog_AddEdit.ACTION_EDIT, project);
 
         fragment.SetViewRequest(_viewRequest);
-        fragment.show(getFragmentManager(), Activity_Project_Fragment_AddEdit.FRAGMENT_NAME);
+        fragment.show(getFragmentManager(), Activity_Project_Dialog_AddEdit.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_DeleteProjectEntry(final Project project)

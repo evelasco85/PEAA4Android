@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 public class Activity_Main extends Activity implements LoaderManager.LoaderCallbacks<Cursor>{
     private TextView _txtProjectId;
     private TextView _txtProjectName;
+    private Button _btnAddAmount;
 
     public static final String KEY_PROJECTID = "Project Id";
     public static final String KEY_PROJECTNAME = "Project Name";
@@ -61,10 +64,20 @@ public class Activity_Main extends Activity implements LoaderManager.LoaderCallb
                 .findFragmentById(R.id.fragment_amountList);
         _txtProjectId = (TextView) findViewById(R.id.txtProjectId);
         _txtProjectName = (TextView) findViewById(R.id.txtProjectName);
+        _btnAddAmount = (Button)findViewById(R.id.btnAddAmount);
     }
 
     public void SetViewHandlers()
     {
+        _btnAddAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity_Amount_Dialog_AddEdit fragment = Activity_Amount_Dialog_AddEdit
+                        .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_ADD, null);
+
+                fragment.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
+            }
+        });
     }
 
     public void SetDefaultMainViewData()
