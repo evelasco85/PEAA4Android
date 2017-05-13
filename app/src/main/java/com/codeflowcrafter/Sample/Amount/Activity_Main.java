@@ -37,11 +37,14 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
 
     public static final String KEY_PROJECTID = "Project Id";
     public static final String KEY_PROJECTNAME = "Project Name";
+    public static final String ACTION_NONE = "NONE";
+    public static final String ACTION_ADD = "ADD";
 
     private ArrayList<Amount> _activityList;
     private Activity_Amount_List_Item _activityAdapter;
     private Activity_Amount_Fragment_List _listImplementation;
 
+    private String _action = ACTION_NONE;
     private int _projectId = 0;
     private String _projectName;
 
@@ -61,14 +64,16 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         if(invoker != null) {
             _projectId = invoker.getIntExtra(KEY_PROJECTID, 0);
             _projectName = invoker.getStringExtra(KEY_PROJECTNAME);
+            _action = invoker.getAction();
         }
 
         AssociateViewToLocalVar();
         SetViewHandlers();
         SetDefaultMainViewData();
+        PerformAction();
     }
 
-    public void AssociateViewToLocalVar()
+    private void AssociateViewToLocalVar()
     {
         _listImplementation = (Activity_Amount_Fragment_List) getFragmentManager()
                 .findFragmentById(R.id.fragment_amountList);
@@ -77,7 +82,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         _btnAddAmount = (Button)findViewById(R.id.btnAddAmount);
     }
 
-    public void SetViewHandlers()
+    private void SetViewHandlers()
     {
         _btnAddAmount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,13 +92,18 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         });
     }
 
-    public void SetDefaultMainViewData()
+    private void SetDefaultMainViewData()
     {
         _txtProjectId.setText(String.valueOf(_projectId));
         _txtProjectName.setText(String.valueOf(_projectName));
 
         _listImplementation.setListAdapter(_activityAdapter);
         getLoaderManager().initLoader(0, null, this);
+    }
+
+    private void PerformAction()
+    {
+        if(_action == ACTION_ADD) _viewRequest.Prompt_AddAmountEntry();
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args)

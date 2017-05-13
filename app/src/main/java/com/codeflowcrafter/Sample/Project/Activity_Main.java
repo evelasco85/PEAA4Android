@@ -174,9 +174,16 @@ public class Activity_Main
 
     public void OnPromptExecution_AddAmountEntry(Project project)
     {
-        Toast
-                .makeText(getApplicationContext(), "Show add amount here", Toast.LENGTH_SHORT)
-                .show();
+//        Toast
+//                .makeText(getApplicationContext(), "Show add amount here", Toast.LENGTH_SHORT)
+//                .show();
+        Intent amountListIntent = new Intent(this, com.codeflowcrafter.Sample.Amount.Activity_Main.class);
+
+        amountListIntent.setAction(com.codeflowcrafter.Sample.Amount.Activity_Main.ACTION_ADD);
+        amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.KEY_PROJECTID, project.GetId());
+        amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.KEY_PROJECTNAME, project.GetName());
+
+        this.startActivity(amountListIntent);
     }
 
     public void OnPromptExecution_AmountList(Project project)
