@@ -8,7 +8,7 @@ import com.codeflowcrafter.MVP.IView;
 
 interface IView_Events
 {
-
+    void OnPromptExecution_AddAmountEntry();
 }
 
 public interface IView_Amount extends IView_Events, IView<IRequests_Amount> {

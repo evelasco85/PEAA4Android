@@ -82,10 +82,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         _btnAddAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity_Amount_Dialog_AddEdit fragment = Activity_Amount_Dialog_AddEdit
-                        .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_ADD, null);
-
-                fragment.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
+                _viewRequest.Prompt_AddAmountEntry();
             }
         });
     }
@@ -119,5 +116,13 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     {
         super.onResume();
         getLoaderManager().restartLoader(0, null, this);
+    }
+
+    public void OnPromptExecution_AddAmountEntry()
+    {
+        Activity_Amount_Dialog_AddEdit fragment = Activity_Amount_Dialog_AddEdit
+                .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_ADD, null);
+
+        fragment.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
     }
 }
