@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
-import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
+import com.codeflowcrafter.Sample.Project.Implementation.MVP.IRequests_Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IView_Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.Presenter_Project;
 import com.codeflowcrafter.Sample.R;
@@ -34,9 +34,9 @@ public class Activity_Main
     private Button _btnAddProject;
 
     private Presenter_Project _presenter;
-    private IProjectRequests _viewRequest;
-    public IProjectRequests GetViewRequest(){return _viewRequest;}
-    public void SetViewRequest(IProjectRequests viewRequest){
+    private IRequests_Project _viewRequest;
+    public IRequests_Project GetViewRequest(){return _viewRequest;}
+    public void SetViewRequest(IRequests_Project viewRequest){
         _viewRequest = viewRequest;}
 
     private ArrayList<Project> _activityList;

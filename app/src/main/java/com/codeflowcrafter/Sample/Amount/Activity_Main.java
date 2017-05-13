@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
-import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IAmountRequests;
+import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IRequests_Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IView_Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.Presenter_Amount;
 import com.codeflowcrafter.Sample.R;
@@ -30,9 +30,9 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     private Button _btnAddAmount;
 
     private Presenter_Amount _presenter;
-    private IAmountRequests _viewRequest;
-    public IAmountRequests GetViewRequest(){return _viewRequest;}
-    public void SetViewRequest(IAmountRequests viewRequest){
+    private IRequests_Amount _viewRequest;
+    public IRequests_Amount GetViewRequest(){return _viewRequest;}
+    public void SetViewRequest(IRequests_Amount viewRequest){
         _viewRequest = viewRequest;}
 
     public static final String KEY_PROJECTID = "Project Id";

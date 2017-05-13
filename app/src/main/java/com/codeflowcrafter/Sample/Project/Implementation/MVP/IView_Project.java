@@ -9,7 +9,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-interface IView_Project_Events
+interface IView_Events
 {
     //UI Prompting Events
     void OnPromptExecution_AddProjectEntry();
@@ -22,5 +22,5 @@ interface IView_Project_Events
     void OnLoadProjectsViaLoaderCompletion(List<Project> projects);
 }
 
-public interface IView_Project extends IView_Project_Events, IView<IProjectRequests> {
+public interface IView_Project extends IView_Events, IView<IRequests_Project> {
 }

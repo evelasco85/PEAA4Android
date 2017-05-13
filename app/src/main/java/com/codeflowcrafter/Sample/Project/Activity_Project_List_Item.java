@@ -1,6 +1,5 @@
 package com.codeflowcrafter.Sample.Project;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -13,7 +12,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
-import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
+import com.codeflowcrafter.Sample.Project.Implementation.MVP.IRequests_Project;
 import com.codeflowcrafter.Sample.R;
 
 import java.util.List;
@@ -86,7 +85,7 @@ public class Activity_Project_List_Item extends ArrayAdapter<Project> {
         final PopupMenu popMenu = new PopupMenu(activity, _btnMenu);
         final Project projectItem = item;
 
-        final IProjectRequests viewrequest = activity.GetViewRequest();
+        final IRequests_Project viewrequest = activity.GetViewRequest();
 
         popMenu.inflate(R.menu.project_listitem);
         popMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

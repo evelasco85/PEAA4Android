@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
-import com.codeflowcrafter.Sample.Project.Implementation.MVP.IProjectRequests;
+import com.codeflowcrafter.Sample.Project.Implementation.MVP.IRequests_Project;
 import com.codeflowcrafter.Sample.R;
 import com.codeflowcrafter.UI.Date.Fragment_DatePicker;
 
@@ -39,11 +39,11 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
 
     private static final String KEY_ACTION = "action";
 
-    private IProjectRequests _viewRequest;
+    private IRequests_Project _viewRequest;
     private Project _projectToEdit;
     private int _projectId = 0;
 
-    public void SetViewRequest(IProjectRequests viewRequest)
+    public void SetViewRequest(IRequests_Project viewRequest)
     {
         _viewRequest = viewRequest;
     }

@@ -10,7 +10,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public interface IProjectRequests {
+public interface IRequests_Project {
     //User prompting operations (See corresponding events)
     void Prompt_AddProjectEntry();
     void Prompt_EditProjectEntry(Project project);

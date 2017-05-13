@@ -8,23 +8,19 @@ import com.codeflowcrafter.LogManagement.Priority;
 import com.codeflowcrafter.LogManagement.Status;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
-import com.codeflowcrafter.PEAA.DataSynchronizationManager;
-import com.codeflowcrafter.PEAA.Domain.Interfaces.IDomainObject;
-import com.codeflowcrafter.PEAA.Interfaces.IRepository;
 import com.codeflowcrafter.Sample.InvocationDelegate;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.ToProjectTranslator;
 import com.codeflowcrafter.Sample.SampleApplication;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 /**
  * Created by aiko on 5/1/17.
  */
 
-public class Presenter_Project implements IProjectRequests {
+public class Presenter_Project implements IRequests_Project {
     private IView_Project _view;
     private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().GetSLC();
     private ToProjectTranslator _translator = new ToProjectTranslator();
