@@ -22,7 +22,7 @@ import java.util.List;
 
 public class Presenter_Project implements IRequests_Project {
     private IView_Project _view;
-    private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().GetSLC();
+    private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().CreateSLC();
     private ToProjectTranslator _translator = new ToProjectTranslator();
     private IInvocationDelegates _invocationDelegate = new InvocationDelegate(_slc);
 

@@ -13,7 +13,7 @@ import com.codeflowcrafter.Sample.SampleApplication;
 
 public class Presenter_Amount implements IRequests_Amount {
     private IView_Amount _view;
-    private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().GetSLC();
+    private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().CreateSLC();
     private IInvocationDelegates _invocationDelegate = new InvocationDelegate(_slc);
 
     public Presenter_Amount(IView_Amount view)

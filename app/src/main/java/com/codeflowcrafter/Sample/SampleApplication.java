@@ -40,20 +40,19 @@ public class SampleApplication
 {
     private static SampleApplication s_instance;
     private IDataSynchronizationManager _dsManager = DataSynchronizationManager.GetInstance();
-    private IStaticLogEntryWrapper _slc = new StaticLogEntryWrapper(
-            LogManager.GetInstance(),
-            "Mobile",
-            "com.codeflowcrafter.Sample"
-    );
 
     public static SampleApplication GetInstance()
     {
         return s_instance;
     }
 
-    public IStaticLogEntryWrapper GetSLC()
+    public IStaticLogEntryWrapper CreateSLC()
     {
-        return _slc;
+        return new StaticLogEntryWrapper(
+                LogManager.GetInstance(),
+                "Mobile",
+                "com.codeflowcrafter.Sample"
+        );
     }
 
     @Override
