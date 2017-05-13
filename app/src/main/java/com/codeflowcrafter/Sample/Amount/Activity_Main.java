@@ -133,6 +133,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         Activity_Amount_Dialog_AddEdit fragment = Activity_Amount_Dialog_AddEdit
                 .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_ADD, null);
 
+        fragment.SetViewRequest(_viewRequest);
         fragment.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
     }
 }

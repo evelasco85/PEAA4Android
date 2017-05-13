@@ -25,4 +25,5 @@ public interface IRequests_Project {
     void DeleteProject(Project project);
 
     void LoadProjectsViaLoader(CursorLoader loader);
+    void CancelProjectEntry();
 }

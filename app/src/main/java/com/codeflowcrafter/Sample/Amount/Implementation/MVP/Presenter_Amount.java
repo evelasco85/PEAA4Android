@@ -30,4 +30,11 @@ public class Presenter_Amount implements IRequests_Amount {
         _view.OnPromptExecution_AddAmountEntry();
         _slc.SetEvent("Open Amount Entry").EmitLog(Priority.Info, Status.Success);
     }
+
+    public void CancelAmountEntry()
+    {
+        _slc
+                .SetEvent("Cancel amount entry window")
+                .EmitLog(Priority.Info, Status.Success);
+    }
 }

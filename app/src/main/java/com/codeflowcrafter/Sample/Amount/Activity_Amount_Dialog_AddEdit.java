@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
+import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IRequests_Amount;
 import com.codeflowcrafter.Sample.R;
 
 /**
@@ -27,11 +28,15 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
     private static final String KEY_ACTION = "action";
 
 
+    private IRequests_Amount _viewRequest;
     private Amount _amountToEdit;
     private int _projectId = 0;
 
-    public void SetAmountToEdit(Amount amount){
-        _amountToEdit = amount;}
+    public void SetViewRequest(IRequests_Amount viewRequest)
+    {
+        _viewRequest = viewRequest;
+    }
+    public void SetAmountToEdit(Amount amount){        _amountToEdit = amount;}
 
     public static Activity_Amount_Dialog_AddEdit newInstance(String action, Amount amount)
     {
@@ -86,7 +91,8 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         _btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                _viewRequest.CancelAmountEntry();
+                 dismiss();
             }
         });
     }

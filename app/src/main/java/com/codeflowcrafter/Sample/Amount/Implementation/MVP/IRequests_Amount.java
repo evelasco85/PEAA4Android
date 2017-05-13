@@ -6,4 +6,6 @@ package com.codeflowcrafter.Sample.Amount.Implementation.MVP;
 
 public interface IRequests_Amount {
     void Prompt_AddAmountEntry();
+
+    void CancelAmountEntry();
 }

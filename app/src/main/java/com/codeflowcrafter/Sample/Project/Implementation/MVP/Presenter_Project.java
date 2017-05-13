@@ -127,4 +127,10 @@ public class Presenter_Project implements IRequests_Project {
                 .SetEvent(String.format("Open amount list view for project id %s", project.GetId()))
                 .EmitLog(Priority.Info, Status.Success);
     }
+
+    public void CancelProjectEntry(){
+        _slc
+                .SetEvent("Cancel project entry window")
+                .EmitLog(Priority.Info, Status.Success);
+    }
 }

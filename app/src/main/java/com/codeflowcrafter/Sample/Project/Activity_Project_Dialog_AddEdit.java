@@ -107,6 +107,7 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
         _btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                _viewRequest.CancelProjectEntry();
                 dismiss();
             }
         });
