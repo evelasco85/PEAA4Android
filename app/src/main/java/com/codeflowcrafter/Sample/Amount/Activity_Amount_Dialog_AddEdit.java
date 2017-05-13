@@ -31,21 +31,28 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
     private IRequests_Amount _viewRequest;
     private Amount _amountToEdit;
     private int _projectId = 0;
+    private int _amountId = 0;
 
-    public void SetViewRequest(IRequests_Amount viewRequest)
-    {
+    public void SetViewRequest(IRequests_Amount viewRequest) {
         _viewRequest = viewRequest;
     }
-    public void SetAmountToEdit(Amount amount){        _amountToEdit = amount;}
 
-    public static Activity_Amount_Dialog_AddEdit newInstance(String action, Amount amount)
-    {
+    public void SetProjectId(int projectId) {
+        _projectId = projectId;
+    }
+
+    public void SetAmountToEdit(Amount amount) {
+        _amountToEdit = amount;
+    }
+
+    public static Activity_Amount_Dialog_AddEdit newInstance(String action, int projectId, Amount amount) {
         Bundle args = new Bundle();
 
         args.putString(KEY_ACTION, action);
 
         Activity_Amount_Dialog_AddEdit fragment = new Activity_Amount_Dialog_AddEdit();
 
+        fragment.SetProjectId(projectId);
         fragment.setArguments(args);
         fragment.SetAmountToEdit(amount);
 
@@ -53,14 +60,12 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_amount_fragment_add_edit, container, false);
 
         AssociateViewToLocalVar(view);
@@ -69,18 +74,17 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
 
         SetViewHandlers(selectedAction);
 
-        if(selectedAction == ACTION_EDIT) SetModelToViewData(_amountToEdit);
+        if (selectedAction == ACTION_EDIT) SetModelToViewData(_amountToEdit);
 
         return view;
     }
 
     private void AssociateViewToLocalVar(View view) {
-        _btnSave = (Button)view.findViewById(R.id.btnSave);
-        _btnCancel = (Button)view.findViewById(R.id.btnCancel);
+        _btnSave = (Button) view.findViewById(R.id.btnSave);
+        _btnCancel = (Button) view.findViewById(R.id.btnCancel);
     }
 
-    private void SetViewHandlers(final String selectedAction)
-    {
+    private void SetViewHandlers(final String selectedAction) {
         _btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,21 +96,19 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
             @Override
             public void onClick(View v) {
                 _viewRequest.CancelAmountEntry();
-                 dismiss();
+                dismiss();
             }
         });
     }
 
-    private void SetModelToViewData(Amount amount)
-    {
-        if(amount == null)
+    private void SetModelToViewData(Amount amount) {
+        if (amount == null)
             return;
     }
 
     @Override
-    public void onDestroyView()
-    {
-        try{
+    public void onDestroyView() {
+        try {
             Fragment childFragment = getFragmentManager().findFragmentById(R.id.saveCancelFragmentPlaceholder);
 
             FragmentTransaction transaction = getFragmentManager()
@@ -115,7 +117,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
             transaction.remove(childFragment);
 
             transaction.commit();
-        }catch(Exception e){
+        } catch (Exception e) {
         }
 
         super.onDestroyView();
