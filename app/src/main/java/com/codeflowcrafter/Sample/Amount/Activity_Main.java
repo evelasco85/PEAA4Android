@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
+import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IAmountRequests;
+import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IView_Amount;
+import com.codeflowcrafter.Sample.Amount.Implementation.MVP.Presenter_Amount;
 import com.codeflowcrafter.Sample.R;
 import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
 
@@ -21,10 +24,16 @@ import java.util.ArrayList;
  * Created by aiko on 5/1/17.
  */
 
-public class Activity_Main extends Activity implements LoaderManager.LoaderCallbacks<Cursor>{
+public class Activity_Main extends Activity implements IView_Amount, LoaderManager.LoaderCallbacks<Cursor>{
     private TextView _txtProjectId;
     private TextView _txtProjectName;
     private Button _btnAddAmount;
+
+    private Presenter_Amount _presenter;
+    private IAmountRequests _viewRequest;
+    public IAmountRequests GetViewRequest(){return _viewRequest;}
+    public void SetViewRequest(IAmountRequests viewRequest){
+        _viewRequest = viewRequest;}
 
     public static final String KEY_PROJECTID = "Project Id";
     public static final String KEY_PROJECTNAME = "Project Name";
@@ -46,6 +55,7 @@ public class Activity_Main extends Activity implements LoaderManager.LoaderCallb
         _activityList = new ArrayList<Amount>();
         _activityAdapter = new Activity_Amount_List_Item(this, _activityList);
 
+        _presenter = new Presenter_Amount(this);
         Intent invoker = getIntent();
 
         if(invoker != null) {

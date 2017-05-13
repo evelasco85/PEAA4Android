@@ -31,10 +31,10 @@ public class Activity_Main
         extends Activity
     implements IView_Project, LoaderManager.LoaderCallbacks<Cursor>
 {
-    private Presenter_Project _presenter;
-    private IProjectRequests _viewRequest;
     private Button _btnAddProject;
 
+    private Presenter_Project _presenter;
+    private IProjectRequests _viewRequest;
     public IProjectRequests GetViewRequest(){return _viewRequest;}
     public void SetViewRequest(IProjectRequests viewRequest){
         _viewRequest = viewRequest;}
