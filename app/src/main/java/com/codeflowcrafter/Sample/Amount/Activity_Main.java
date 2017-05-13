@@ -3,9 +3,11 @@ package com.codeflowcrafter.Sample.Amount;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.R;
@@ -18,11 +20,18 @@ import java.util.ArrayList;
  */
 
 public class Activity_Main extends Activity implements LoaderManager.LoaderCallbacks<Cursor>{
-    public static final String FILTER_BY_PROJECTID = "ProjectId";
+    private TextView _txtProjectId;
+    private TextView _txtProjectName;
+
+    public static final String KEY_PROJECTID = "Project Id";
+    public static final String KEY_PROJECTNAME = "Project Name";
 
     private ArrayList<Amount> _activityList;
     private Activity_Amount_List_Item _activityAdapter;
     private Activity_Amount_Fragment_List _listImplementation;
+
+    private int _projectId = 0;
+    private String _projectName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,13 @@ public class Activity_Main extends Activity implements LoaderManager.LoaderCallb
         _activityList = new ArrayList<Amount>();
         _activityAdapter = new Activity_Amount_List_Item(this, _activityList);
 
+        Intent invoker = getIntent();
+
+        if(invoker != null) {
+            _projectId = invoker.getIntExtra(KEY_PROJECTID, 0);
+            _projectName = invoker.getStringExtra(KEY_PROJECTNAME);
+        }
+
         AssociateViewToLocalVar();
         SetViewHandlers();
         SetDefaultMainViewData();
@@ -43,6 +59,8 @@ public class Activity_Main extends Activity implements LoaderManager.LoaderCallb
     {
         _listImplementation = (Activity_Amount_Fragment_List) getFragmentManager()
                 .findFragmentById(R.id.fragment_amountList);
+        _txtProjectId = (TextView) findViewById(R.id.txtProjectId);
+        _txtProjectName = (TextView) findViewById(R.id.txtProjectName);
     }
 
     public void SetViewHandlers()
@@ -51,6 +69,9 @@ public class Activity_Main extends Activity implements LoaderManager.LoaderCallb
 
     public void SetDefaultMainViewData()
     {
+        _txtProjectId.setText(String.valueOf(_projectId));
+        _txtProjectName.setText(String.valueOf(_projectName));
+
         _listImplementation.setListAdapter(_activityAdapter);
         getLoaderManager().initLoader(0, null, this);
     }

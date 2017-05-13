@@ -183,7 +183,8 @@ public class Activity_Main
     {
         Intent amountListIntent = new Intent(this, com.codeflowcrafter.Sample.Amount.Activity_Main.class);
 
-        amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.FILTER_BY_PROJECTID, project.GetId());
+        amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.KEY_PROJECTID, project.GetId());
+        amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.KEY_PROJECTNAME, project.GetName());
 
         this.startActivity(amountListIntent);
     }
