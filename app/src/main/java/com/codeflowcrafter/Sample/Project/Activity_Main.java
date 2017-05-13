@@ -43,7 +43,6 @@ public class Activity_Main
     private Activity_Project_List_Item _activityAdapter;
     private Activity_Project_Fragment_List _listImplementation;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,14 +60,14 @@ public class Activity_Main
         SetDefaultMainViewData();
     }
 
-    public void AssociateViewToLocalVar()
+    private void AssociateViewToLocalVar()
     {
         _btnAddProject = (Button)findViewById(R.id.btnAddProject);
         _listImplementation = (Activity_Project_Fragment_List) getFragmentManager()
                 .findFragmentById(R.id.fragment_projectList);
     }
 
-    public void SetViewHandlers()
+    private void SetViewHandlers()
     {
         _btnAddProject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +77,7 @@ public class Activity_Main
         });
     }
 
-    public void SetDefaultMainViewData()
+    private void SetDefaultMainViewData()
     {
         _listImplementation.setListAdapter(_activityAdapter);
         getLoaderManager().initLoader(0, null, this);
@@ -174,9 +173,6 @@ public class Activity_Main
 
     public void OnPromptExecution_AddAmountEntry(Project project)
     {
-//        Toast
-//                .makeText(getApplicationContext(), "Show add amount here", Toast.LENGTH_SHORT)
-//                .show();
         Intent amountListIntent = new Intent(this, com.codeflowcrafter.Sample.Amount.Activity_Main.class);
 
         amountListIntent.setAction(com.codeflowcrafter.Sample.Amount.Activity_Main.ACTION_ADD);
