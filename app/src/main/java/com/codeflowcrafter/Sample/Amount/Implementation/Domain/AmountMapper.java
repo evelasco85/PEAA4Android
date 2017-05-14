@@ -1,10 +1,12 @@
 package com.codeflowcrafter.Sample.Amount.Implementation.Domain;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.net.Uri;
 
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
+import com.codeflowcrafter.Sample.Amount.Implementation.ContentProvider.AmountTable;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 
 /**
@@ -41,4 +43,22 @@ public class AmountMapper extends BaseMapper<Amount> {
     public boolean ConcreteDelete(Amount amount, IInvocationDelegates invocationDelegates) {
         return false;
     }
+
+    private ContentValues EntityToContentValues(Amount amount)
+    {
+        ContentValues values = new ContentValues();
+
+        if(amount.get_id() > 0)
+            values.put(AmountTable.COLUMN_ID, amount.get_id());
+
+        values.put(AmountTable.COLUMN_PROJECT_ID, amount.get_projectId());
+        values.put(AmountTable.COLUMN_CREATED_DATE, amount.get_createdDate());
+        values.put(AmountTable.COLUMN_CREATED_TIME, amount.get_createdTime());
+        values.put(AmountTable.COLUMN_AMOUNT, amount.get_amount());
+        values.put(AmountTable.COLUMN_EXPENSE_ENTRY, amount.is_expenseEntry());
+        values.put(AmountTable.COLUMN_DESCRIPTION, amount.get_description());
+
+        return values;
+    }
+
 }

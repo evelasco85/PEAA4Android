@@ -55,14 +55,14 @@ public class ForeignKeyMappingTests {
         /*Match by Id*/
         GetCustomerByIdQuery.Criteria criteriaById = new GetCustomerByIdQuery.Criteria(3);
         List<Customer> resultsById = repository.Matching(criteriaById);
-        Customer matchById = resultsById.get(0);
+        Customer customerMatchById = resultsById.get(0);
 
-        assertEquals("3", matchById.Number);
-        assertEquals("John Doe", matchById.Name);
+        assertEquals("3", customerMatchById.Number);
+        assertEquals("John Doe", customerMatchById.Name);
         /************/
 
         try {
-            List<AccountReceivable> receivables = _fkMappingManager.GetForeignKeyValues(Customer.class, AccountReceivable.class, matchById);
+            List<AccountReceivable> receivables = _fkMappingManager.GetForeignKeyValues(Customer.class, AccountReceivable.class, customerMatchById);
 
             assertEquals(2, receivables.size());
             assertEquals("02", receivables.get(0).Number);
