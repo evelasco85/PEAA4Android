@@ -8,11 +8,13 @@ import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
  */
 
 public class AmountProvider  extends ContentProviderTemplate {
+    private static final String PROVIDER_NAME = "AmountProvider";
+
     public AmountProvider() {
         super(
                 SampleApplicationContentProviders.APPLICATION_NAME,
                 SampleApplicationContentProviders.GetInstance(),
-                "AmountProvider", "amounts",
+                PROVIDER_NAME, AmountTable.TABLE_NAME,
                 new AmountTable());
     }
 }

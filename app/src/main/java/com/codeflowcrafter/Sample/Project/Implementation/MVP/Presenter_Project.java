@@ -98,7 +98,6 @@ public class Presenter_Project implements IRequests_Project {
         IBaseMapper mapper = project.GetMapper();
 
         mapper.Delete(project, _invocationDelegate);
-        _slc.SetEvent("").EmitLog(Priority.Info, Status.Success);
         _slc
                 .SetEvent(String.format("Deleted project id %s", project.GetId()))
                 .EmitLog(Priority.Info, Status.Success);

@@ -80,6 +80,7 @@ public class Activity_Main
     private void SetDefaultMainViewData()
     {
         _listImplementation.setListAdapter(_activityAdapter);
+
         getLoaderManager().initLoader(0, null, this);
     }
 

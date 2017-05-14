@@ -1,6 +1,9 @@
 package com.codeflowcrafter.Sample.Amount.Implementation.MVP;
 
 import com.codeflowcrafter.MVP.IView;
+import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
+
+import java.util.List;
 
 /**
  * Created by aiko on 5/14/17.
@@ -9,6 +12,8 @@ import com.codeflowcrafter.MVP.IView;
 interface IView_Events
 {
     void OnPromptExecution_AddAmountEntry();
+
+    void OnLoadAmountsViaLoaderCompletion(List<Amount> amounts);
 }
 
 public interface IView_Amount extends IView_Events, IView<IRequests_Amount> {

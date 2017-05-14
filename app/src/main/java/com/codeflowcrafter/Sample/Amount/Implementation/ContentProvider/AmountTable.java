@@ -64,7 +64,7 @@ public class AmountTable extends BaseTable {
             fields += entry.getKey() + " " + entry.getValue() + terminator;
         }
 
-        return "create table " + GetTableName() + " ( " +
+        return "create table " + TABLE_NAME + " ( " +
                 ((fields.length() > 0) ? fields.substring(0, fields.length() - terminator.length()) : fields) +
                 " );";
     }

@@ -19,6 +19,7 @@ import com.codeflowcrafter.Sample.R;
 import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by aiko on 5/1/17.
@@ -96,8 +97,8 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     {
         _txtProjectId.setText(String.valueOf(_projectId));
         _txtProjectName.setText(String.valueOf(_projectName));
-
         _listImplementation.setListAdapter(_activityAdapter);
+
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -117,6 +118,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
+        _viewRequest.LoadAmountsViaLoader((CursorLoader)loader);
     }
 
     public void onLoaderReset(Loader<Cursor> loader){}
@@ -126,6 +128,13 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     {
         super.onResume();
         getLoaderManager().restartLoader(0, null, this);
+    }
+
+    public void OnLoadAmountsViaLoaderCompletion(List<Amount> amounts)
+    {
+        _activityList.clear();
+        _activityList.addAll(amounts);
+        _activityAdapter.notifyDataSetChanged();
     }
 
     public void OnPromptExecution_AddAmountEntry()

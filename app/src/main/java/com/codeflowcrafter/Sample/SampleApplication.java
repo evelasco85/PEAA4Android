@@ -17,9 +17,11 @@ import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.PEAA.ForeignKeyMappingManager;
 import com.codeflowcrafter.PEAA.Interfaces.IDataSynchronizationManager;
 import com.codeflowcrafter.PEAA.Interfaces.IForeignKeyMappingManager;
+import com.codeflowcrafter.Sample.Amount.Implementation.ContentProvider.AmountProvider;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.AmountMapper;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.QueryAmountByProjectId;
+import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectProvider;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.ProjectMapper;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryAllProjects;
@@ -169,7 +171,8 @@ public class SampleApplication
         ContentResolver resolver = getContentResolver();
 
         List<IBaseQueryObjectConcrete<Project>> projectQueryObjects = new ArrayList<IBaseQueryObjectConcrete<Project>>();
-        Uri uri = SampleApplicationContentProviders.GetInstance().GetProjectProvider().GetContentUri();
+        ProjectProvider provider = SampleApplicationContentProviders.GetInstance().GetProjectProvider();
+        Uri uri = provider.GetContentUri();
         Context context = this.getApplicationContext();
 
         projectQueryObjects.add(new QueryAllProjects(context, uri));
@@ -185,7 +188,8 @@ public class SampleApplication
         ContentResolver resolver = getContentResolver();
 
         List<IBaseQueryObjectConcrete<Amount>> amountQueryObjects = new ArrayList<IBaseQueryObjectConcrete<Amount>>();
-        Uri uri = SampleApplicationContentProviders.GetInstance().GetProjectProvider().GetContentUri();
+        AmountProvider provider = SampleApplicationContentProviders.GetInstance().GetAmountProvider();
+        Uri uri = provider.GetContentUri();
         Context context = this.getApplicationContext();
 
         amountQueryObjects.add(new QueryAmountByProjectId(context, uri));

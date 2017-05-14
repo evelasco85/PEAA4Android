@@ -22,6 +22,10 @@
             android:name=".Project.Implementation.ContentProvider.ProjectProvider"
             android:authorities="com.codeflowcrafter.SampleApplication.ProjectProvider"
             />
+        <provider
+            android:name=".Amount.Implementation.ContentProvider.AmountProvider"
+            android:authorities="com.codeflowcrafter.SampleApplication.AmountProvider"
+            />
 
         <activity android:name=".Amount.Activity_Main" android:label="@string/lblAmount" />
     </application>
