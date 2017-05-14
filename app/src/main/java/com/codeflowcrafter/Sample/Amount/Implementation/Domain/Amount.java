@@ -46,59 +46,59 @@ public class Amount  extends DomainObject {
         _description = description;
     }
 
-    public int get_id() {
+    public int GetId() {
         return _id;
     }
 
-    public void set_id(int _id) {
+    public void SetId(int _id) {
         this._id = _id;
     }
 
-    public int get_projectId() {
+    public int GetProjectId() {
         return _projectId;
     }
 
-    public void set_projectId(int _projectId) {
+    public void SetProjectId(int _projectId) {
         this._projectId = _projectId;
     }
 
-    public String get_createdDate() {
+    public String GetCreatedDate() {
         return _createdDate;
     }
 
-    public void set_createdDate(String _createdDate) {
+    public void SetCreatedDate(String _createdDate) {
         this._createdDate = _createdDate;
     }
 
-    public String get_createdTime() {
+    public String GetCreatedTime() {
         return _createdTime;
     }
 
-    public void set_createdTime(String _createdTime) {
+    public void SetCreatedTime(String _createdTime) {
         this._createdTime = _createdTime;
     }
 
-    public double get_amount() {
+    public double GetAmount() {
         return _amount;
     }
 
-    public void set_amount(double _amount) {
+    public void SetAmount(double _amount) {
         this._amount = _amount;
     }
 
-    public boolean is_expenseEntry() {
+    public boolean GetIsExpense() {
         return _expenseEntry;
     }
 
-    public void set_expenseEntry(boolean _expenseEntry) {
+    public void SetIsExpense(boolean _expenseEntry) {
         this._expenseEntry = _expenseEntry;
     }
 
-    public String get_description() {
+    public String GetDescription() {
         return _description;
     }
 
-    public void set_description(String _description) {
+    public void SetDescription(String _description) {
         this._description = _description;
     }
 }
