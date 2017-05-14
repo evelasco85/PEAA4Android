@@ -14,7 +14,7 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class QueryProjectById  extends BaseQueryObject<Project, QueryProjectById.Criteria> {
+public class QueryProjectById extends BaseQueryObject<Project, QueryProjectById.Criteria> {
     private Context _context;
     private Uri _uri;
     private ToProjectTranslator _translator = new ToProjectTranslator();
