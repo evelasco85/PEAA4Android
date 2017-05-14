@@ -15,6 +15,9 @@ import com.codeflowcrafter.LogManagement.StaticLogEntryWrapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseQueryObjectInterfaces.IBaseQueryObjectConcrete;
 import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.PEAA.Interfaces.IDataSynchronizationManager;
+import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
+import com.codeflowcrafter.Sample.Amount.Implementation.Domain.AmountMapper;
+import com.codeflowcrafter.Sample.Amount.Implementation.Domain.QueryAmountByProjectId;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.ProjectMapper;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryAllProjects;
@@ -154,6 +157,7 @@ public class SampleApplication
         super.onCreate();
 
         RegisterProjectDomain(_dsManager);
+        RegisterAmountDomain(_dsManager);
 
         s_instance = this;
     }
@@ -172,5 +176,20 @@ public class SampleApplication
                 Project.class,
                 new ProjectMapper(resolver, uri),
                 projectQueryObjects);
+    }
+
+    private void RegisterAmountDomain(IDataSynchronizationManager dsManager)
+    {
+        ContentResolver resolver = getContentResolver();
+
+        List<IBaseQueryObjectConcrete<Amount>> amountQueryObjects = new ArrayList<IBaseQueryObjectConcrete<Amount>>();
+        Uri uri = SampleApplicationContentProviders.GetInstance().GetProjectProvider().GetContentUri();
+        Context context = this.getApplicationContext();
+
+        amountQueryObjects.add(new QueryAmountByProjectId(context, uri));
+        dsManager.RegisterEntity(
+                Amount.class,
+                new AmountMapper(resolver, uri),
+                amountQueryObjects);
     }
 }
