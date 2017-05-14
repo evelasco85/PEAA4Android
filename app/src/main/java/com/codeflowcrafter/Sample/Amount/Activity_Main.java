@@ -139,10 +139,10 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
 
     public void OnPromptExecution_AddAmountEntry()
     {
-        Activity_Amount_Dialog_AddEdit fragment = Activity_Amount_Dialog_AddEdit
+        Activity_Amount_Dialog_AddEdit dialog = Activity_Amount_Dialog_AddEdit
                 .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_ADD, _projectId, null);
 
-        fragment.SetViewRequest(_viewRequest);
-        fragment.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
+        dialog.SetViewRequest(_viewRequest);
+        dialog.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
     }
 }

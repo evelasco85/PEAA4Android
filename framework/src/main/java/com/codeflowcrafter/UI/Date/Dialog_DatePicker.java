@@ -17,7 +17,7 @@ import java.util.Date;
  * Created by aiko on 5/1/17.
  */
 
-public class Fragment_DatePicker extends DialogFragment
+public class Dialog_DatePicker extends DialogFragment
         implements DatePickerDialog.OnDateSetListener
 {
 

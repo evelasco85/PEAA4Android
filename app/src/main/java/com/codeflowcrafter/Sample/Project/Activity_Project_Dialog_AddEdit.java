@@ -18,7 +18,7 @@ import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.MVP.IRequests_Project;
 import com.codeflowcrafter.Sample.R;
-import com.codeflowcrafter.UI.Date.Fragment_DatePicker;
+import com.codeflowcrafter.UI.Date.Dialog_DatePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,12 +55,12 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
 
         args.putString(KEY_ACTION, action);
 
-        Activity_Project_Dialog_AddEdit fragment = new Activity_Project_Dialog_AddEdit();
+        Activity_Project_Dialog_AddEdit dialog = new Activity_Project_Dialog_AddEdit();
 
-        fragment.setArguments(args);
-        fragment.SetProjectToEdit(project);
+        dialog.setArguments(args);
+        dialog.SetProjectToEdit(project);
 
-        return fragment;
+        return dialog;
     }
 
     @Override
@@ -115,10 +115,10 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
         _txtStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment_DatePicker dateFragment = new Fragment_DatePicker();
+                Dialog_DatePicker dialog = new Dialog_DatePicker();
 
-                dateFragment.SetDefaultDate(_txtStartDate.getText().toString());
-                dateFragment.SetOnDateSetListener(new DatePickerDialog.OnDateSetListener()
+                dialog.SetDefaultDate(_txtStartDate.getText().toString());
+                dialog.SetOnDateSetListener(new DatePickerDialog.OnDateSetListener()
                 {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day)
@@ -132,17 +132,17 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
                         _txtStartDate.setText((new SimpleDateFormat("yyyy-MM-dd")).format(cal.getTime()));
                     }
                 });
-                dateFragment.show(getFragmentManager(), "datePicker");
+                dialog.show(getFragmentManager(), "datePicker");
             }
         });
 
         _txtEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment_DatePicker dateFragment = new Fragment_DatePicker();
+                Dialog_DatePicker dialog = new Dialog_DatePicker();
 
-                dateFragment.SetDefaultDate(_txtEndDate.getText().toString());
-                dateFragment.SetOnDateSetListener(new DatePickerDialog.OnDateSetListener()
+                dialog.SetDefaultDate(_txtEndDate.getText().toString());
+                dialog.SetOnDateSetListener(new DatePickerDialog.OnDateSetListener()
                 {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day)
@@ -156,7 +156,7 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
                         _txtEndDate.setText((new SimpleDateFormat("yyyy-MM-dd")).format(cal.getTime()));
                     }
                 });
-                dateFragment.show(getFragmentManager(), "datePicker");
+                dialog.show(getFragmentManager(), "datePicker");
             }
         });
     }

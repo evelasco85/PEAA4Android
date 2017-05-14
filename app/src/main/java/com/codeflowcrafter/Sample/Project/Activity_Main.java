@@ -86,20 +86,20 @@ public class Activity_Main
 
     public void OnPromptExecution_AddProjectEntry()
     {
-        Activity_Project_Dialog_AddEdit fragment = Activity_Project_Dialog_AddEdit
+        Activity_Project_Dialog_AddEdit dialog = Activity_Project_Dialog_AddEdit
                 .newInstance(Activity_Project_Dialog_AddEdit.ACTION_ADD, null);
 
-        fragment.SetViewRequest(_viewRequest);
-        fragment.show(getFragmentManager(), Activity_Project_Dialog_AddEdit.FRAGMENT_NAME);
+        dialog.SetViewRequest(_viewRequest);
+        dialog.show(getFragmentManager(), Activity_Project_Dialog_AddEdit.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_EditProjectEntry(Project project)
     {
-        Activity_Project_Dialog_AddEdit fragment = Activity_Project_Dialog_AddEdit
+        Activity_Project_Dialog_AddEdit dialog = Activity_Project_Dialog_AddEdit
                 .newInstance(Activity_Project_Dialog_AddEdit.ACTION_EDIT, project);
 
-        fragment.SetViewRequest(_viewRequest);
-        fragment.show(getFragmentManager(), Activity_Project_Dialog_AddEdit.FRAGMENT_NAME);
+        dialog.SetViewRequest(_viewRequest);
+        dialog.show(getFragmentManager(), Activity_Project_Dialog_AddEdit.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_DeleteProjectEntry(final Project project)
@@ -166,10 +166,10 @@ public class Activity_Main
 
     public void OnPromptExecution_ProjectDetail(Project project)
     {
-        Activity_Project_Fragment_Show_Detail fragment = Activity_Project_Fragment_Show_Detail
+        Activity_Project_Dialog_Show_Detail dialog = Activity_Project_Dialog_Show_Detail
                 .newInstance(project);
 
-        fragment.show(getFragmentManager(), Activity_Project_Fragment_Show_Detail.FRAGMENT_NAME);
+        dialog.show(getFragmentManager(), Activity_Project_Dialog_Show_Detail.FRAGMENT_NAME);
     }
 
     public void OnPromptExecution_AddAmountEntry(Project project)

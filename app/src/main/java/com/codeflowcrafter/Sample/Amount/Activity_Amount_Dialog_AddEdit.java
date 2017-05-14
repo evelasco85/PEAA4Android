@@ -17,9 +17,8 @@ import android.widget.TimePicker;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IRequests_Amount;
 import com.codeflowcrafter.Sample.R;
-import com.codeflowcrafter.UI.Date.Fragment_DatePicker;
-import com.codeflowcrafter.UI.Date.Fragment_TimePicker;
-import com.codeflowcrafter.Utilities.DateHelper;
+import com.codeflowcrafter.UI.Date.Dialog_DatePicker;
+import com.codeflowcrafter.UI.Date.Dialog_TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,13 +62,13 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
 
         args.putString(KEY_ACTION, action);
 
-        Activity_Amount_Dialog_AddEdit fragment = new Activity_Amount_Dialog_AddEdit();
+        Activity_Amount_Dialog_AddEdit dialog = new Activity_Amount_Dialog_AddEdit();
 
-        fragment.SetProjectId(projectId);
-        fragment.setArguments(args);
-        fragment.SetAmountToEdit(amount);
+        dialog.SetProjectId(projectId);
+        dialog.setArguments(args);
+        dialog.SetAmountToEdit(amount);
 
-        return fragment;
+        return dialog;
     }
 
     @Override
@@ -128,10 +127,10 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         _txtDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment_DatePicker dateFragment = new Fragment_DatePicker();
+                Dialog_DatePicker dialog = new Dialog_DatePicker();
 
-                dateFragment.SetDefaultDate(_txtDate.getText().toString());
-                dateFragment.SetOnDateSetListener(new DatePickerDialog.OnDateSetListener()
+                dialog.SetDefaultDate(_txtDate.getText().toString());
+                dialog.SetOnDateSetListener(new DatePickerDialog.OnDateSetListener()
                 {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day)
@@ -145,17 +144,17 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
                         _txtDate.setText((new SimpleDateFormat("yyyy-MM-dd")).format(cal.getTime()));
                     }
                 });
-                dateFragment.show(getFragmentManager(), "datePicker");
+                dialog.show(getFragmentManager(), "datePicker");
             }
         });
 
         _txtTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment_TimePicker dateFragment = new Fragment_TimePicker();
+                Dialog_TimePicker dialog = new Dialog_TimePicker();
 
-                dateFragment.SetDefaultTime(_txtTime.getText().toString());
-                dateFragment.SetOnDateSetListener(new TimePickerDialog.OnTimeSetListener()
+                dialog.SetDefaultTime(_txtTime.getText().toString());
+                dialog.SetOnDateSetListener(new TimePickerDialog.OnTimeSetListener()
                 {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute)
@@ -168,7 +167,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
                         _txtTime.setText((new SimpleDateFormat("HH:mm")).format(cal.getTime()));
                     }
                 });
-                dateFragment.show(getFragmentManager(), "timePicker");
+                dialog.show(getFragmentManager(), "timePicker");
             }
         });
     }
