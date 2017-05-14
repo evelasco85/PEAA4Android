@@ -59,6 +59,7 @@ public class Presenter_Project implements IRequests_Project {
             entityList.add(_translator.CursorToEntity(cursor));
         }
 
+        cursor.close();
         _view.OnLoadProjectsViaLoaderCompletion(entityList);
         _slc
                 .SetEvent(String.format("Loaded project count %d", entityList.size()))

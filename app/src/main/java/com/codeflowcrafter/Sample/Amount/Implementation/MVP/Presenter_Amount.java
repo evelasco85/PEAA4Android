@@ -65,6 +65,7 @@ public class Presenter_Amount implements IRequests_Amount {
             entityList.add(_translator.CursorToEntity(cursor));
         }
 
+        cursor.close();
         _view.OnLoadAmountsViaLoaderCompletion(entityList);
         _slc
                 .SetEvent(String.format("Loaded amount count %d", entityList.size()))
