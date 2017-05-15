@@ -8,7 +8,11 @@ import com.codeflowcrafter.LogManagement.Priority;
 import com.codeflowcrafter.LogManagement.Status;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
+import com.codeflowcrafter.PEAA.DataSynchronizationManager;
+import com.codeflowcrafter.PEAA.Interfaces.IDataSynchronizationManager;
+import com.codeflowcrafter.PEAA.Interfaces.IRepository;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
+import com.codeflowcrafter.Sample.Amount.Implementation.Domain.QueryAmountByProjectId;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.ToAmountTranslator;
 import com.codeflowcrafter.Sample.InvocationDelegate;
 import com.codeflowcrafter.Sample.SampleApplication;
@@ -96,25 +100,14 @@ public class Presenter_Amount implements IRequests_Amount {
                 .EmitLog(Priority.Info, Status.Success);
     }
 
-    public void LoadAmountsViaLoader(CursorLoader loader)
+    public void LoadAmountsViaLoader(int projectId)
     {
-        Cursor cursor = loader.loadInBackground();
-        List<Amount> entityList = new ArrayList();
+        IDataSynchronizationManager manager= DataSynchronizationManager.GetInstance();
+        IRepository<Amount> repository = manager.GetRepository(Amount.class);
+        QueryAmountByProjectId.Criteria criteria = new QueryAmountByProjectId.Criteria(projectId);
+        List<Amount> entityList = repository.Matching(criteria);
 
-        if(cursor == null) {
-            _view.OnLoadAmountsViaLoaderCompletion(entityList);
 
-            return;
-        }
-
-        _translator.UpdateColumnOrdinals(cursor);
-
-        while (cursor.moveToNext())
-        {
-            entityList.add(_translator.CursorToEntity(cursor));
-        }
-
-        cursor.close();
         _view.OnLoadAmountsViaLoaderCompletion(entityList);
         _slc
                 .SetEvent(String.format("Loaded amount count %d", entityList.size()))

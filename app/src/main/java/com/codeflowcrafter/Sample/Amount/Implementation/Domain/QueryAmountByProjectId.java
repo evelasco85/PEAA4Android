@@ -46,9 +46,12 @@ public class QueryAmountByProjectId extends BaseQueryObject<Amount, QueryAmountB
 
         _translator.UpdateColumnOrdinals(cursor);
 
-        if(cursor.moveToFirst()) {
+        while (cursor.moveToNext())
+        {
             entityList.add(_translator.CursorToEntity(cursor));
         }
+
+        cursor.close();
 
         return entityList;
     }

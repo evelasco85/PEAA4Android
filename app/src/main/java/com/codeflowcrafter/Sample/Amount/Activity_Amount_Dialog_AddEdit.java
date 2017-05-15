@@ -200,6 +200,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         if (amount == null)
             return;
 
+        this._amountId = amount.GetId();
         this._txtDate.setText(amount.GetCreatedDate());
         this._txtTime.setText(amount.GetCreatedTime());
         this._txtAmount.setText(String.valueOf(amount.GetAmount()));

@@ -121,7 +121,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
     {
-        _viewRequest.LoadAmountsViaLoader((CursorLoader)loader);
+        _viewRequest.LoadAmountsViaLoader(_projectId);
     }
 
     public void onLoaderReset(Loader<Cursor> loader){}

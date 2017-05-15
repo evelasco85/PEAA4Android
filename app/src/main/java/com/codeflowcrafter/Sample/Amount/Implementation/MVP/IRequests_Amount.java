@@ -18,6 +18,6 @@ public interface IRequests_Amount {
     void UpdateAmount(Amount amount);
     void DeleteAmount(Amount amount);
 
-    void LoadAmountsViaLoader(CursorLoader loader);
+    void LoadAmountsViaLoader(int projectId);
     void CancelAmountEntry();
 }
