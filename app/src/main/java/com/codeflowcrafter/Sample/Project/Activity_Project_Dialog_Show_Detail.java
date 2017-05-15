@@ -22,8 +22,7 @@ public class Activity_Project_Dialog_Show_Detail extends DialogFragment{
     private TextView _txtProjectId, _txtStartDate, _txtEndDate;
 
     private Project _projectToView;
-
-    public void SetProjectToEdit(Project project){
+    public void SetProjectToView(Project project){
         _projectToView = project;}
 
     public static final String FRAGMENT_NAME = "Show Project Details";
@@ -35,7 +34,7 @@ public class Activity_Project_Dialog_Show_Detail extends DialogFragment{
         Activity_Project_Dialog_Show_Detail dialog = new Activity_Project_Dialog_Show_Detail();
 
         dialog.setArguments(args);
-        dialog.SetProjectToEdit(project);
+        dialog.SetProjectToView(project);
 
         return dialog;
     }

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
 import com.codeflowcrafter.LogManagement.Priority;
 import com.codeflowcrafter.LogManagement.Status;
+import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.ToAmountTranslator;
@@ -38,6 +39,54 @@ public class Presenter_Amount implements IRequests_Amount {
     {
         _view.OnPromptExecution_AddAmountEntry();
         _slc.SetEvent("Open Amount Entry").EmitLog(Priority.Info, Status.Success);
+    }
+
+    @Override
+    public void Prompt_EditAmountEntry(Amount amount) {
+        _view.OnPromptExecution_EditAmountEntry(amount);
+        _slc.SetEvent("Open amount editing").EmitLog(Priority.Info, Status.Success);
+
+    }
+
+    @Override
+    public void Prompt_DeleteAmountEntry(Amount amount) {
+        _view.OnPromptExecution_DeleteAmountEntry(amount);
+    }
+
+    @Override
+    public void Prompt_AmountDetail(Amount amount) {
+        _view.OnPromptExecution_AmountDetail(amount);
+        _slc
+                .SetEvent(String.format("Showing details of amount id %s", amount.GetId()))
+                .EmitLog(Priority.Info, Status.Success);
+    }
+
+    @Override
+    public void AddAmount(Amount amount) {
+        IBaseMapper mapper = amount.GetMapper();
+
+        mapper.Insert(amount, _invocationDelegate);
+        _slc.SetEvent("Amount Added").EmitLog(Priority.Info, Status.Success);
+    }
+
+    @Override
+    public void UpdateAmount(Amount amount) {
+        IBaseMapper mapper = amount.GetMapper();
+
+        mapper.Update(amount, _invocationDelegate);
+        _slc
+                .SetEvent(String.format("Updated amount id %s", amount.GetId()))
+                .EmitLog(Priority.Info, Status.Success);
+    }
+
+    @Override
+    public void DeleteAmount(Amount amount) {
+        IBaseMapper mapper = amount.GetMapper();
+
+        mapper.Delete(amount, _invocationDelegate);
+        _slc
+                .SetEvent(String.format("Deleted amount id %s", amount.GetId()))
+                .EmitLog(Priority.Info, Status.Success);
     }
 
     public void CancelAmountEntry()

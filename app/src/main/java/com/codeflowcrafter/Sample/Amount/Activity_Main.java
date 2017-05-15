@@ -1,8 +1,10 @@
 package com.codeflowcrafter.Sample.Amount;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IRequests_Amount;
@@ -144,5 +147,56 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
 
         dialog.SetViewRequest(_viewRequest);
         dialog.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
+    }
+
+    @Override
+    public void OnPromptExecution_EditAmountEntry(Amount amount) {
+        Activity_Amount_Dialog_AddEdit dialog = Activity_Amount_Dialog_AddEdit
+                .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_EDIT, _projectId, amount);
+
+        dialog.SetViewRequest(_viewRequest);
+        dialog.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
+
+    }
+
+    @Override
+    public void OnPromptExecution_DeleteAmountEntry(final Amount amount) {
+        AlertDialog.Builder verify = new AlertDialog.Builder(this);
+
+        verify.setTitle("Are you sure you want to delete?");
+        verify.setMessage("You are about to delete this item");
+
+        verify.setPositiveButton(
+                "Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int arg) {
+                        _viewRequest.DeleteAmount(amount);
+                        String message = "Amount of " + amount.GetAmount() + " is deleted";
+                        Toast
+                                .makeText(getApplicationContext(), message, Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                }
+        );
+
+        verify.setNegativeButton(
+                "No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int arg) {
+                        //No action takes
+                    }
+                }
+        );
+
+        verify.show();
+    }
+
+    @Override
+    public void OnPromptExecution_AmountDetail(Amount amount) {
+        Activity_Amount_Dialog_Show_Detail dialog = Activity_Amount_Dialog_Show_Detail
+                .newInstance(amount);
+
+        dialog.show(getFragmentManager(), Activity_Amount_Dialog_Show_Detail.FRAGMENT_NAME);
+
     }
 }

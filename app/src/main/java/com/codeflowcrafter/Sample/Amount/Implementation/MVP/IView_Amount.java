@@ -12,6 +12,9 @@ import java.util.List;
 interface IView_Events
 {
     void OnPromptExecution_AddAmountEntry();
+    void OnPromptExecution_EditAmountEntry(Amount amount);
+    void OnPromptExecution_DeleteAmountEntry(Amount amount);
+    void OnPromptExecution_AmountDetail(Amount amount);
 
     void OnLoadAmountsViaLoaderCompletion(List<Amount> amounts);
 }
