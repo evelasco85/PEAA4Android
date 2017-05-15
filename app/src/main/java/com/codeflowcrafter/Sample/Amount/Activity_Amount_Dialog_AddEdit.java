@@ -10,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IRequests_Amount;
 import com.codeflowcrafter.Sample.R;
@@ -29,8 +32,10 @@ import java.util.Date;
  */
 
 public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
-    private Button _btnSave, _btnCancel;
-    private TextView _txtDate, _txtTime;
+    Button _btnSave, _btnCancel;
+    TextView _txtDate, _txtTime;
+    EditText _txtAmount, _txtDescription;
+    CheckBox _chkExpense;
 
     public static final String FRAGMENT_NAME = "Add/Edit Amount";
 
@@ -90,10 +95,13 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
     }
 
     private void AssociateViewToLocalVar(View view, final String selectedAction) {
-        _btnSave = (Button) view.findViewById(R.id.btnSave);
-        _btnCancel = (Button) view.findViewById(R.id.btnCancel);
-        _txtDate = (TextView) view.findViewById(R.id.txtDate);
-        _txtTime = (TextView) view.findViewById(R.id.txtTime);
+        _btnSave = (Button)view.findViewById(R.id.btnSave);
+        _btnCancel = (Button)view.findViewById(R.id.btnCancel);
+        _txtDate = (TextView)view.findViewById(R.id.txtDate);
+        _txtTime = (TextView)view.findViewById(R.id.txtTime);
+        _txtAmount = (EditText)view.findViewById(R.id.txtAmount);
+        _txtDescription = (EditText)view.findViewById(R.id.txtDescription);
+        _chkExpense = (CheckBox)view.findViewById(R.id.chkExpense);
 
         if (selectedAction == ACTION_ADD)
         {
@@ -112,6 +120,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         _btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InvokeActionBasedPersistency(selectedAction);
                 dismiss();
             }
         });
@@ -172,9 +181,44 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         });
     }
 
+    private void InvokeActionBasedPersistency(String selectedAction)
+    {
+        switch (selectedAction)
+        {
+            case ACTION_ADD:
+                _viewRequest.AddAmount(ViewDataToModel());
+                break;
+            case ACTION_EDIT:
+                _viewRequest.UpdateAmount(ViewDataToModel());
+                break;
+            default:
+                break;
+        }
+    }
+
     private void SetModelToViewData(Amount amount) {
         if (amount == null)
             return;
+
+        this._txtDate.setText(amount.GetCreatedDate());
+        this._txtTime.setText(amount.GetCreatedTime());
+        this._txtAmount.setText(String.valueOf(amount.GetAmount()));
+        this._txtDescription.setText(amount.GetDescription());
+        this._chkExpense.setChecked(amount.GetIsExpense());
+    }
+
+    public Amount ViewDataToModel()
+    {
+        return new Amount(
+                DataSynchronizationManager.GetInstance().GetMapper(Amount.class),
+                _amountId,
+                _projectId,
+                _txtDate.getText().toString(),
+                _txtTime.getText().toString(),
+                Double.parseDouble(_txtAmount.getText().toString()),
+                (_chkExpense.isChecked()) ? 1 : 0,
+                _txtDescription.getText().toString()
+        );
     }
 
     @Override

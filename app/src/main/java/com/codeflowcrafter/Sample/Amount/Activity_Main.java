@@ -197,6 +197,5 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
                 .newInstance(amount);
 
         dialog.show(getFragmentManager(), Activity_Amount_Dialog_Show_Detail.FRAGMENT_NAME);
-
     }
 }

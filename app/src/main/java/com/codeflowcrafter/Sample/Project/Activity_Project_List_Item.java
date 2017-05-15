@@ -62,8 +62,8 @@ public class Activity_Project_List_Item extends ArrayAdapter<Project> {
         final Project item = getItem(position);
         final LinearLayout itemLayout = this.GetLayout(convertView, getContext(), _resource);
 
-        this.SetViewToLocalVarAssociation(itemLayout);
-        this.SetItemViewHandler(itemLayout, item);
+        SetViewToLocalVarAssociation(itemLayout);
+        SetItemViewHandler(itemLayout, item);
 
         return itemLayout;
     }
