@@ -206,21 +206,4 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
 
         dialog.show(getFragmentManager(), Activity_Amount_Dialog_Show_Detail.FRAGMENT_NAME);
     }
-
-    @Override
-    public double GetAmountListTotal() {
-        double expense = 0;
-        double nonExpense = 0;
-
-        for (Amount amount : _activityList) {
-            if(amount == null) continue;
-
-            if (amount.GetIsExpense())
-                expense += amount.GetAmount();
-            else
-                nonExpense += amount.GetAmount();
-        }
-
-        return nonExpense - expense;
-    }
 }

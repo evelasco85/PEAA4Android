@@ -20,5 +20,4 @@ interface IView_Events
 }
 
 public interface IView_Amount extends IView_Events, IView<IRequests_Amount> {
-    double GetAmountListTotal();
 }

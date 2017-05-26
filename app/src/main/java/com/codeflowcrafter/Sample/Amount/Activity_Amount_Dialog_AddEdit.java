@@ -211,13 +211,18 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
 
     public Amount ViewDataToModel()
     {
+        double amount = 0;
+
+        if(!_txtAmount.getText().toString().isEmpty())
+            amount = Double.parseDouble(_txtAmount.getText().toString());
+
         return new Amount(
                 DataSynchronizationManager.GetInstance().GetMapper(Amount.class),
                 _amountId,
                 _project.GetId(),
                 _txtDate.getText().toString(),
                 _txtTime.getText().toString(),
-                Double.parseDouble(_txtAmount.getText().toString()),
+                amount,
                 (_chkExpense.isChecked()) ? 1 : 0,
                 _txtDescription.getText().toString()
         );

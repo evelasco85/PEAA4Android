@@ -128,6 +128,8 @@ public class Presenter_Amount implements IRequests_Amount {
     }
 
     private void UpdateProjectTotal(Project project, Amount amount, boolean reversal) {
+        if(amount.GetAmount() == 0) return;
+
         double currentTotal = project.GetTotal();
 
         if (!reversal) {
