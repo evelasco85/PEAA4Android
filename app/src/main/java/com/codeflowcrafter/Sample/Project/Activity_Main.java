@@ -178,7 +178,6 @@ public class Activity_Main
 
         amountListIntent.setAction(com.codeflowcrafter.Sample.Amount.Activity_Main.ACTION_ADD);
         amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.KEY_PROJECTID, project.GetId());
-        amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.KEY_PROJECTNAME, project.GetName());
 
         this.startActivity(amountListIntent);
     }
@@ -188,7 +187,6 @@ public class Activity_Main
         Intent amountListIntent = new Intent(this, com.codeflowcrafter.Sample.Amount.Activity_Main.class);
 
         amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.KEY_PROJECTID, project.GetId());
-        amountListIntent.putExtra(com.codeflowcrafter.Sample.Amount.Activity_Main.KEY_PROJECTNAME, project.GetName());
 
         this.startActivity(amountListIntent);
     }

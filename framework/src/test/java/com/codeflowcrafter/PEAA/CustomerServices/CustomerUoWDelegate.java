@@ -3,7 +3,7 @@ package com.codeflowcrafter.PEAA.CustomerServices;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapper;
 import com.codeflowcrafter.PEAA.Domain.Interfaces.IDomainObject;
 import com.codeflowcrafter.PEAA.Interfaces.UnitOfWorkAction;
-import com.codeflowcrafter.PEAA.Interfaces.UoWInvocationDelegates;
+import com.codeflowcrafter.PEAA.Interfaces.IUoWInvocationDelegates;
 
 import java.util.Hashtable;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by aiko on 4/8/17.
  */
 
-public class CustomerUoWDelegate implements UoWInvocationDelegates {
+public class CustomerUoWDelegate implements IUoWInvocationDelegates {
     Hashtable _results;
     List<String> _sequenceDescription;
 

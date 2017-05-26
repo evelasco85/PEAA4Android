@@ -13,11 +13,11 @@ import java.util.Hashtable;
  * Created by aiko on 5/6/17.
  */
 
-public class InvocationDelegate implements IInvocationDelegates {
+public class MapperInvocationDelegate implements IInvocationDelegates {
     private Hashtable _results;
     private IStaticLogEntryWrapper _slc;
 
-    public InvocationDelegate(IStaticLogEntryWrapper slc)
+    public MapperInvocationDelegate(IStaticLogEntryWrapper slc)
     {
         _slc = slc;
     }

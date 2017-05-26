@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IRequests_Amount;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.R;
 import com.codeflowcrafter.UI.Date.Dialog_DatePicker;
 import com.codeflowcrafter.UI.Date.Dialog_TimePicker;
@@ -47,29 +48,29 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
 
     private IRequests_Amount _viewRequest;
     private Amount _amountToEdit;
-    private int _projectId = 0;
+    private Project _project;
     private int _amountId = 0;
 
     public void SetViewRequest(IRequests_Amount viewRequest) {
         _viewRequest = viewRequest;
     }
 
-    public void SetProjectId(int projectId) {
-        _projectId = projectId;
+    public void SetProject(Project project) {
+        _project = project;
     }
 
     public void SetAmountToEdit(Amount amount) {
         _amountToEdit = amount;
     }
 
-    public static Activity_Amount_Dialog_AddEdit newInstance(String action, int projectId, Amount amount) {
+    public static Activity_Amount_Dialog_AddEdit newInstance(String action, Project project, Amount amount) {
         Bundle args = new Bundle();
 
         args.putString(KEY_ACTION, action);
 
         Activity_Amount_Dialog_AddEdit dialog = new Activity_Amount_Dialog_AddEdit();
 
-        dialog.SetProjectId(projectId);
+        dialog.SetProject(project);
         dialog.setArguments(args);
         dialog.SetAmountToEdit(amount);
 
@@ -120,7 +121,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         _btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InvokeActionBasedPersistency(selectedAction);
+                InvokeActionBasedPersistency(_project, selectedAction);
                 dismiss();
             }
         });
@@ -181,15 +182,15 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         });
     }
 
-    private void InvokeActionBasedPersistency(String selectedAction)
+    private void InvokeActionBasedPersistency(Project project, String selectedAction)
     {
         switch (selectedAction)
         {
             case ACTION_ADD:
-                _viewRequest.AddAmount(ViewDataToModel());
+                _viewRequest.AddAmount(project, ViewDataToModel());
                 break;
             case ACTION_EDIT:
-                _viewRequest.UpdateAmount(ViewDataToModel());
+                _viewRequest.UpdateAmount(project, ViewDataToModel());
                 break;
             default:
                 break;
@@ -213,7 +214,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         return new Amount(
                 DataSynchronizationManager.GetInstance().GetMapper(Amount.class),
                 _amountId,
-                _projectId,
+                _project.GetId(),
                 _txtDate.getText().toString(),
                 _txtTime.getText().toString(),
                 Double.parseDouble(_txtAmount.getText().toString()),

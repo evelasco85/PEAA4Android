@@ -19,7 +19,7 @@ import com.codeflowcrafter.Sample.R;
 
 public class Activity_Project_Dialog_Show_Detail extends DialogFragment{
     private EditText _txtName, _txtDescription;
-    private TextView _txtProjectId, _txtStartDate, _txtEndDate;
+    private TextView _txtProjectId, _txtStartDate, _txtEndDate, _txtTotal;
 
     private Project _projectToView;
     public void SetProjectToView(Project project){
@@ -62,6 +62,7 @@ public class Activity_Project_Dialog_Show_Detail extends DialogFragment{
         _txtDescription = (EditText) view.findViewById(R.id.txtDescription);
         _txtStartDate = (TextView) view.findViewById(R.id.txtStartDate);
         _txtEndDate = (TextView) view.findViewById(R.id.txtEndDate);
+        _txtTotal= (TextView) view.findViewById(R.id.txtTotal);
 
         _txtName.setEnabled(false);
         _txtName.setInputType(InputType.TYPE_NULL);
@@ -79,6 +80,7 @@ public class Activity_Project_Dialog_Show_Detail extends DialogFragment{
         this._txtDescription.setText(project.GetDescription());
         this._txtStartDate.setHint("");
         this._txtEndDate.setHint("");
+        this._txtTotal.setText(String.valueOf(project.GetTotal()));
 
         if(!TextUtils.isEmpty(project.GetCreatedDate()))
             this._txtStartDate.setText(project.GetCreatedDate());

@@ -14,10 +14,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
+import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
+import com.codeflowcrafter.PEAA.DataSynchronizationManager;
+import com.codeflowcrafter.PEAA.Interfaces.IDataSynchronizationManager;
+import com.codeflowcrafter.PEAA.Interfaces.IRepository;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IRequests_Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.IView_Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.MVP.Presenter_Amount;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.QueryProjectById;
 import com.codeflowcrafter.Sample.R;
 import com.codeflowcrafter.Sample.SampleApplicationContentProviders;
 
@@ -45,7 +52,6 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     }
 
     public static final String KEY_PROJECTID = "Project Id";
-    public static final String KEY_PROJECTNAME = "Project Name";
     public static final String ACTION_NONE = "NONE";
     public static final String ACTION_ADD = "ADD";
 
@@ -54,8 +60,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     private Activity_Amount_Fragment_List _listImplementation;
 
     private String _action = ACTION_NONE;
-    private int _projectId = 0;
-    private String _projectName;
+    private Project _project;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +76,14 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         Intent invoker = getIntent();
 
         if (invoker != null) {
-            _projectId = invoker.getIntExtra(KEY_PROJECTID, 0);
-            _projectName = invoker.getStringExtra(KEY_PROJECTNAME);
+            int projectId = invoker.getIntExtra(KEY_PROJECTID, 0);
+            IDataSynchronizationManager manager = DataSynchronizationManager.GetInstance();
+            IRepository<Project> repository = manager.GetRepository(Project.class);
+            QueryProjectById.Criteria criteria = new QueryProjectById.Criteria(projectId);
+            List<Project> entityList = repository.Matching(criteria);
+
+            if (!entityList.isEmpty()) _project = entityList.get(0);
+
             _action = invoker.getAction();
         }
 
@@ -100,8 +111,8 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     }
 
     private void SetDefaultMainViewData() {
-        _txtProjectId.setText(String.valueOf(_projectId));
-        _txtProjectName.setText(String.valueOf(_projectName));
+        _txtProjectId.setText(String.valueOf(_project.GetId()));
+        _txtProjectName.setText(String.valueOf(_project.GetName()));
         _listImplementation.setListAdapter(_activityAdapter);
 
         getLoaderManager().initLoader(0, null, this);
@@ -120,7 +131,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     }
 
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        _viewRequest.LoadAmountsViaLoader(_projectId);
+        _viewRequest.LoadAmountsViaLoader(_project.GetId());
     }
 
     public void onLoaderReset(Loader<Cursor> loader) {
@@ -140,7 +151,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
 
     public void OnPromptExecution_AddAmountEntry() {
         Activity_Amount_Dialog_AddEdit dialog = Activity_Amount_Dialog_AddEdit
-                .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_ADD, _projectId, null);
+                .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_ADD, _project, null);
 
         dialog.SetViewRequest(_viewRequest);
         dialog.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
@@ -149,7 +160,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     @Override
     public void OnPromptExecution_EditAmountEntry(Amount amount) {
         Activity_Amount_Dialog_AddEdit dialog = Activity_Amount_Dialog_AddEdit
-                .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_EDIT, _projectId, amount);
+                .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_EDIT, _project, amount);
 
         dialog.SetViewRequest(_viewRequest);
         dialog.show(getFragmentManager(), Activity_Amount_Dialog_AddEdit.FRAGMENT_NAME);
@@ -167,7 +178,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
                 "Yes",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int arg) {
-                        _viewRequest.DeleteAmount(amount);
+                        _viewRequest.DeleteAmount(_project, amount);
                         String message = "Amount of " + amount.GetAmount() + " is deleted";
                         Toast
                                 .makeText(getApplicationContext(), message, Toast.LENGTH_SHORT)
@@ -197,7 +208,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     }
 
     @Override
-    public void OnPerformProjectUpdate() {
+    public double GetAmountListTotal() {
         double expense = 0;
         double nonExpense = 0;
 
@@ -210,6 +221,6 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
                 nonExpense += amount.GetAmount();
         }
 
-        double projectTotal = nonExpense - expense;
+        return nonExpense - expense;
     }
 }

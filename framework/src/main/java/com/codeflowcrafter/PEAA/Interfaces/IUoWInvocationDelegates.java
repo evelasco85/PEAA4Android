@@ -8,7 +8,7 @@ import java.util.Hashtable;
  * Created by aiko on 4/1/17.
  */
 
-public interface UoWInvocationDelegates {
+public interface IUoWInvocationDelegates {
     Hashtable GetResults();
 
     void SetResults(Hashtable results);

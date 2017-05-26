@@ -18,7 +18,7 @@ public interface IUnitOfWork {
     <TEntity extends IDomainObject> TEntity RegisterRemoved(TEntity entity, IInvocationDelegates invocationDelegates)
             throws NullPointerException;
 
-    void Commit(UoWInvocationDelegates delegates);
+    void Commit(IUoWInvocationDelegates delegates);
     void ClearUnitOfWork();
     boolean PendingCommits();
 }

@@ -103,6 +103,7 @@ public class ProjectMapper extends BaseMapper<Project> {
         values.put(ProjectTable.COLUMN_DESCRIPTION, project.GetDescription());
         values.put(ProjectTable.COLUMN_STARTED_AT, project.GetCreatedDate());
         values.put(ProjectTable.COLUMN_ENDED_AT, project.GetEndedDate());
+        values.put(ProjectTable.COLUMN_TOTAL, project.GetTotal());
 
         return values;
     }

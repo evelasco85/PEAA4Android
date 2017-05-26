@@ -23,8 +23,7 @@ import java.util.List;
 
 public class Activity_Project_List_Item extends ArrayAdapter<Project> {
 
-    private TextView _idView;
-    private TextView _nameView;
+    private TextView _idView, _nameView, _txtTotal;
     private Button _btnMenu;
     private Button _btnAddAmount;
 
@@ -72,6 +71,7 @@ public class Activity_Project_List_Item extends ArrayAdapter<Project> {
     {
         _idView = (TextView) itemLayout.findViewById(R.id.projectId);
         _nameView = (TextView) itemLayout.findViewById(R.id.projectName);
+        _txtTotal = (TextView) itemLayout.findViewById(R.id.txtTotal);
         _btnMenu = (Button) itemLayout.findViewById(R.id.btnProjectMenu);
         _btnAddAmount = (Button) itemLayout.findViewById(R.id.btnAddAmount);
     }
@@ -80,6 +80,7 @@ public class Activity_Project_List_Item extends ArrayAdapter<Project> {
     {
         _idView.setText(String.valueOf(item.GetId()));
         _nameView.setText(item.GetName());
+        _txtTotal.setText(String.valueOf(item.GetTotal()));
 
         final Activity_Main activity = _activity;
         final PopupMenu popMenu = new PopupMenu(activity, _btnMenu);

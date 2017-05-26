@@ -1,6 +1,6 @@
 package com.codeflowcrafter.PEAA;
 
-import com.codeflowcrafter.PEAA.Interfaces.UoWInvocationDelegates;
+import com.codeflowcrafter.PEAA.Interfaces.IUoWInvocationDelegates;
 import com.codeflowcrafter.PEAA.Interfaces.IUnitOfWork;
 import com.codeflowcrafter.PEAA.Interfaces.UnitOfWorkAction;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
@@ -125,7 +125,7 @@ public class UnitOfWork implements IUnitOfWork {
         return entity;
     }
 
-    public void Commit(UoWInvocationDelegates delegates)
+    public void Commit(IUoWInvocationDelegates delegates)
     {
         ;
         ApplyOperation(UnitOfWorkAction.Insert, new ArrayList<IDomainObject>(_insertionObjects.values()), delegates);
@@ -148,7 +148,7 @@ public class UnitOfWork implements IUnitOfWork {
 
     private void ApplyOperation(
             UnitOfWorkAction action, List<IDomainObject> affectedEntities,
-            UoWInvocationDelegates uoWInvocationDelegates
+            IUoWInvocationDelegates uoWInvocationDelegates
     )
     {
         for(int index = 0; index < affectedEntities.size(); ++index)

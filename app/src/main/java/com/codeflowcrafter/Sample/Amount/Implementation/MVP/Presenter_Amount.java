@@ -1,8 +1,5 @@
 package com.codeflowcrafter.Sample.Amount.Implementation.MVP;
 
-import android.content.CursorLoader;
-import android.database.Cursor;
-
 import com.codeflowcrafter.LogManagement.Interfaces.IStaticLogEntryWrapper;
 import com.codeflowcrafter.LogManagement.Priority;
 import com.codeflowcrafter.LogManagement.Status;
@@ -11,13 +8,17 @@ import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocatio
 import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.PEAA.Interfaces.IDataSynchronizationManager;
 import com.codeflowcrafter.PEAA.Interfaces.IRepository;
+import com.codeflowcrafter.PEAA.Interfaces.IUnitOfWork;
+import com.codeflowcrafter.PEAA.Interfaces.IUoWInvocationDelegates;
+import com.codeflowcrafter.PEAA.UnitOfWork;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.Amount;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.QueryAmountByProjectId;
 import com.codeflowcrafter.Sample.Amount.Implementation.Domain.ToAmountTranslator;
-import com.codeflowcrafter.Sample.InvocationDelegate;
+import com.codeflowcrafter.Sample.MapperInvocationDelegate;
+import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.SampleApplication;
+import com.codeflowcrafter.Sample.UoWInvocationDelegate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +29,8 @@ public class Presenter_Amount implements IRequests_Amount {
     private IView_Amount _view;
     private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().CreateSLC();
     private ToAmountTranslator _translator = new ToAmountTranslator();
-    private IInvocationDelegates _invocationDelegate = new InvocationDelegate(_slc);
+    private IInvocationDelegates _mapperInvocationDelegate = new MapperInvocationDelegate(_slc);
+    private IUoWInvocationDelegates _uowInvocationDelegate = new UoWInvocationDelegate();
 
     public Presenter_Amount(IView_Amount view)
     {
@@ -66,31 +68,39 @@ public class Presenter_Amount implements IRequests_Amount {
     }
 
     @Override
-    public void AddAmount(Amount amount) {
-        IBaseMapper mapper = amount.GetMapper();
+    public void AddAmount(Project project, Amount amount) {
+        IUnitOfWork uow = new UnitOfWork();
 
-        mapper.Insert(amount, _invocationDelegate);
-        _view.OnPerformProjectUpdate();
+        UpdateProjectTotal(project, amount, false);
+        uow.RegisterNew(amount, _mapperInvocationDelegate);
+        uow.RegisterDirty(project, _mapperInvocationDelegate);
+        uow.Commit(_uowInvocationDelegate);
+
         _slc.SetEvent("Amount Added").EmitLog(Priority.Info, Status.Success);
     }
 
     @Override
-    public void UpdateAmount(Amount amount) {
-        IBaseMapper mapper = amount.GetMapper();
+    public void UpdateAmount(Project project, Amount amount) {
+        IUnitOfWork uow = new UnitOfWork();
 
-        mapper.Update(amount, _invocationDelegate);
-        _view.OnPerformProjectUpdate();
+        UpdateProjectTotal(project, amount, false);
+        uow.RegisterDirty(amount, _mapperInvocationDelegate);
+        uow.RegisterDirty(project, _mapperInvocationDelegate);
+        uow.Commit(_uowInvocationDelegate);
+
         _slc
                 .SetEvent(String.format("Updated amount id %s", amount.GetId()))
                 .EmitLog(Priority.Info, Status.Success);
     }
 
     @Override
-    public void DeleteAmount(Amount amount) {
-        IBaseMapper mapper = amount.GetMapper();
+    public void DeleteAmount(Project project, Amount amount) {
+        IUnitOfWork uow = new UnitOfWork();
 
-        mapper.Delete(amount, _invocationDelegate);
-        _view.OnPerformProjectUpdate();
+        UpdateProjectTotal(project, amount, true);
+        uow.RegisterRemoved(amount, _mapperInvocationDelegate);
+        uow.RegisterDirty(project, _mapperInvocationDelegate);
+        uow.Commit(_uowInvocationDelegate);
         _slc
                 .SetEvent(String.format("Deleted amount id %s", amount.GetId()))
                 .EmitLog(Priority.Info, Status.Success);
@@ -115,5 +125,25 @@ public class Presenter_Amount implements IRequests_Amount {
         _slc
                 .SetEvent(String.format("Loaded amount count %d", entityList.size()))
                 .EmitLog(Priority.Info, Status.Success);
+    }
+
+    private void UpdateProjectTotal(Project project, Amount amount, boolean reversal) {
+        double currentTotal = project.GetTotal();
+
+        if (!reversal) {
+            if (amount.GetIsExpense())
+                currentTotal -= amount.GetAmount();
+            else
+                currentTotal += amount.GetAmount();
+        }
+        else
+        {
+            if (amount.GetIsExpense())
+                currentTotal += amount.GetAmount();
+            else
+                currentTotal -= amount.GetAmount();
+        }
+
+        project.SetTotal(currentTotal);
     }
 }

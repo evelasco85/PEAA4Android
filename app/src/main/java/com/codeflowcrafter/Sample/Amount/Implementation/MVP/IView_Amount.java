@@ -17,8 +17,8 @@ interface IView_Events
     void OnPromptExecution_AmountDetail(Amount amount);
 
     void OnLoadAmountsViaLoaderCompletion(List<Amount> amounts);
-    void OnPerformProjectUpdate();
 }
 
 public interface IView_Amount extends IView_Events, IView<IRequests_Amount> {
+    double GetAmountListTotal();
 }

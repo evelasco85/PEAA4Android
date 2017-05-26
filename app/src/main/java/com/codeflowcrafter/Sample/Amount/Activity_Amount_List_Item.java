@@ -74,7 +74,9 @@ public class Activity_Amount_List_Item extends ArrayAdapter<Amount> {
     }
 
     public void SetItemViewHandler(LinearLayout itemLayout, Amount item) {
-        _txtAmount.setText(String.valueOf(item.GetAmount()));
+        String amount = (item.GetIsExpense() ? "-" : "") + String.valueOf(item.GetAmount());
+
+        _txtAmount.setText(amount);
 
         final Activity_Main activity = _activity;
         final PopupMenu popMenu = new PopupMenu(activity, _btnAmountMenu);

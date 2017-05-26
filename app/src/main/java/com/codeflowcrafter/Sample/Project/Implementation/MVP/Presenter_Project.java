@@ -8,7 +8,7 @@ import com.codeflowcrafter.LogManagement.Priority;
 import com.codeflowcrafter.LogManagement.Status;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
-import com.codeflowcrafter.Sample.InvocationDelegate;
+import com.codeflowcrafter.Sample.MapperInvocationDelegate;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.Project;
 import com.codeflowcrafter.Sample.Project.Implementation.Domain.ToProjectTranslator;
 import com.codeflowcrafter.Sample.SampleApplication;
@@ -24,7 +24,7 @@ public class Presenter_Project implements IRequests_Project {
     private IView_Project _view;
     private IStaticLogEntryWrapper _slc = SampleApplication.GetInstance().CreateSLC();
     private ToProjectTranslator _translator = new ToProjectTranslator();
-    private IInvocationDelegates _invocationDelegate = new InvocationDelegate(_slc);
+    private IInvocationDelegates _invocationDelegate = new MapperInvocationDelegate(_slc);
 
     public Presenter_Project(IView_Project view)
     {
