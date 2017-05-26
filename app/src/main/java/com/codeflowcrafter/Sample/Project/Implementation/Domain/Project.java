@@ -13,6 +13,7 @@ public class Project extends DomainObject {
     private String _description;
     private String _createdDate;
     private String _endedDate;
+    private double _total;
 
     public int GetId(){return  _id;}
 
@@ -34,7 +35,10 @@ public class Project extends DomainObject {
         _endedDate = endedDate;
     }
 
-    public Project(IBaseMapper mapper, int id, String name, String description, String createdDate)
+    public double GetTotal(){return _total;}
+    public void SetTotal(double total){_total = total;}
+
+    public Project(IBaseMapper mapper, int id, String name, String description, String createdDate, double total)
     {
         super(mapper);
 
@@ -42,10 +46,11 @@ public class Project extends DomainObject {
         _name = name;
         _description = description;
         _createdDate = createdDate;
+        _total = total;
     }
-    public Project(IBaseMapper mapper, int id, String name, String description, String createdDate, String endedDate)
+    public Project(IBaseMapper mapper, int id, String name, String description, String createdDate, String endedDate, double total)
     {
-        this(mapper, id, name, description, createdDate);
+        this(mapper, id, name, description, createdDate, total);
 
         _endedDate = endedDate;
     }

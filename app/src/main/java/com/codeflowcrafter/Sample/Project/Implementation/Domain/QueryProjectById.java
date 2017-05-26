@@ -48,6 +48,7 @@ public class QueryProjectById extends BaseQueryObject<Project, QueryProjectById.
 
         if(cursor.moveToFirst()) {
             entityList.add(_translator.CursorToEntity(cursor));
+            cursor.close();
         }
 
         return entityList;

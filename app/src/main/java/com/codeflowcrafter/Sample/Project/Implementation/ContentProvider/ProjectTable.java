@@ -23,6 +23,7 @@ public class ProjectTable extends BaseTable {
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_STARTED_AT = "started_at";
     public static final String COLUMN_ENDED_AT = "ended_at";
+    public static final String COLUMN_TOTAL = "total";
     /**********************/
 
     public ProjectTable()
@@ -52,6 +53,7 @@ public class ProjectTable extends BaseTable {
         tableColumns.put(COLUMN_DESCRIPTION, "TEXT");
         tableColumns.put(COLUMN_STARTED_AT, "DATETIME default CURRENT_DATE");
         tableColumns.put(COLUMN_ENDED_AT, "DATETIME");
+        tableColumns.put(COLUMN_TOTAL, "REAL");
 
         String fields = "";
         String terminator = ", ";

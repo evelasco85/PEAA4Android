@@ -2,7 +2,6 @@ package com.codeflowcrafter.Sample.Project.Implementation.Domain;
 
 import android.database.Cursor;
 
-import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IBaseMapper;
 import com.codeflowcrafter.PEAA.DataSynchronizationManager;
 import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectTable;
 
@@ -14,8 +13,9 @@ public class ToProjectTranslator {
     int _idIndex = 0;
     int _nameIndex = 0;
     int _descriptionIndex = 0;
-    int _startedDate = 0;
-    int _endedDate = 0;
+    int _startedDateIndex = 0;
+    int _endedDateIndex = 0;
+    int _totalIndex = 0;
 
     //Base class of Query Object and Data Mapper
     public void UpdateColumnOrdinals(Cursor cursor)
@@ -23,8 +23,9 @@ public class ToProjectTranslator {
         _idIndex = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_ID);
         _nameIndex = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_NAME);
         _descriptionIndex = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_DESCRIPTION);
-        _startedDate = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_STARTED_AT);
-        _endedDate = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_ENDED_AT);
+        _startedDateIndex = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_STARTED_AT);
+        _endedDateIndex = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_ENDED_AT);
+        _totalIndex = cursor.getColumnIndexOrThrow(ProjectTable.COLUMN_TOTAL);
     }
 
     //non-static to avoid race condition
@@ -34,8 +35,9 @@ public class ToProjectTranslator {
                 cursor.getInt(_idIndex),
                 cursor.getString(_nameIndex),
                 cursor.getString(_descriptionIndex),
-                cursor.getString(_startedDate),
-                cursor.getString(_endedDate)
+                cursor.getString(_startedDateIndex),
+                cursor.getString(_endedDateIndex),
+                cursor.getDouble(_totalIndex)
         );
     }
 }

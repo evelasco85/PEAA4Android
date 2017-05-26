@@ -43,6 +43,8 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
     private Project _projectToEdit;
     private int _projectId = 0;
 
+    private double _currentTotal = 0;
+
     public void SetViewRequest(IRequests_Project viewRequest)
     {
         _viewRequest = viewRequest;
@@ -184,7 +186,8 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
                 _txtName.getText().toString(),
                 _txtDescription.getText().toString(),
                 _txtStartDate.getText().toString(),
-                _txtEndDate.getText().toString()
+                _txtEndDate.getText().toString(),
+                _currentTotal
         );
     }
 
@@ -196,6 +199,7 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
         this._projectId = project.GetId();
         this._txtName.setText(project.GetName());
         this._txtDescription.setText(project.GetDescription());
+        this._currentTotal = project.GetTotal();
 
         if(!TextUtils.isEmpty(project.GetCreatedDate()))
             this._txtStartDate.setText(project.GetCreatedDate());

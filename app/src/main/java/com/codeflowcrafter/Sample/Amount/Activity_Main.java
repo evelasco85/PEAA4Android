@@ -28,16 +28,21 @@ import java.util.List;
  * Created by aiko on 5/1/17.
  */
 
-public class Activity_Main extends Activity implements IView_Amount, LoaderManager.LoaderCallbacks<Cursor>{
+public class Activity_Main extends Activity implements IView_Amount, LoaderManager.LoaderCallbacks<Cursor> {
     private TextView _txtProjectId;
     private TextView _txtProjectName;
     private Button _btnAddAmount;
 
     private Presenter_Amount _presenter;
     private IRequests_Amount _viewRequest;
-    public IRequests_Amount GetViewRequest(){return _viewRequest;}
-    public void SetViewRequest(IRequests_Amount viewRequest){
-        _viewRequest = viewRequest;}
+
+    public IRequests_Amount GetViewRequest() {
+        return _viewRequest;
+    }
+
+    public void SetViewRequest(IRequests_Amount viewRequest) {
+        _viewRequest = viewRequest;
+    }
 
     public static final String KEY_PROJECTID = "Project Id";
     public static final String KEY_PROJECTNAME = "Project Name";
@@ -65,7 +70,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         _presenter = new Presenter_Amount(this);
         Intent invoker = getIntent();
 
-        if(invoker != null) {
+        if (invoker != null) {
             _projectId = invoker.getIntExtra(KEY_PROJECTID, 0);
             _projectName = invoker.getStringExtra(KEY_PROJECTNAME);
             _action = invoker.getAction();
@@ -77,17 +82,15 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         PerformAction();
     }
 
-    private void AssociateViewToLocalVar()
-    {
+    private void AssociateViewToLocalVar() {
         _listImplementation = (Activity_Amount_Fragment_List) getFragmentManager()
                 .findFragmentById(R.id.fragment_amountList);
         _txtProjectId = (TextView) findViewById(R.id.txtProjectId);
         _txtProjectName = (TextView) findViewById(R.id.txtProjectName);
-        _btnAddAmount = (Button)findViewById(R.id.btnAddAmount);
+        _btnAddAmount = (Button) findViewById(R.id.btnAddAmount);
     }
 
-    private void SetViewHandlers()
-    {
+    private void SetViewHandlers() {
         _btnAddAmount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,8 +99,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         });
     }
 
-    private void SetDefaultMainViewData()
-    {
+    private void SetDefaultMainViewData() {
         _txtProjectId.setText(String.valueOf(_projectId));
         _txtProjectName.setText(String.valueOf(_projectName));
         _listImplementation.setListAdapter(_activityAdapter);
@@ -105,43 +107,38 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
         getLoaderManager().initLoader(0, null, this);
     }
 
-    private void PerformAction()
-    {
-        if(_action == ACTION_ADD) _viewRequest.Prompt_AddAmountEntry();
+    private void PerformAction() {
+        if (_action == ACTION_ADD) _viewRequest.Prompt_AddAmountEntry();
     }
 
-    public Loader<Cursor> onCreateLoader(int id, Bundle args)
-    {
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         CursorLoader loader = new CursorLoader(this, SampleApplicationContentProviders.GetInstance().GetAmountProvider().GetContentUri(),
                 null, null, null, null
         );
 
-        return  loader;
+        return loader;
     }
 
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor)
-    {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         _viewRequest.LoadAmountsViaLoader(_projectId);
     }
 
-    public void onLoaderReset(Loader<Cursor> loader){}
+    public void onLoaderReset(Loader<Cursor> loader) {
+    }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         getLoaderManager().restartLoader(0, null, this);
     }
 
-    public void OnLoadAmountsViaLoaderCompletion(List<Amount> amounts)
-    {
+    public void OnLoadAmountsViaLoaderCompletion(List<Amount> amounts) {
         _activityList.clear();
         _activityList.addAll(amounts);
         _activityAdapter.notifyDataSetChanged();
     }
 
-    public void OnPromptExecution_AddAmountEntry()
-    {
+    public void OnPromptExecution_AddAmountEntry() {
         Activity_Amount_Dialog_AddEdit dialog = Activity_Amount_Dialog_AddEdit
                 .newInstance(Activity_Amount_Dialog_AddEdit.ACTION_ADD, _projectId, null);
 
@@ -197,5 +194,22 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
                 .newInstance(amount);
 
         dialog.show(getFragmentManager(), Activity_Amount_Dialog_Show_Detail.FRAGMENT_NAME);
+    }
+
+    @Override
+    public void OnPerformProjectUpdate() {
+        double expense = 0;
+        double nonExpense = 0;
+
+        for (Amount amount : _activityList) {
+            if(amount == null) continue;
+
+            if (amount.GetIsExpense())
+                expense += amount.GetAmount();
+            else
+                nonExpense += amount.GetAmount();
+        }
+
+        double projectTotal = nonExpense - expense;
     }
 }

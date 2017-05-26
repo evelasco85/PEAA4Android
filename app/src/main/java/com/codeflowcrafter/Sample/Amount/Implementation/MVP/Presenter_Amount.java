@@ -70,6 +70,7 @@ public class Presenter_Amount implements IRequests_Amount {
         IBaseMapper mapper = amount.GetMapper();
 
         mapper.Insert(amount, _invocationDelegate);
+        _view.OnPerformProjectUpdate();
         _slc.SetEvent("Amount Added").EmitLog(Priority.Info, Status.Success);
     }
 
@@ -78,6 +79,7 @@ public class Presenter_Amount implements IRequests_Amount {
         IBaseMapper mapper = amount.GetMapper();
 
         mapper.Update(amount, _invocationDelegate);
+        _view.OnPerformProjectUpdate();
         _slc
                 .SetEvent(String.format("Updated amount id %s", amount.GetId()))
                 .EmitLog(Priority.Info, Status.Success);
@@ -88,6 +90,7 @@ public class Presenter_Amount implements IRequests_Amount {
         IBaseMapper mapper = amount.GetMapper();
 
         mapper.Delete(amount, _invocationDelegate);
+        _view.OnPerformProjectUpdate();
         _slc
                 .SetEvent(String.format("Deleted amount id %s", amount.GetId()))
                 .EmitLog(Priority.Info, Status.Success);
