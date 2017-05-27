@@ -8,5 +8,6 @@
     <!--**********-->
 
     <string name="lblProjectId">Project ID:</string>
+    <string name="lblAmountId">Amount ID:</string>
     <string name="lblAmount">Amount List</string>
 </resources>

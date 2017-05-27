@@ -81,12 +81,8 @@ public class Presenter_Amount implements IRequests_Amount {
 
     @Override
     public void UpdateAmount(Project project, Amount amount) {
-        IUnitOfWork uow = new UnitOfWork();
-
-        UpdateProjectTotal(project, amount, false);
-        uow.RegisterDirty(amount, _mapperInvocationDelegate);
-        uow.RegisterDirty(project, _mapperInvocationDelegate);
-        uow.Commit(_uowInvocationDelegate);
+        DeleteAmount(project, amount);
+        AddAmount(project, amount);
 
         _slc
                 .SetEvent(String.format("Updated amount id %s", amount.GetId()))

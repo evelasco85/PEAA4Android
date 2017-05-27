@@ -18,7 +18,7 @@ import com.codeflowcrafter.Sample.R;
  */
 
 public class Activity_Amount_Dialog_Show_Detail extends DialogFragment {
-    TextView _txtDate, _txtTime;
+    TextView _txtDate, _txtTime, _txtAmountId;
     EditText _txtAmount, _txtDescription;
     CheckBox _chkExpense;
 
@@ -58,6 +58,7 @@ public class Activity_Amount_Dialog_Show_Detail extends DialogFragment {
     }
 
     private void AssociateViewToLocalVar(View view) {
+        _txtAmountId = (TextView)view.findViewById(R.id.lblAmountId);
         _txtDate = (TextView)view.findViewById(R.id.txtDate);
         _txtTime = (TextView)view.findViewById(R.id.txtTime);
         _txtAmount = (EditText)view.findViewById(R.id.txtAmount);
@@ -77,6 +78,7 @@ public class Activity_Amount_Dialog_Show_Detail extends DialogFragment {
         if(amount == null)
             return;
 
+        this._txtAmountId.setText(String.valueOf(amount.GetId()));
         this._txtDate.setText(amount.GetCreatedDate());
         this._txtTime.setText(amount.GetCreatedTime());
         this._txtAmount.setText(String.valueOf(amount.GetAmount()));
