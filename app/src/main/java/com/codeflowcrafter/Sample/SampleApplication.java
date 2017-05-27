@@ -171,15 +171,21 @@ public class SampleApplication
         ContentResolver resolver = getContentResolver();
 
         List<IBaseQueryObjectConcrete<Project>> projectQueryObjects = new ArrayList<IBaseQueryObjectConcrete<Project>>();
-        ProjectProvider provider = SampleApplicationContentProviders.GetInstance().GetProjectProvider();
-        Uri uri = provider.GetContentUri();
+        ProjectProvider projectProvider = SampleApplicationContentProviders.GetInstance().GetProjectProvider();
+        AmountProvider provider = SampleApplicationContentProviders.GetInstance().GetAmountProvider();
+        Uri projectUri = projectProvider.GetContentUri();
+        Uri amountUri = provider.GetContentUri();
         Context context = this.getApplicationContext();
 
-        projectQueryObjects.add(new QueryAllProjects(context, uri));
-        projectQueryObjects.add(new QueryProjectById(context, uri));
+        projectQueryObjects.add(new QueryAllProjects(context, projectUri));
+        projectQueryObjects.add(new QueryProjectById(context, projectUri));
         dsManager.RegisterEntity(
                 Project.class,
-                new ProjectMapper(resolver, uri),
+                new ProjectMapper(
+                        resolver,
+                        projectUri,
+                        amountUri
+                ),
                 projectQueryObjects);
     }
 

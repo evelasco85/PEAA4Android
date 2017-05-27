@@ -6,6 +6,7 @@ import android.net.Uri;
 
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapper;
 import com.codeflowcrafter.PEAA.DataManipulation.BaseMapperInterfaces.IInvocationDelegates;
+import com.codeflowcrafter.Sample.Amount.Implementation.ContentProvider.AmountTable;
 import com.codeflowcrafter.Sample.Project.Implementation.ContentProvider.ProjectTable;
 
 import java.util.Hashtable;
@@ -20,14 +21,15 @@ public class ProjectMapper extends BaseMapper<Project> {
     public final static String KEY_COUNT = "[Count]";
 
     private ContentResolver _resolver;
-    private Uri _uri;
+    private Uri _projectUri, _amountUri;
 
-    public ProjectMapper(ContentResolver resolver, Uri uri)
+    public ProjectMapper(ContentResolver resolver, Uri projectUri, Uri amountUri)
     {
         super(Project.class);
 
         _resolver = resolver;
-        _uri = uri;
+        _projectUri = projectUri;
+        _amountUri = amountUri;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class ProjectMapper extends BaseMapper<Project> {
 
         updatedRecords = _resolver
                 .update(
-                        _uri,
+                        _projectUri,
                         EntityToContentValues(project),
                         where, null);
 
@@ -59,7 +61,7 @@ public class ProjectMapper extends BaseMapper<Project> {
 
     @Override
     public boolean ConcreteInsert(Project project, IInvocationDelegates invocationDelegates) {
-        _resolver.insert(_uri, EntityToContentValues(project));
+        _resolver.insert(_projectUri, EntityToContentValues(project));
 
         Hashtable results = new Hashtable();
 
@@ -75,16 +77,22 @@ public class ProjectMapper extends BaseMapper<Project> {
 
     @Override
     public boolean ConcreteDelete(Project project, IInvocationDelegates invocationDelegates) {
-        String where = ProjectTable.COLUMN_ID + "=" +  project.GetId();
-
-        int deletedRecords = _resolver
-                .delete(_uri, where, null );
+        String projectWhere = ProjectTable.COLUMN_ID + "=" +  project.GetId();
+        int deletedProjectRecords = _resolver.delete(_projectUri, projectWhere, null );
 
         Hashtable results = new Hashtable();
 
         results.put(KEY_MAPPER_NAME, this.getClass().getName());
-        results.put(KEY_OPERATION, "Deletion");
-        results.put(KEY_COUNT, String.valueOf(deletedRecords));
+        results.put(KEY_OPERATION, "Deletion Project(s)");
+        results.put(KEY_COUNT, String.valueOf(deletedProjectRecords));
+
+        if(deletedProjectRecords > 0){
+            String amountWhere = AmountTable.COLUMN_PROJECT_ID + "=" +  project.GetId();
+            int deletedAmountRecords = _resolver.delete(_amountUri, amountWhere, null );
+
+            results.put("[2 - Operation]", "Deletion Amount(s)");
+            results.put("[2 - Count]", String.valueOf(deletedAmountRecords));
+        }
 
         invocationDelegates.SetResults(results);
         invocationDelegates.SuccessfulInvocation(project);

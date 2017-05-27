@@ -132,13 +132,14 @@ public class Presenter_Amount implements IRequests_Amount {
 
         double currentTotal = project.GetTotal();
 
-        if (!reversal) {
+        if (!reversal) {/*Add section*/
             if (amount.GetIsExpense())
                 currentTotal -= amount.GetAmount();
             else
                 currentTotal += amount.GetAmount();
         }
-        else
+        /*Update section????*/
+        else/*Delete section*/
         {
             if (amount.GetIsExpense())
                 currentTotal += amount.GetAmount();
