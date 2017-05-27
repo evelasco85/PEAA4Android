@@ -16,7 +16,7 @@ public interface IRequests_Amount {
     void Prompt_AmountDetail(Amount amount);
 
     void AddAmount(Project project, Amount amount);
-    void UpdateAmount(Project project, Amount amount);
+    void UpdateAmount(Project project, Amount originalAmount, Amount updatedAmount);
     void DeleteAmount(Project project, Amount amount);
 
     void LoadAmountsViaLoader(int projectId);

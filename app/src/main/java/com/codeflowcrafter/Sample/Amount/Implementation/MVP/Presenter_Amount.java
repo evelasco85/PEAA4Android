@@ -80,12 +80,12 @@ public class Presenter_Amount implements IRequests_Amount {
     }
 
     @Override
-    public void UpdateAmount(Project project, Amount amount) {
-        DeleteAmount(project, amount);
-        AddAmount(project, amount);
+    public void UpdateAmount(Project project, Amount originalAmount, Amount updatedAmount) {
+        DeleteAmount(project, originalAmount);
+        AddAmount(project, updatedAmount);
 
         _slc
-                .SetEvent(String.format("Updated amount id %s", amount.GetId()))
+                .SetEvent(String.format("Updated amount id %s", updatedAmount.GetId()))
                 .EmitLog(Priority.Info, Status.Success);
     }
 

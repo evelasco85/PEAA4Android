@@ -190,7 +190,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
                 _viewRequest.AddAmount(project, ViewDataToModel());
                 break;
             case ACTION_EDIT:
-                _viewRequest.UpdateAmount(project, ViewDataToModel());
+                _viewRequest.UpdateAmount(project, _amountToEdit, ViewDataToModel());
                 break;
             default:
                 break;
