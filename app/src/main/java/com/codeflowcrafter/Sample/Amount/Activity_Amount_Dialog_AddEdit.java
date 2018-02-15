@@ -90,7 +90,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         AssociateViewToLocalVar(view, selectedAction);
         SetViewHandlers(selectedAction);
 
-        if (selectedAction == ACTION_EDIT) SetModelToViewData(_amountToEdit);
+        if (selectedAction.equals(ACTION_EDIT)) SetModelToViewData(_amountToEdit);
 
         return view;
     }
@@ -104,7 +104,7 @@ public class Activity_Amount_Dialog_AddEdit extends DialogFragment {
         _txtDescription = (EditText)view.findViewById(R.id.txtDescription);
         _chkExpense = (CheckBox)view.findViewById(R.id.chkExpense);
 
-        if (selectedAction == ACTION_ADD)
+        if (selectedAction.equals(ACTION_ADD))
         {
             Date datetime = Calendar.getInstance().getTime();
 

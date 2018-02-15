@@ -119,7 +119,7 @@ public class Activity_Main extends Activity implements IView_Amount, LoaderManag
     }
 
     private void PerformAction() {
-        if (_action == ACTION_ADD) _viewRequest.Prompt_AddAmountEntry();
+        if (_action.equals(ACTION_ADD)) _viewRequest.Prompt_AddAmountEntry();
     }
 
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {

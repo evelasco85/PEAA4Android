@@ -82,7 +82,7 @@ public class Activity_Project_Dialog_AddEdit extends DialogFragment{
 
         SetViewHandlers(selectedAction);
 
-        if(selectedAction == ACTION_EDIT) SetModelToViewData(_projectToEdit);
+        if(selectedAction.equals(ACTION_EDIT)) SetModelToViewData(_projectToEdit);
 
         return view;
     }
